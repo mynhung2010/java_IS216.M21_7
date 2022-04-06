@@ -23,7 +23,7 @@ INSERT INTO Employee VALUES ('E001',N'Nguyễn Văn Đẩu','0123456789','P001',
 INSERT INTO Employee VALUES ('E002',N'Lê Thị Anh','0345678912','P002','26/07/1998',0,'26/11/2012','anh@gmail.com');
 INSERT INTO Employee VALUES ('E003',N'Nguyễn Anh Thiên','0135792468','P003','26/06/1990',1,'26/12/2012','thien@gmail.com');
 INSERT INTO Employee VALUES ('E004',N'Lê Thị Huyền Trang','0246813579','P004','13/05/1992',0,'10/10/2017','trang@gmail.com');
-INSERT INTO Employee VALUES ('E005',N'Trần Văn Thanh','0778899210','P005','14/06/195',1,'10/11/2017','thanh@gmail.com');
+INSERT INTO Employee VALUES ('E005',N'Trần Văn Thanh','0778899210','P005','14/06/1915',1,'10/11/2017','thanh@gmail.com');
 INSERT INTO Employee VALUES ('E006',N'Phạm Trang Nhung','0889972871','P006','26/08/1996',0,'10/12/2017','phong@gmail.com');
 INSERT INTO Employee VALUES ('E007',N'Bùi Hoàng Phong','0779898771','P007','27/08/1997',1,'12/10/2018','dau@gmail.com');
 INSERT INTO Employee VALUES ('E008',N'Lê Thị Cẩm Tú','0112233445','P008','28/08/1998',0,'09/08/2019','tu@gmail.com');
