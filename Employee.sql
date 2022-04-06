@@ -3,8 +3,8 @@
 /*==============================================================*/
 Create table Employee(
 	EmpNo	varchar(5) not null,
-	EmpName	NVarchar(50)	not null,
-	Phone	Varchar(10)	not null,
+	EmpName	nvarchar(50)	not null,
+	Phone	varchar(10)	not null,
 	PosNo	varchar(5)	not null,
 	DateOfBirth	smalldatetime	not null,
 	Gender		int	not null, --0: nam, 1: nữ
