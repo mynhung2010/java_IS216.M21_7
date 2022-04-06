@@ -1,5 +1,5 @@
 /*==============================================================*/
-/* Table: Room							*/
+/* Table: Room													*/
 /*==============================================================*/
 Create table Room(
 	RoomNo	varchar(5) not null,
@@ -17,7 +17,6 @@ Create table Room(
 );
 --- khóa chính bảng Room
 ALTER TABLE Room ADD CONSTRAINT PK_ROOM PRIMARY KEY (RoomNo);
-
 
 /*==============================================================*/
 /*      INSERT DỮ LIỆU BẢNG ROOM				*/
