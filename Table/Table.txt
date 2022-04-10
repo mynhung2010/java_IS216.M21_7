@@ -1,6 +1,0 @@
-TẠO CÁC BẢNG
-	++++ Bill
-	++++ Employee
-	++++ Item
-	++++ Room
-	++++ ServiceCalled
