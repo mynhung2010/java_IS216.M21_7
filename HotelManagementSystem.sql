@@ -93,33 +93,33 @@ GO
 /* Table: Employee                                              */
 /*==============================================================*/
 Create table Employee(
-	EmpNo	varchar(5) not null,
-	EmpName	nvarchar(50)	not null,
-	Phone	varchar(10)	not null,
-	PosNo	varchar(5)	not null,
-	DateOfBirth	smalldatetime	not null,
-	Gender		int	not null, --0: nam, 1: nữ
-	StartDate	smalldatetime	not null,
-	Email		varchar(30)	not null,
+	EmpNo	varchar2(5) not null,
+	EmpName	varchar2(50)	not null,
+	Phone	varchar2(10)	not null,
+	PosNo	varchar2(5)	not null,
+	DateOfBirth	date	not null,
+	Gender		number	not null, --0: nam, 1: nữ
+	StartDate	date	not null,
+	Email		varchar2(30)	not null,
 	CONSTRAINT CHK_Gender CHECK (GENDER BETWEEN 0 AND 1)
 );
 --- Khóa chỉnh bảng Employee
 ALTER TABLE Employee ADD CONSTRAINT PK_Employee PRIMARY KEY(EmpNo);
 
 /*==============================================================*/
-/* Table: Room													*/
+/* Table: Room							*/
 /*==============================================================*/
 Create table Room(
-	RoomNo	varchar(5) not null,
-	TypeOfRoom	int 	not null, --1: 1 giường, 2: 2 giường
-	Quality		varchar(10)	not null,
+	RoomNo	varchar2(5) not null,
+	TypeOfRoom	number 	not null, --1: 1 giường, 2: 2 giường
+	Quality		varchar2(10)	not null,
 	--- Quality
 		-- Standard: Phòng tiêu chuẩn trong khách sạn
 		-- Superior: Phòng có chất lượng cao hơn standard(gọi tắt là SUP)
 		-- Deluxe: Phòng có chất lượng khá cao, thường nằm ở tầng cao khách sạn (gọi tắt là DLX)
-	Cost		money		not null,
-	tCheckIn	smalldatetime	not null,
-	tCheckOut	smalldatetime	not null,
+	Cost		number		not null,
+	tCheckIn	date	not null,
+	tCheckOut	date	not null,
 	CONSTRAINT CHK_TYPE CHECK (TypeOfRoom BETWEEN 1 AND 2),
 	CONSTRAINT CHK_QUALITY CHECK (Quality IN ('Standard','Superior','Deluxe'))
 );
@@ -128,15 +128,15 @@ ALTER TABLE Room ADD CONSTRAINT PK_ROOM PRIMARY KEY (RoomNo);
 
 
 /*==============================================================*/
-/* Table: Bill													*/
+/* Table: Bill							*/
 /*==============================================================*/
 Create table Bill(
-	BillNo		varchar(5)		not null,
-	CusNo	varchar(5)	not null,
-	SerNo	varchar(5)		not null,
-	RoomNo		varchar(5)	not null,
-	SumOfMoney	money		not null,
-	PolNo	varchar(5)	not null
+	BillNo		varchar2(5)		not null,
+	CusNo	varchar2(5)	not null,
+	SerNo	varchar2(5)		not null,
+	RoomNo		varchar2(5)	not null,
+	SumOfMoney	number		not null,
+	PolNo	varchar2(5)	not null
 );
 --- Khóa chính bảng Bill
 ALTER TABLE Bill ADD CONSTRAINT PK_Bill PRIMARY KEY(BillNo);
@@ -145,9 +145,9 @@ ALTER TABLE Bill ADD CONSTRAINT PK_Bill PRIMARY KEY(BillNo);
 /* Table: ServiceCalled                                         */
 /*==============================================================*/
 Create table ServiceCalled(
-	SerNo	varchar(5) not null,
-	RoomNo		varchar(5)	not null,
-	Note		nvarchar(2000)
+	SerNo	varchar2(5) not null,
+	RoomNo		varchar2(5)	not null,
+	Note		varchar2(2000)  not null
 );
 --- Khóa chính ServiceCalled
 ALTER TABLE ServiceCalled ADD CONSTRAINT PK_ServiceCalled PRIMARY KEY(SerNo, RoomNo);
@@ -156,11 +156,11 @@ ALTER TABLE ServiceCalled ADD CONSTRAINT PK_ServiceCalled PRIMARY KEY(SerNo, Roo
 /* Table: Item							*/
 /*==============================================================*/
 Create table Item(
-	ItemNo		varchar(5) not null,
-	ItemName	nvarchar(30)	not null,
-	NoOfItem	int	not null,
-	Status		nvarchar(20)	not null,-- Tốt, hư hỏng, chưa trang bị
-	CONSTRAINT CHK_STATUS CHECK(Status IN (N'Tốt', N'Hư hỏng', N'Chưa trang bị'))
+	ItemNo		varchar2(5) not null,
+	ItemName	varchar2(30)	not null,
+	NoOfItem	number	not null,
+	Status		varchar2(20)	not null,-- Tốt, hư hỏng, chưa trang bị
+	CONSTRAINT CHK_STATUS CHECK(Status IN ('Tot', 'Hu hong', 'Chua trang bi'))
 );
 --- Khóa chính bảng Item
 ALTER TABLE Item ADD CONSTRAINT PK_ITEM PRIMARY KEY(ItemNo);
@@ -169,15 +169,15 @@ ALTER TABLE Item ADD CONSTRAINT PK_ITEM PRIMARY KEY(ItemNo);
 /* Table: Policy						*/
 /*==============================================================*/
 Create table Policy(
-	PolNo	varchar(5)	not null,
-	PolName	nvarchar(50)	not null,
-	Requirement	int	not null,
+	PolNo	varchar2(5)	not null,
+	PolName	varchar2(50)	not null,
+	Requirement	number	not null,
 	-- Requirement:
 		-- 1: Thời gian ở
 		-- 2: Ngày lễ
 		-- 3: Sử dụng dịch vụ 
-	tApplication	smalldatetime	not null,
-	StartDate	smalldatetime	not null,
+	tApplication	date	not null,
+	StartDate	date	not null,
 	CONSTRAINT CHK_Requirement CHECK (Requirement BETWEEN 1 AND 3)
 );
 --- Khóa chính Policy
@@ -272,31 +272,32 @@ SET DATEFORMAT DMY;
 /*==============================================================*/
 /*      INSERT DỮ LIỆU BẢNG EMPLOYEE                            */
 /*==============================================================*/
-INSERT INTO Employee VALUES ('E001',N'Nguyễn Văn Đẩu','0123456789','P001','26/08/1990',1,'26/10/2012','dau@gmail.com');
-INSERT INTO Employee VALUES ('E002',N'Lê Thị Anh','0345678912','P002','26/07/1998',0,'26/11/2012','anh@gmail.com');
-INSERT INTO Employee VALUES ('E003',N'Nguyễn Anh Thiên','0135792468','P003','26/06/1990',1,'26/12/2012','thien@gmail.com');
-INSERT INTO Employee VALUES ('E004',N'Lê Thị Huyền Trang','0246813579','P004','13/05/1992',0,'10/10/2017','trang@gmail.com');
-INSERT INTO Employee VALUES ('E005',N'Trần Văn Thanh','0778899210','P005','14/06/1995',1,'10/11/2017','thanh@gmail.com');
-INSERT INTO Employee VALUES ('E006',N'Phạm Trang Nhung','0889972871','P006','26/08/1996',0,'10/12/2017','phong@gmail.com');
-INSERT INTO Employee VALUES ('E007',N'Bùi Hoàng Phong','0779898771','P007','27/08/1997',1,'12/10/2018','dau@gmail.com');
-INSERT INTO Employee VALUES ('E008',N'Lê Thị Cẩm Tú','0112233445','P008','28/08/1998',0,'09/08/2019','tu@gmail.com');
-INSERT INTO Employee VALUES ('E009',N'Nguyễn Thành Long','0123456789','P009','20/08/1999',1,'11/11/2016','long@gmail.com');
-INSERT INTO Employee VALUES ('E010',N'Hoàng Thị Tuyết Hà','0123456789','P010','30/08/1999',0,'12/12/2018','ha@gmail.com');
+INSERT INTO Employee VALUES ('E001','Nguyen Van Dau','0123456789','P001',TO_DATE('26/08/1990','dd/mm/yyyy'),1,TO_DATE('26/10/2012','dd/mm/yyyy'),'dau@gmail.com');
+INSERT INTO Employee VALUES ('E002','Le Thi Anh','0345678912','P002',TO_DATE('26/07/1998','dd/mm/yyyy'),0,TO_DATE('26/11/2012','dd/mm/yyyy'),'anh@gmail.com');
+INSERT INTO Employee VALUES ('E003','Nguyen Anh Thien','0135792468','P003',TO_DATE('26/06/1990','dd/mm/yyyy'),1,TO_DATE('26/12/2012','dd/mm/yyyy'),'thien@gmail.com');
+INSERT INTO Employee VALUES ('E004','Le Thi Huyen Trang','0246813579','P004',TO_DATE('13/05/1992','dd/mm/yyyy'),0,TO_DATE('10/10/2017','dd/mm/yyyy'),'trang@gmail.com');
+INSERT INTO Employee VALUES ('E005','Tran Van Thanh','0778899210','P005',TO_DATE('14/06/1995','dd/mm/yyyy'),1,TO_DATE('10/11/2017','dd/mm/yyyy'),'thanh@gmail.com');
+INSERT INTO Employee VALUES ('E006','Pham Trang Nhung','0889972871','P006',TO_DATE('26/08/1996','dd/mm/yyyy'),0,TO_DATE('10/12/2017','dd/mm/yyyy'),'nhung@gmail.com');
+INSERT INTO Employee VALUES ('E007','Bui Hoang Phong','0779898771','P007',TO_DATE('27/08/1997','dd/mm/yyyy'),1,TO_DATE('12/10/2018','dd/mm/yyyy'),'phong@gmail.com');
+INSERT INTO Employee VALUES ('E008','Le Thi Cam Tu','0112233445','P008',TO_DATE('28/08/1998','dd/mm/yyyy'),0,TO_DATE('09/08/2019','dd/mm/yyyy'),'tu@gmail.com');
+INSERT INTO Employee VALUES ('E009','Nguyen Thanh Long','0123456789','P009',TO_DATE('20/08/1999','dd/mm/yyyy'),1,TO_DATE('11/11/2016','dd/mm/yyyy'),'long@gmail.com');
+INSERT INTO Employee VALUES ('E010','Hoang Thi Tuyet Ha','0123456789','P010',TO_DATE('30/08/1999','dd/mm/yyyy'),0,TO_DATE('12/12/2018','dd/mm/yyyy'),'ha@gmail.com');
 
 
 /*==============================================================*/
 /*      INSERT DỮ LIỆU BẢNG ROOM				*/
 /*==============================================================*/
-INSERT INTO Room VALUES ('R100',1,'Standard',200000,'24/06/2021','27/06/2021');
-INSERT INTO Room VALUES ('R101',2,'Standard',450000,'14/03/2021','16/3/2021');
-INSERT INTO Room VALUES ('R102',1,'Superior',250000,'30/06/2021','02/07/2021');
-INSERT INTO Room VALUES ('R103',2,'Superior',500000,'05/05/2021','06/05/2021');
-INSERT INTO Room VALUES ('R104',1,'Deluxe',300000,'05/05/2021','08/05/2021');
-INSERT INTO Room VALUES ('R105',2,'Deluxe',550000,'24/04/2021','25/04/2021');
-INSERT INTO Room VALUES ('R106',1,'Standard',200000,'26/06/2021','28/06/2021');
-INSERT INTO Room VALUES ('R107',1,'Superior',250000,'21/01/2021','23/01/2021');
-INSERT INTO Room VALUES ('R108',2,'Deluxe',550000,'22/07/2021','23/07/2021');
-INSERT INTO Room VALUES ('R109',2,'Deluxe',550000,'08/06/2021','11/06/2021');
+INSERT INTO Room VALUES ('R100',1,'Standard',200000,TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R101',2,'Standard',450000,TO_DATE('14/03/2021','dd/mm/yyyy'),TO_DATE('16/3/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R102',1,'Superior',250000,TO_DATE('30/06/2021','dd/mm/yyyy'),TO_DATE('02/07/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R103',2,'Superior',500000,TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('06/05/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R104',1,'Deluxe',300000,TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('08/05/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R105',2,'Deluxe',550000,TO_DATE('24/04/2021','dd/mm/yyyy'),TO_DATE('25/04/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R106',1,'Standard',200000,TO_DATE('26/06/2021','dd/mm/yyyy'),TO_DATE('28/06/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R107',1,'Superior',250000,TO_DATE('21/01/2021','dd/mm/yyyy'),TO_DATE('23/01/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R108',2,'Deluxe',550000,TO_DATE('22/07/2021','dd/mm/yyyy'),TO_DATE('23/07/2021','dd/mm/yyyy'));
+INSERT INTO Room VALUES ('R109',2,'Deluxe',550000,TO_DATE('08/06/2021','dd/mm/yyyy'),TO_DATE('11/06/2021','dd/mm/yyyy'));
+
 
 
 /*==============================================================*/
@@ -333,46 +334,46 @@ INSERT INTO Service VALUES ('S010',N'Dịch vụ bar trên lầu khách sạn',0
 /*==============================================================*/
 /*      INSERT DỮ LIỆU BẢNG ServiceCalled			*/
 /*==============================================================*/
-INSERT INTO ServiceCalled VALUES('S001','R100',N'Không cần gì thêm');
-INSERT INTO ServiceCalled VALUES('S002','R101',N'Không cần gì thêm');
-INSERT INTO ServiceCalled VALUES('S003','R102',N'Chỉ lấy 2 chiếc xe đạp');
-INSERT INTO ServiceCalled VALUES('S004','R103',N'Giặc xong giao trả tận phòng');
-INSERT INTO ServiceCalled VALUES('S005','R104',N'Cần phòng rộng, có máy lạnh');
-INSERT INTO ServiceCalled VALUES('S006','R105',N'Trang bị sẵn 2 mic, trái cây');
-INSERT INTO ServiceCalled VALUES('S007','R106',N'Kế bên tiệc có hồ bơi');
-INSERT INTO ServiceCalled VALUES('S008','R107',N'Cần 2 cây vợt đánh tennis');
-INSERT INTO ServiceCalled VALUES('S009','R108',N'Không cần gì thêm');
-INSERT INTO ServiceCalled VALUES('S010','R109',N'Không cần gì thêm');
+INSERT INTO ServiceCalled VALUES('S001','R100','Khong can gi them');
+INSERT INTO ServiceCalled VALUES('S002','R101','Khong can gi them');
+INSERT INTO ServiceCalled VALUES('S003','R102','Chi lay 2 chiec xe dap');
+INSERT INTO ServiceCalled VALUES('S004','R103','Giac xong giao tra tan phong');
+INSERT INTO ServiceCalled VALUES('S005','R104','Can phong rong, co may lanh');
+INSERT INTO ServiceCalled VALUES('S006','R105','Trang bi san 2 mic, dia trai cay');
+INSERT INTO ServiceCalled VALUES('S007','R106','Ke ben tiec co ho boi');
+INSERT INTO ServiceCalled VALUES('S008','R107','Can 2 cay vot danh tennis');
+INSERT INTO ServiceCalled VALUES('S009','R108','Khong can gi them');
+INSERT INTO ServiceCalled VALUES('S010','R109','Khong can gi them');
 
 
 /*==============================================================*/
 /*      INSERT DỮ LIỆU BẢNG Item				*/
 /*==============================================================*/
-INSERT INTO Item VALUES('I001',N'Bàn là', 1,N'Tốt');
-INSERT INTO Item VALUES('I002',N'Khăn tắm', 2,N'Chưa trang bị');
-INSERT INTO Item VALUES('I003',N'Mền', 2,N'Tốt');
-INSERT INTO Item VALUES('I004',N'Móc quần áo', 5,N'Hư hỏng');
-INSERT INTO Item VALUES('I005',N'Bình đun siêu tốc', 1,N'Tốt');
-INSERT INTO Item VALUES('I006',N'Quạt đứng', 1,N'Chưa trang bị');
-INSERT INTO Item VALUES('I007',N'Ti vi', 1,N'Tốt');
-INSERT INTO Item VALUES('I008',N'Tủ lạnh', 1,N'Hư hỏng');
-INSERT INTO Item VALUES('I009',N'Móc quần áo', 5,N'Tốt');
-INSERT INTO Item VALUES('I010',N'Mền', 2,N'Chưa trang bị');
+INSERT INTO Item VALUES('I001','Ban la', 1,'Tot');
+INSERT INTO Item VALUES('I002','Khan tam', 2,'Chua trang bi');
+INSERT INTO Item VALUES('I003','Men', 2,'Tot');
+INSERT INTO Item VALUES('I004','Moc quan ao', 5,'Hu hong');
+INSERT INTO Item VALUES('I005','Binh dun sieu toc', 1,'Tot');
+INSERT INTO Item VALUES('I006','Quat dung', 1,'Chua trang bi');
+INSERT INTO Item VALUES('I007','Tivi', 1,'Tot');
+INSERT INTO Item VALUES('I008','Tu lanh', 1,'Hu hong');
+INSERT INTO Item VALUES('I009','Moc quan ao', 5,'Tot');
+INSERT INTO Item VALUES('I010','Men', 2,'Chua trang bi');
 
 
 /*==============================================================*/
-/*      INSERT DỮ LIỆU BẢNG Policy								*/
+/*      INSERT DỮ LIỆU BẢNG Policy				*/
 /*==============================================================*/
-INSERT INTO Policy VALUES('POL01',N'Ở càng nhiều khuyến mãi càng cao',1,3,'23/6/2021');
-INSERT INTO Policy VALUES('POL02',N'Vui chơi ngày lễ nghỉ tại khách sạn',2,1,'14/3/2021');
-INSERT INTO Policy VALUES('POL03',N'Xài dịch vụ xài khuyến mãi',3,2,'01/07/2021');
-INSERT INTO Policy VALUES('POL04',N'Xài dịch vụ xài khuyến mãi',3,2,'06/05/2021');
-INSERT INTO Policy VALUES('POL05',N'Vui chơi lễ nghỉ ngơi tại khách sạn',3,2,'08/05/2021');
-INSERT INTO Policy VALUES('POL06',N'Ngày lễ lao động',2,1,'30/04/2021');
-INSERT INTO Policy VALUES('POL07',N'Vui chơi lễ nghỉ ngơi tại khách sạn',2,1,'28/06/2021');
-INSERT INTO Policy VALUES('POL08',N'Ở càng lâu khuyến mãi càng nhiều',1,3,'23/01/2021');
-INSERT INTO Policy VALUES('POL09',N'Ở càng lâu khuyến mãi càng nhiều',1,3,'25/07/2021');
-INSERT INTO Policy VALUES('POL10',N'Ngày lễ vui chơi',2,1,'01/06/2021');
+INSERT INTO Policy VALUES('POL01','O cang nhieu khuyen mai cang cao',1,3,TO_DATE('23/06/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL02','Vui choi le tai khach san',2,1,TO_DATE('14/03/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL03','Xai dich vu xai khuyen mai',3,2,TO_DATE('01/07/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL04','Xai dich vu xai khuyen mai',3,2,TO_DATE('06/05/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL05','Vui choi le tai khach san',3,2,TO_DATE('08/05/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL06','Ngay le lao dong',2,1,TO_DATE('30/04/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL07','Vui choi le tai khach san',2,1,TO_DATE('28/06/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL08','O cang lau khuyen mai cang nhieu',1,3,TO_DATE('23/01/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL09','O cang lau khuyen mai cang nhieu',1,3,TO_DATE('25/07/2021','dd/mm/yyyy'));
+INSERT INTO Policy VALUES('POL10','Vui choi le',2,1,TO_DATE('01/06/2021','dd/mm/yyyy'));
 
 
 /*==============================================================*/
