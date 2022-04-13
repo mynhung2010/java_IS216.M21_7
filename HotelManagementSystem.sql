@@ -31,7 +31,6 @@ CREATE TABLE Customer(
 ALTER TABLE Customer ADD CONSTRAINT PK_Customer PRIMARY KEY (CusNo);
 
 
-
 /*==============================================================*/
 /* Table: Reservation                                           */
 /*==============================================================*/
