@@ -9,7 +9,7 @@ Create table Policy(
 		-- 1: Thời gian ở
 		-- 2: Ngày lễ
 		-- 3: Sử dụng dịch vụ 
-	tApplication	date	not null,
+	tApplication	int	not null,
 	StartDate	date	not null,
 	CONSTRAINT CHK_Requirement CHECK (Requirement BETWEEN 1 AND 3)
 );
