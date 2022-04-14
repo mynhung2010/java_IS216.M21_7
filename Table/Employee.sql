@@ -7,9 +7,9 @@ Create table Employee(
 	Phone	varchar2(10)	not null,
 	PosNo	varchar2(5)	not null,
 	DateOfBirth	date	not null,
-	Gender		number	not null, --0: nam, 1: nữ
+	Gender		number	not null, --0: nam, 1: nu
 	StartDate	date	not null,
-	Email		varchar2(30)	not null,
+	Email		varchar2(30)	not null unique,
 	CONSTRAINT CHK_Gender CHECK (GENDER BETWEEN 0 AND 1)
 );
 --- Khóa chỉnh bảng Employee
