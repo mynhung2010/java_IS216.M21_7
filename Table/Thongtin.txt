@@ -1,0 +1,10 @@
+TÁC GIẢ
+	++++ Nguyễn Thành Phát
+	++++ MSSV: 20520270
+	++++ Nhóm : 7
+TẠO CÁC BẢNG
+	++++ Bill
+	++++ Employee
+	++++ Item
+	++++ Room
+	++++ ServiceCalled
