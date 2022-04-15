@@ -26,7 +26,7 @@ DECLARE
     
 BEGIN
     ServiceCalled_Info(SerNo, RoomNo, Note);
-    DBMS_OUTPUT.PUT_LINE('Ma dịch vụ : ' || SerNo);
-    DBMS_OUTPUT.PUT_LINE('Ma phòng: ' || RoomNo);
-    DBMS_OUTPUT.PUT_LINE('Chu thích: ' || Note);
+    DBMS_OUTPUT.PUT_LINE('Mã dịch vụ : ' || SerNo);
+    DBMS_OUTPUT.PUT_LINE('Mã phòng: ' || RoomNo);
+    DBMS_OUTPUT.PUT_LINE('Chú thích: ' || Note);
 END;
