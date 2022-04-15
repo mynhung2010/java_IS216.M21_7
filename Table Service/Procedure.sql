@@ -2,7 +2,7 @@
 /*      PROCEDURE: THONG TIN SERVICE	                        */
 /*==============================================================*/
     
-CREATE OR REPLACE PROCEDURE Service_Info(SerNo_IN IN service.serno%TYPE)
+CREATE OR REPLACE PROCEDURE pro_info_service(SerNo_IN IN service.serno%TYPE)
 AS 
     SerName_out  service.sername%TYPE;
     TOService_out  service.typeofservice%TYPE;
@@ -28,4 +28,4 @@ END;
 /*      CHAY PROCEDURE	                                        */
 /*==============================================================*/
 
-EXEC Service_Info('S001');
+EXEC pro_info_service('S001');
