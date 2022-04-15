@@ -2,7 +2,7 @@
 /*      FUNCTION: XUAT RA THONG TIN SERVICE MA PHONG DA CHON	*/
 /*==============================================================*/
 
-CREATE OR REPLACE FUNCTION ServiceOfRoom(RoomNo_In IN room.roomno%type)
+CREATE OR REPLACE FUNCTION func_serviceofroom_service(RoomNo_In IN room.roomno%type)
 RETURN VARCHAR2
 AS
     SerNo_para service.serno%TYPE;
@@ -28,7 +28,7 @@ DECLARE
     Cost_Out service.cost%TYPE;
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Ma phong tim dich vu: ' || RoomNo_IN);
-    SerNo_Out := ServiceOfRoom(RoomNo_IN);
+    SerNo_Out := func_serviceofroom_service(RoomNo_IN);
     SELECT SerName, Cost INTO SerName_Out, Cost_Out
     FROM Service
     WHERE SerNo = SerNo_Out;
