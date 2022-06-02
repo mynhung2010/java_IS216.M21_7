@@ -13,7 +13,7 @@ CREATE TABLE Customer(
     AccountID   NUMBER          not null
 );
 
---T?o khóa chính
+--Tạo khóa chính
 ALTER TABLE Customer ADD CONSTRAINT PK_Customer PRIMARY KEY (CusNo);
 
 
@@ -325,7 +325,7 @@ INSERT INTO Employee VALUES ('E012','Nguyễn Duy Anh','0123456789','P013',TO_DA
 INSERT INTO Employee VALUES ('E013','Nguyễn Thị Thảo Hà','0326483923','P014',TO_DATE('12/04/2000','dd/mm/yyyy'),1,TO_DATE('06/03/2018','dd/mm/yyyy'),'tha@gmail.com',13);
 INSERT INTO Employee VALUES ('E014','Lê Anh Thư','0384249312','P015',TO_DATE('04/08/1999','dd/mm/yyyy'),1,TO_DATE('23/01/2018','dd/mm/yyyy'),'thu@gmail.com',14);
 /*==============================================================*/
-/*      INSERT D? LI?U B?NG ROOM				*/
+/*      INSERT DỮ LIỆU BẢNG ROOM				*/
 /*==============================================================*/
 INSERT INTO Room VALUES ('R100',1,'Standard',200000);
 INSERT INTO Room VALUES ('R101',2,'Standard',450000);
@@ -339,7 +339,7 @@ INSERT INTO Room VALUES ('R108',2,'Deluxe',550000);
 INSERT INTO Room VALUES ('R109',2,'Deluxe',550000);
 INSERT INTO Room VALUES ('R110',2,'Deluxe',5500000);
 INSERT INTO Room VALUES ('R111',1,'Superior',550000);
-INSERT INTO Room VALUES ('R112',2,'Standard',250000);
+INSERT INTO Room VALUES ('R112',2,'Standard',450000);
 INSERT INTO Room VALUES ('R113',2,'Deluxe',550000);
 INSERT INTO Room VALUES ('R114',2,'Superior',500000);
 
@@ -388,16 +388,16 @@ INSERT INTO Bill VALUES ('B018','C015','R113',1400000);
 /*      INSERT D? LI?U B?NG Service                             */
 /*==============================================================*/
 
-INSERT INTO Service VALUES ('S001','Dich vu Spa',1,1000000);
-INSERT INTO Service VALUES ('S002','Dich vu ca phe',1,100000);
-INSERT INTO Service VALUES ('S003','Dich vu thue xe',0,500000);
-INSERT INTO Service VALUES ('S004','Dich vu giat do',1,100000);
-INSERT INTO Service VALUES ('S005','Dich vu thue phong hop',1,1000000);
-INSERT INTO Service VALUES ('S006','Dich vu thue phong karaoke',0,500000);
-INSERT INTO Service VALUES ('S007','Dich vu tiec ngoai troi',0,500000);
-INSERT INTO Service VALUES ('S008','Dich vu san tennis',0,800000);
-INSERT INTO Service VALUES ('S009','Dich vu phong gym',1,50000);
-INSERT INTO Service VALUES ('S010','Dich vu bar tren lau khach san',0,1900000);
+INSERT INTO Service VALUES ('S001','Dịch vụ Spa',1,1000000);
+INSERT INTO Service VALUES ('S002','Dịch vụ cà phê',1,100000);
+INSERT INTO Service VALUES ('S003','Dịch vụ thuê xe',0,500000);
+INSERT INTO Service VALUES ('S004','Dịch vụ giặt đồ',1,100000);
+INSERT INTO Service VALUES ('S005','Dịch vụ thuê phòng họp',1,1000000);
+INSERT INTO Service VALUES ('S006','Dịch vụ thuê phòng karaoke',0,500000);
+INSERT INTO Service VALUES ('S007','Dịch vụ tiệc ngoài trời',0,500000);
+INSERT INTO Service VALUES ('S008','Dịch vụ sân tennis',0,800000);
+INSERT INTO Service VALUES ('S009','Dịch vụ phòng gym',1,50000);
+INSERT INTO Service VALUES ('S010','Dịch vụ bar',0,1900000);
 INSERT INTO Service VALUES ('S011','Dịch vụ xe đưa đón sân bay',0,1500000);
 INSERT INTO Service VALUES ('S012','Dịch vụ cho thuê xe máy tự lái',0,500000);
 INSERT INTO Service VALUES ('S013','Dịch vụ phòng 24/24',0,1000000);
