@@ -4,7 +4,12 @@
  */
 package View;
 
+import Process.Account;
+import Process.TaiKhoan;
 import codeui.*;
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +22,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        this.setLocationRelativeTo(null); 
     }
 
     /**
@@ -33,13 +39,12 @@ public class login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PasswordField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        DangNhapjButton = new javax.swing.JButton();
+        taikhoanTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,19 +65,7 @@ public class login extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Mật khẩu:");
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setTabSize(6);
-        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextArea1.setMinimumSize(new java.awt.Dimension(164, 30));
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        PasswordField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codeui/image/user-6775.png"))); // NOI18N
@@ -80,8 +73,13 @@ public class login extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codeui/image/login-password-11924.png"))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setText("Đăng Nhập");
+        DangNhapjButton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        DangNhapjButton.setText("Đăng Nhập");
+        DangNhapjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DangNhapjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout containPanelLayout = new javax.swing.GroupLayout(containPanel);
         containPanel.setLayout(containPanelLayout);
@@ -98,19 +96,17 @@ public class login extends javax.swing.JFrame {
                         .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(containPanelLayout.createSequentialGroup()
                                 .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jPasswordField1))
+                                    .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                    .addComponent(taikhoanTextField))
                                 .addGap(18, 18, 18)
                                 .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel7)))
-                            .addGroup(containPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2))))
+                            .addComponent(jLabel2)))
                     .addGroup(containPanelLayout.createSequentialGroup()
                         .addGap(141, 141, 141)
-                        .addComponent(jButton1)))
+                        .addComponent(DangNhapjButton)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         containPanelLayout.setVerticalGroup(
@@ -122,19 +118,22 @@ public class login extends javax.swing.JFrame {
                 .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addGroup(containPanelLayout.createSequentialGroup()
-                        .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addGroup(containPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel6)))
                             .addGroup(containPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)))
-                        .addGap(27, 27, 27)
+                                .addGap(15, 15, 15)
+                                .addComponent(taikhoanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(containPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(DangNhapjButton)
                 .addGap(31, 31, 31))
         );
 
@@ -165,6 +164,44 @@ public class login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DangNhapjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangNhapjButtonActionPerformed
+        
+    
+    // Kiem tra tai khoan
+    String taikhoan = taikhoanTextField.getText();
+    if(taikhoan.equals("")){
+    JOptionPane.showMessageDialog(this,"có lỗi trong quá trinh Đăng nhập","Tài khoản không thể để trống",JOptionPane.ERROR_MESSAGE);
+    }
+
+    char[]matkhau = PasswordField.getPassword();
+    if(matkhau.equals("")){
+    JOptionPane.showMessageDialog(this,"có lỗi trong quá trinh Đăng nhập","Mật khẩu không thể để trống",JOptionPane.ERROR_MESSAGE);
+    }
+        TaiKhoan nd = new TaiKhoan();
+        try{
+            Account acc = nd.CheckLogin(taikhoanTextField.getText(),new String (PasswordField.getPassword()));
+            System.out.println(acc);
+            if(acc == null){
+            JOptionPane.showMessageDialog(this,"có lỗi trong quá trinh Đăng nhập","Tên đăng nhập khoặc mật khẩu sai",JOptionPane.ERROR_MESSAGE);
+            }
+            else if(acc.getRole().equals("Nhan Vien Quan Ly")){
+            HomePageCus khachhangpage = new HomePageCus();
+            khachhangpage.setVisible(true);
+            this.dispose();
+            }else if (acc.getRole().equals("Nhan vien")){
+            HomePageCus khachhangpage = new HomePageCus();
+            khachhangpage.setVisible(true);
+            this.dispose();
+            }else if(acc.getRole().equals("Khach Hang")){
+            HomePageCus khachhangpage = new HomePageCus();
+            khachhangpage.setVisible(true);
+            this.dispose();
+            }
+        }catch (HeadlessException | ClassNotFoundException | SQLException e){
+        JOptionPane.showMessageDialog(this,"có lỗi trong quá trinh Đăng nhập", "Tên đăng nhập khoặc mật khẩu sai",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DangNhapjButtonActionPerformed
+   
     /**
      * @param args the command line arguments
      */
@@ -202,8 +239,9 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DangNhapjButton;
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JPanel containPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -211,9 +249,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField taikhoanTextField;
     // End of variables declaration//GEN-END:variables
 }
