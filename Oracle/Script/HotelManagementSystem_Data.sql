@@ -13,6 +13,41 @@
 --drop table servicecalled;
 
 
+create or replace PROCEDURE proc_update_money(billno_update bill.billno%TYPE)
+AS
+    SumOfMoney bill.sumofmoney%type;
+    PaymentDate PAY.paymentdate%TYPE;   
+    tCheckOut Reservation.tCheckOut%TYPE;    
+    cost room.cost%type;
+    songaytre number;
+    --SerNo bill.serno%type;
+    total_ser NUMBER:=0;
+BEGIN
+    -- t√≠nh so ngay tra
+    SELECT (ROUND(PaymentDate - tCheckOut)/365) into songaytre
+    from reservation R JOIN customer C ON r.cusno= c.cusno JOIN PAY ON pay.cusno = C.CUSNO
+    WHERE TO_CHAR(PaymentDate,'DD-MM-YY') > TO_CHAR(tCheckOut,'DD-MM-YY');
+    -- t√≠nh so dich vu
+    SELECT COUNT(Ser.SerNo) into total_ser
+    FROM BILL B JOIN ServiceCalled Ser on B.RoomNo = Ser.RoomNo;
+
+    IF (SumOfMoney >3000000 or total_ser > 3 ) then
+        UPDATE BILL
+        SET SumOfMoney = SumOfMoney - (SumOfMoney*0.9) --//GIAM 10%
+        WHERE billno=billno_update;
+        DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+    end if;
+    if ( TO_CHAR(PaymentDate,'DD-MM-YY') > TO_CHAR(tCheckOut,'DD-MM-YY')) THEN
+        UPDATE BILL
+        SET SumOfMoney = SumOfMoney +  (cost * 0.05 * songaytre)
+        WHERE billno=billno_update;
+        DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+    else
+        DBMS_OUTPUT.PUT_LINE('Cap nhat khong thanh cong!');
+    end if;
+END;
+
+drop table Reservation;
 ------------------------------------------------------------ CAC BANG VA THUOC TINH ------------------------------------------------------------ 
 /*==============================================================*/
 /* Table: Customer                                              */
@@ -28,7 +63,7 @@ CREATE TABLE Customer(
     AccountID   NUMBER          not null
 );
 
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Customer ADD CONSTRAINT PK_Customer PRIMARY KEY (CusNo);
 
 
@@ -37,13 +72,14 @@ ALTER TABLE Customer ADD CONSTRAINT PK_Customer PRIMARY KEY (CusNo);
 /*==============================================================*/
 CREATE TABLE Reservation(
 	ResNo			varchar2(5)	not null,
+    billNo          varchar2(5) not null,
 	CusNo		varchar2(5)	not null,
 	RoomNo 			varchar2(5)		not null,
 	ResDate		date	not null,
     tCheckIn	date	not null,
 	tCheckOut	date	not null
 );
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Reservation ADD CONSTRAINT PK_Reservation PRIMARY KEY (ResNo);
 
 
@@ -54,11 +90,11 @@ ALTER TABLE Reservation ADD CONSTRAINT PK_Reservation PRIMARY KEY (ResNo);
 CREATE TABLE Service(
 	SerNo				varchar2(5)		not null,
 	SerName				varchar2(50)	not null,
-	TypeOfService		number		not null, --0:Ngo‡i tr?i ; 1:Trong nh‡
+	TypeOfService		number		not null, --0:Ngo√†i tr?i ; 1:Trong nh√†
 	Cost				number		not null,
 	CONSTRAINT CHK_TypeOfService CHECK (TypeOfService BETWEEN 0 AND 1 )
 );
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Service ADD CONSTRAINT PK_Service PRIMARY KEY (SerNo);
 
 /*==============================================================*/
@@ -74,7 +110,7 @@ CREATE TABLE Assessroom(
 	CONSTRAINT CHK_Point CHECK (Point BETWEEN 0 AND 10)
 );
 
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Assessroom ADD CONSTRAINT PK_Assessroom PRIMARY KEY (RoomNo,CusNo);
 
 
@@ -86,7 +122,7 @@ CREATE TABLE Belong(
 	ItemNo		varchar2(5) not null,
 	RoomNo		varchar2(5) not null
 );
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Belong ADD CONSTRAINT PK_Belong PRIMARY KEY (ItemNo);
 
 
@@ -99,7 +135,7 @@ CREATE TABLE Position(
 	PosName		varchar2(50)	not null,
 	EmpNo		varchar2(5) not null
 );
---T?o khÛa chÌnh
+--T?o kh√≥a ch√≠nh
 ALTER TABLE Position ADD CONSTRAINT PK_Position PRIMARY KEY (PosNo);
 
 
@@ -119,7 +155,7 @@ Create table Employee(
     AccountID   NUMBER          not null,
 	CONSTRAINT CHK_Gender CHECK (GENDER BETWEEN 0 AND 1)
 );
---- KhÛa ch?nh b?ng Employee
+--- Kh√≥a ch?nh b?ng Employee
 ALTER TABLE Employee ADD CONSTRAINT PK_Employee PRIMARY KEY(EmpNo);
 
 
@@ -132,14 +168,14 @@ Create table Room(
 	TypeOfRoom	number 	not null, --1: 1 gi??ng, 2: 2 gi??ng
 	Quality		varchar2(10)	not null,
 	--- Quality
-		-- Standard: PhÚng tiÍu chu?n trong kh·ch s?n
-		-- Superior: PhÚng cÛ ch?t l??ng cao h?n standard(g?i t?t l‡ SUP)
-		-- Deluxe: PhÚng cÛ ch?t l??ng kh· cao, th??ng n?m ? t?ng cao kh·ch s?n (g?i t?t l‡ DLX)
+		-- Standard: Ph√≤ng ti√™u chu?n trong kh√°ch s?n
+		-- Superior: Ph√≤ng c√≥ ch?t l??ng cao h?n standard(g?i t?t l√† SUP)
+		-- Deluxe: Ph√≤ng c√≥ ch?t l??ng kh√° cao, th??ng n?m ? t?ng cao kh√°ch s?n (g?i t?t l√† DLX)
 	Cost		number		not null,
 	CONSTRAINT CHK_TYPE CHECK (TypeOfRoom BETWEEN 1 AND 2),
 	CONSTRAINT CHK_QUALITY CHECK (Quality IN ('Standard','Superior','Deluxe'))
 );
---- khÛa chÌnh b?ng Room
+--- kh√≥a ch√≠nh b?ng Room
 ALTER TABLE Room ADD CONSTRAINT PK_ROOM PRIMARY KEY (RoomNo);
 
 
@@ -157,7 +193,7 @@ Create table Bill(
         -- 1: Da thanh toan
     CONSTRAINT CHK_STATUS CHECK (status BETWEEN 0 AND 1)
 );
---- KhÛa chÌnh b?ng Bill
+--- Kh√≥a ch√≠nh b?ng Bill
 ALTER TABLE Bill ADD CONSTRAINT PK_Bill PRIMARY KEY(BillNo);
 
 
@@ -170,7 +206,7 @@ Create table ServiceCalled(
 	RoomNo		varchar2(5)	not null,
 	Note		varchar2(2000)
 );
---- KhÛa chÌnh ServiceCalled
+--- Kh√≥a ch√≠nh ServiceCalled
 ALTER TABLE ServiceCalled ADD CONSTRAINT PK_ServiceCalled PRIMARY KEY(billNo, SerNo, RoomNo);
 
 
@@ -185,7 +221,7 @@ Create table Item(
         -- T?t, h? h?ng, ch?a trang b?
 	CONSTRAINT CHK_STATUSItem CHECK(Status IN ('T?t', 'H? h?ng', 'Ch?a trang b?'))
 );
---- KhÛa chÌnh b?ng Item
+--- Kh√≥a ch√≠nh b?ng Item
 ALTER TABLE Item ADD CONSTRAINT PK_ITEM PRIMARY KEY(ItemNo);
 
 
@@ -199,7 +235,7 @@ CREATE TABLE Account (
 	Password	varchar2(30) not null,
 	Role        varchar2(30) not null	
 );
---- KhÛa chÌnh Account
+--- Kh√≥a ch√≠nh Account
 ALTER TABLE Account ADD CONSTRAINT PK_Acount PRIMARY KEY(AccountID);
 
 
@@ -212,17 +248,17 @@ CREATE TABLE Pay (
 	CusNo			varchar(5) not null,
 	Method			int not null,
 	-- Status:
-		-- 1: d˘ng COD
-		-- 2: B?ng c·ch chuy?n kho?n
+		-- 1: d√πng COD
+		-- 2: B?ng c√°ch chuy?n kho?n
 	PaymentDate		date not null,
 	CONSTRAINT CHK_Method CHECK (Method BETWEEN 1 AND 2)	
 );
---- KhÛa chÌnh Pay
+--- Kh√≥a ch√≠nh Pay
 ALTER TABLE Pay ADD CONSTRAINT PK_Pay PRIMARY KEY(BillNo,CusNo);
 
 
 
--------------------------------------------------------- KhÛa ngo?i -------------------------------------------------------- 
+-------------------------------------------------------- Kh√≥a ngo?i -------------------------------------------------------- 
 
 ALTER TABLE Assessroom
    ADD CONSTRAINT FK_ASSESSRO_ASSESSROO_ROOM FOREIGN KEY (ROOMNO)
@@ -262,6 +298,9 @@ ALTER TABLE Position
    ADD CONSTRAINT FK_Position_IS_EMPLOYEE FOREIGN KEY (EMPNO)
       REFERENCES EMPLOYEE (EMPNO);
 
+ALTER TABLE Reservation
+   ADD CONSTRAINT FK_RESERVAT_RESERVATI_Bill FOREIGN KEY (BillNo)
+      REFERENCES Bill (BillNo);
 
 ALTER TABLE Reservation
    ADD CONSTRAINT FK_RESERVAT_RESERVATI_ROOM FOREIGN KEY (ROOMNO)
@@ -296,38 +335,38 @@ ALTER TABLE Employee
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Account                             */
 /*==============================================================*/
-INSERT INTO Account VALUES (101,'trangnhung','trangnhung123','Nh‚n viÍn qu?n l˝');
+INSERT INTO Account VALUES (101,'trangnhung','trangnhung123','Nh√¢n vi√™n qu?n l√Ω');
 
-INSERT INTO Account VALUES (1,'vandau','vandau123','Nh‚n viÍn');
-INSERT INTO Account VALUES (2,'thianh','thianh123','Nh‚n viÍn');
-INSERT INTO Account VALUES (3,'anhthien','anhthien123','Nh‚n viÍn');
-INSERT INTO Account VALUES (4,'huyentrang','huyentrang123','Nh‚n viÍn');
-INSERT INTO Account VALUES (5,'vanthanh','vanthanh123','Nh‚n viÍn');
-INSERT INTO Account VALUES (6,'hoangphong','hoangphong123','Nh‚n viÍn');
-INSERT INTO Account VALUES (7,'camtu','camtu123','Nh‚n viÍn');
-INSERT INTO Account VALUES (8,'thanhlong','thanhlong123','Nh‚n viÍn');
-INSERT INTO Account VALUES (9,'tuyetha','tuyetha123','Nh‚n viÍn');
-INSERT INTO Account VALUES (10,'ducduy','ducduy123','Nh‚n viÍn');
-INSERT INTO Account VALUES (11,'ngocngu','ngocnhu123','Nh‚n viÍn');
-INSERT INTO Account VALUES (12,'duyanh','duyanh123','Nh‚n viÍn');
-INSERT INTO Account VALUES (13,'thaoha','thaoha123','Nh‚n viÍn');
-INSERT INTO Account VALUES (14,'anhthu','anhthu123','Nh‚n viÍn');
+INSERT INTO Account VALUES (1,'vandau','vandau123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (2,'thianh','thianh123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (3,'anhthien','anhthien123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (4,'huyentrang','huyentrang123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (5,'vanthanh','vanthanh123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (6,'hoangphong','hoangphong123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (7,'camtu','camtu123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (8,'thanhlong','thanhlong123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (9,'tuyetha','tuyetha123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (10,'ducduy','ducduy123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (11,'ngocngu','ngocnhu123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (12,'duyanh','duyanh123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (13,'thaoha','thaoha123','Nh√¢n vi√™n');
+INSERT INTO Account VALUES (14,'anhthu','anhthu123','Nh√¢n vi√™n');
 
-INSERT INTO Account VALUES(201,'mynhung','mynhung123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(202,'thanhphat','thanhphat123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(203,'thaohong','thaohong123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(204,'tienlinh','tienlinh123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(205,'hoailinh','hoailinh123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(206,'anhkiet','anhkiet123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(207,'phuonglinh','phuonglinh123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(208,'myquyen','myquyen123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(209,'duythien','duythien123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(210,'anhhuy','anhhuy123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(211,'nguyenduy','nguyenduy123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(212,'hobaoan','hobaoan123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(213,'thuyduong','thuyduong123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(214,'tangduc','tangduc123','Kh·ch h‡ng');
-INSERT INTO Account VALUES(215,'ngochien','ngochien123','Kh·ch h‡ng');
+INSERT INTO Account VALUES(201,'mynhung','mynhung123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(202,'thanhphat','thanhphat123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(203,'thaohong','thaohong123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(204,'tienlinh','tienlinh123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(205,'hoailinh','hoailinh123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(206,'anhkiet','anhkiet123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(207,'phuonglinh','phuonglinh123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(208,'myquyen','myquyen123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(209,'duythien','duythien123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(210,'anhhuy','anhhuy123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(211,'nguyenduy','nguyenduy123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(212,'hobaoan','hobaoan123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(213,'thuyduong','thuyduong123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(214,'tangduc','tangduc123','Kh√°ch h√†ng');
+INSERT INTO Account VALUES(215,'ngochien','ngochien123','Kh√°ch h√†ng');
 
 
 /*==============================================================*/
@@ -336,19 +375,19 @@ INSERT INTO Account VALUES(215,'ngochien','ngochien123','Kh·ch h‡ng');
 INSERT INTO Employee VALUES ('E016','Ph?m Trang Nhung','0889972871','P006',TO_DATE('26/08/1996','dd/mm/yyyy'),1,TO_DATE('10/12/2017','dd/mm/yyyy'),'nhung@gmail.com',101);
 
 INSERT INTO Employee VALUES ('E001','Nguy?n V?n ??u','0123456789','P001',TO_DATE('26/08/1990','dd/mm/yyyy'),0,TO_DATE('26/10/2012','dd/mm/yyyy'),'dau@gmail.com',1);
-INSERT INTO Employee VALUES ('E002','LÍ Th? Anh','0345678912','P002',TO_DATE('26/07/1998','dd/mm/yyyy'),1,TO_DATE('26/11/2012','dd/mm/yyyy'),'anh@gmail.com',2);
-INSERT INTO Employee VALUES ('E003','Nguy?n Anh ThiÍn','0135792468','P003',TO_DATE('26/06/1990','dd/mm/yyyy'),0,TO_DATE('26/12/2012','dd/mm/yyyy'),'thien@gmail.com',3);
-INSERT INTO Employee VALUES ('E004','LÍ Th? Huy?n Trang','0246813579','P004',TO_DATE('13/05/1992','dd/mm/yyyy'),1,TO_DATE('10/10/2017','dd/mm/yyyy'),'trang@gmail.com',4);
+INSERT INTO Employee VALUES ('E002','L√™ Th? Anh','0345678912','P002',TO_DATE('26/07/1998','dd/mm/yyyy'),1,TO_DATE('26/11/2012','dd/mm/yyyy'),'anh@gmail.com',2);
+INSERT INTO Employee VALUES ('E003','Nguy?n Anh Thi√™n','0135792468','P003',TO_DATE('26/06/1990','dd/mm/yyyy'),0,TO_DATE('26/12/2012','dd/mm/yyyy'),'thien@gmail.com',3);
+INSERT INTO Employee VALUES ('E004','L√™ Th? Huy?n Trang','0246813579','P004',TO_DATE('13/05/1992','dd/mm/yyyy'),1,TO_DATE('10/10/2017','dd/mm/yyyy'),'trang@gmail.com',4);
 INSERT INTO Employee VALUES ('E005','Tr?n V?n Thanh','0778899210','P005',TO_DATE('14/06/1995','dd/mm/yyyy'),0,TO_DATE('10/11/2017','dd/mm/yyyy'),'thanh@gmail.com',5);
-INSERT INTO Employee VALUES ('E006','B˘i Ho‡ng Phong','0779898771','P007',TO_DATE('27/08/1997','dd/mm/yyyy'),0,TO_DATE('12/10/2018','dd/mm/yyyy'),'phong@gmail.com',6);
-INSERT INTO Employee VALUES ('E007','LÍ Th? C?m T˙','0112233445','P008',TO_DATE('28/08/1998','dd/mm/yyyy'),1,TO_DATE('09/08/2019','dd/mm/yyyy'),'tu@gmail.com',7);
-INSERT INTO Employee VALUES ('E008','Nguy?n Th‡nh Long','0123456789','P009',TO_DATE('20/08/1999','dd/mm/yyyy'),0,TO_DATE('11/11/2016','dd/mm/yyyy'),'long@gmail.com',8);
-INSERT INTO Employee VALUES ('E009','Ho‡ng Th? Tuy?t H‡','0123456789','P010',TO_DATE('30/08/1999','dd/mm/yyyy'),1,TO_DATE('12/12/2018','dd/mm/yyyy'),'ha@gmail.com',9);
-INSERT INTO Employee VALUES ('E010','B˘i ??c Duy','0354354353','P011',TO_DATE('21/02/1998','dd/mm/yyyy'),0,TO_DATE('14/04/2019','dd/mm/yyyy'),'duy@gmail.com',10);
+INSERT INTO Employee VALUES ('E006','B√πi Ho√†ng Phong','0779898771','P007',TO_DATE('27/08/1997','dd/mm/yyyy'),0,TO_DATE('12/10/2018','dd/mm/yyyy'),'phong@gmail.com',6);
+INSERT INTO Employee VALUES ('E007','L√™ Th? C?m T√∫','0112233445','P008',TO_DATE('28/08/1998','dd/mm/yyyy'),1,TO_DATE('09/08/2019','dd/mm/yyyy'),'tu@gmail.com',7);
+INSERT INTO Employee VALUES ('E008','Nguy?n Th√†nh Long','0123456789','P009',TO_DATE('20/08/1999','dd/mm/yyyy'),0,TO_DATE('11/11/2016','dd/mm/yyyy'),'long@gmail.com',8);
+INSERT INTO Employee VALUES ('E009','Ho√†ng Th? Tuy?t H√†','0123456789','P010',TO_DATE('30/08/1999','dd/mm/yyyy'),1,TO_DATE('12/12/2018','dd/mm/yyyy'),'ha@gmail.com',9);
+INSERT INTO Employee VALUES ('E010','B√πi ??c Duy','0354354353','P011',TO_DATE('21/02/1998','dd/mm/yyyy'),0,TO_DATE('14/04/2019','dd/mm/yyyy'),'duy@gmail.com',10);
 INSERT INTO Employee VALUES ('E011','Tr?n Ng?c Nh?','0254837235','P012',TO_DATE('30/08/1997','dd/mm/yyyy'),1,TO_DATE('12/3/2018','dd/mm/yyyy'),'nhu@gmail.com',11);
 INSERT INTO Employee VALUES ('E012','Nguy?n Duy Anh','0123456789','P013',TO_DATE('23/07/1989','dd/mm/yyyy'),0,TO_DATE('12/5/2018','dd/mm/yyyy'),'danh@gmail.com',12);
-INSERT INTO Employee VALUES ('E013','Nguy?n Th? Th?o H‡','0326483923','P014',TO_DATE('12/04/2000','dd/mm/yyyy'),1,TO_DATE('06/03/2018','dd/mm/yyyy'),'tha@gmail.com',13);
-INSERT INTO Employee VALUES ('E014','LÍ Anh Th?','0384249312','P015',TO_DATE('04/08/1999','dd/mm/yyyy'),1,TO_DATE('23/01/2018','dd/mm/yyyy'),'thu@gmail.com',14);
+INSERT INTO Employee VALUES ('E013','Nguy?n Th? Th?o H√†','0326483923','P014',TO_DATE('12/04/2000','dd/mm/yyyy'),1,TO_DATE('06/03/2018','dd/mm/yyyy'),'tha@gmail.com',13);
+INSERT INTO Employee VALUES ('E014','L√™ Anh Th?','0384249312','P015',TO_DATE('04/08/1999','dd/mm/yyyy'),1,TO_DATE('23/01/2018','dd/mm/yyyy'),'thu@gmail.com',14);
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG ROOM				*/
@@ -374,19 +413,19 @@ INSERT INTO Room VALUES ('R114',2,'Superior',500000);
 /*==============================================================*/
 
 INSERT INTO Customer VALUES ('C001','Tr?n Th? M? Nhung',1,'Gia Lai','0343927832','nhung@gmail.com','049573028324',201);
-INSERT INTO Customer VALUES ('C002','Nguy?n Th‡nh Ph·t',0,'Th‡nh ph? H? ChÌ Minh','0335482738','phat@gmail.com','054928475893',202);
+INSERT INTO Customer VALUES ('C002','Nguy?n Th√†nh Ph√°t',0,'Th√†nh ph? H? Ch√≠ Minh','0335482738','phat@gmail.com','054928475893',202);
 INSERT INTO Customer VALUES ('C003','Nguy?n Th? Th?o H?ng',1,'Qu?ng Nam','0334586738','hong@gmail.com','035559375847',203);
 INSERT INTO Customer VALUES ('C004','Nguy?n Th? Th?o H?ng',0,'Nam ??nh','0365827407','linh@gmail.com','048529475843',204);
-INSERT INTO Customer VALUES ('C005','Nguy?n Ho‡i Linh',0,'Th‡nh ph? H? ChÌ Minh','0224584727','linhnguyen@gmail.com','025847393024',205);
-INSERT INTO Customer VALUES ('C006','Nguy?n Anh Ki?t',0,'??ng Th·p','0326843438','kiet@gmail.com','034465584292',206);
+INSERT INTO Customer VALUES ('C005','Nguy?n Ho√†i Linh',0,'Th√†nh ph? H? Ch√≠ Minh','0224584727','linhnguyen@gmail.com','025847393024',205);
+INSERT INTO Customer VALUES ('C006','Nguy?n Anh Ki?t',0,'??ng Th√°p','0326843438','kiet@gmail.com','034465584292',206);
 INSERT INTO Customer VALUES ('C007','V? Th? Ph??ng Linh',1,'Gia Lai','0234573859','linhvu@gmail.com','042386549373',207);
-INSERT INTO Customer VALUES ('C008','Tr?n Ng?c M? QuyÍn',1,'BÏnh ??nh','0343927832','quyen@gmail.com','026837542965',208);
-INSERT INTO Customer VALUES ('C009','B˘i Duy Thi?n',0,'??k L?k','0857437233','thien@gmail.com','024937584372',209);
-INSERT INTO Customer VALUES ('C010','Tr?n Anh Huy',0,'BÏnh D??ng','0489274823','huy@gmail.com','044389754618',210);
-INSERT INTO Customer VALUES ('C011','Nguy?n Duy',0,'V?ng T‡u','0432985342','duy@gmail.com','042984732647',211);
+INSERT INTO Customer VALUES ('C008','Tr?n Ng?c M? Quy√™n',1,'B√¨nh ??nh','0343927832','quyen@gmail.com','026837542965',208);
+INSERT INTO Customer VALUES ('C009','B√πi Duy Thi?n',0,'??k L?k','0857437233','thien@gmail.com','024937584372',209);
+INSERT INTO Customer VALUES ('C010','Tr?n Anh Huy',0,'B√¨nh D??ng','0489274823','huy@gmail.com','044389754618',210);
+INSERT INTO Customer VALUES ('C011','Nguy?n Duy',0,'V?ng T√†u','0432985342','duy@gmail.com','042984732647',211);
 INSERT INTO Customer VALUES ('C012','H? B?o An',0,'Nha Trang','0396418423','an@gmail.com','038427412345',212);
-INSERT INTO Customer VALUES ('C013','D??ng Thanh Th?y',1,'Th‡nh ph? H? ChÌ Minh','0329642732','thuyduong@gmail.com','0593741842',213);
-INSERT INTO Customer VALUES ('C014','Th·i T?ng ??c',0,'Qu?ng Tr?','0732406954','duc@gmail.com','049173829432',214);
+INSERT INTO Customer VALUES ('C013','D??ng Thanh Th?y',1,'Th√†nh ph? H? Ch√≠ Minh','0329642732','thuyduong@gmail.com','0593741842',213);
+INSERT INTO Customer VALUES ('C014','Th√°i T?ng ??c',0,'Qu?ng Tr?','0732406954','duc@gmail.com','049173829432',214);
 INSERT INTO Customer VALUES ('C015','Nguy?n Ng?c Hi?n',1,'B?n Tre','0493762453','hien@gmail.com','069382741345',215);
 
 /*==============================================================*/
@@ -424,78 +463,81 @@ INSERT INTO Service VALUES ('S007','Dich vu tiec ngoai troi',0,1000000);
 INSERT INTO Service VALUES ('S008','Dich vu san tennis',0,800000);
 INSERT INTO Service VALUES ('S009','Dich vu phong gym',1,50000);
 INSERT INTO Service VALUES ('S010','Dich vu bar tren lau khach san',0,1900000);
-INSERT INTO Service VALUES ('S011','D?ch v? xe ??a ?Ûn s‚n bay',0,1500000);
-INSERT INTO Service VALUES ('S012','D?ch v? cho thuÍ xe m·y t? l·i',0,500000);
-INSERT INTO Service VALUES ('S013','D?ch v? phÚng 24/24',0,1000000);
-INSERT INTO Service VALUES ('S014','D?ch v? ??t vÈ m·y bay, tour du l?ch',0,800000);
-INSERT INTO Service VALUES ('S015','D?ch v? trÙng tr?',0,1200000);
+INSERT INTO Service VALUES ('S011','D?ch v? xe ??a ?√≥n s√¢n bay',0,1500000);
+INSERT INTO Service VALUES ('S012','D?ch v? cho thu√™ xe m√°y t? l√°i',0,500000);
+INSERT INTO Service VALUES ('S013','D?ch v? ph√≤ng 24/24',0,1000000);
+INSERT INTO Service VALUES ('S014','D?ch v? ??t v√© m√°y bay, tour du l?ch',0,800000);
+INSERT INTO Service VALUES ('S015','D?ch v? tr√¥ng tr?',0,1200000);
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG ServiceCalled			            */
 /*==============================================================*/
-INSERT INTO ServiceCalled VALUES('B001','S001','R100','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B001','S001','R100','Kh√¥ng c?n g√¨ th√™m');
 
-INSERT INTO ServiceCalled VALUES('B002','S002','R101','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B002','S002','R101','Kh√¥ng c?n g√¨ th√™m');
 
 INSERT INTO ServiceCalled VALUES('B003','S003','R102','Ch? l?y 2 chi?c xe ??p');
-INSERT INTO ServiceCalled VALUES('B003','S004','R102','Gi?t v‡ tr? t?i phÚng');
-INSERT INTO ServiceCalled VALUES('B003','S005','R102','C?n phÚng r?ng, cÛ m·y l?nh');
+INSERT INTO ServiceCalled VALUES('B003','S004','R102','Gi?t v√† tr? t?i ph√≤ng');
+INSERT INTO ServiceCalled VALUES('B003','S005','R102','C?n ph√≤ng r?ng, c√≥ m√°y l?nh');
+"select BillNo, RoomNo, SerNo, note "
+                       + "from servicecalled "
+                       + "group by billNo,roomNo, SerNo, note "  
+                       + "order by BillNo"
+INSERT INTO ServiceCalled VALUES('B004','S004','R103','K√®m l√† ?? v√† giao t?i ph√≤ng tr??c 14h');
 
-INSERT INTO ServiceCalled VALUES('B004','S004','R103','KËm l‡ ?? v‡ giao t?i phÚng tr??c 14h');
+INSERT INTO ServiceCalled VALUES('B005','S005','R104','C?n ph√≤ng r?ng, c√≥ m√°y l?nh');
 
-INSERT INTO ServiceCalled VALUES('B005','S005','R104','C?n phÚng r?ng, cÛ m·y l?nh');
+INSERT INTO ServiceCalled VALUES('B006','S006','R105','Trang b? s?n 2 mic, tr√°i c√¢y');
+INSERT INTO ServiceCalled VALUES('B006','S007','R105','K? b√™n ti?c c√≥ h? b?i');
 
-INSERT INTO ServiceCalled VALUES('B006','S006','R105','Trang b? s?n 2 mic, tr·i c‚y');
-INSERT INTO ServiceCalled VALUES('B006','S007','R105','K? bÍn ti?c cÛ h? b?i');
+INSERT INTO ServiceCalled VALUES('B007','S006','R105','Trang b? s?n 2 mic, tr√°i c√¢y');
+INSERT INTO ServiceCalled VALUES('B007','S007','R105','K? b√™n ti?c c√≥ h? b?i');
 
-INSERT INTO ServiceCalled VALUES('B007','S006','R105','Trang b? s?n 2 mic, tr·i c‚y');
-INSERT INTO ServiceCalled VALUES('B007','S007','R105','K? bÍn ti?c cÛ h? b?i');
+INSERT INTO ServiceCalled VALUES('B008','S008','R107','C?n 2 c√¢y v?t ?√°nh tennis');
+INSERT INTO ServiceCalled VALUES('B008','S009','R107','Kh√¥ng c?n g√¨ th√™m');
 
-INSERT INTO ServiceCalled VALUES('B008','S008','R107','C?n 2 c‚y v?t ?·nh tennis');
-INSERT INTO ServiceCalled VALUES('B008','S009','R107','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B009','S008','R107','C?n 2 c√¢y v?t ?√°nh tennis');
+INSERT INTO ServiceCalled VALUES('B009','S009','R107','Kh√¥ng c?n g√¨ th√™m');
 
-INSERT INTO ServiceCalled VALUES('B009','S008','R107','C?n 2 c‚y v?t ?·nh tennis');
-INSERT INTO ServiceCalled VALUES('B009','S009','R107','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B010','S010','R109','Kh√¥ng c?n g√¨ th√™m');
 
-INSERT INTO ServiceCalled VALUES('B010','S010','R109','KhÙng c?n gÏ thÍm');
-
-INSERT INTO ServiceCalled VALUES('B011','S002','R101','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B011','S002','R101','Kh√¥ng c?n g√¨ th√™m');
 
 INSERT INTO ServiceCalled VALUES('B012','S003','R102','Ch? l?y 2 chi?c xe ??p');
-INSERT INTO ServiceCalled VALUES('B012','S004','R102','Gi?t v‡ tr? t?i phÚng');
-INSERT INTO ServiceCalled VALUES('B012','S005','R102','C?n phÚng r?ng, cÛ m·y l?nh');
+INSERT INTO ServiceCalled VALUES('B012','S004','R102','Gi?t v√† tr? t?i ph√≤ng');
+INSERT INTO ServiceCalled VALUES('B012','S005','R102','C?n ph√≤ng r?ng, c√≥ m√°y l?nh');
 
-INSERT INTO ServiceCalled VALUES('B013','S004','R103','KËm l‡ ?? v‡ giao t?i phÚng tr??c 14h');
+INSERT INTO ServiceCalled VALUES('B013','S004','R103','K√®m l√† ?? v√† giao t?i ph√≤ng tr??c 14h');
 
-INSERT INTO ServiceCalled VALUES('B014','S015','R114','TrÙng 2 ??a tr? 3 tu?i');
+INSERT INTO ServiceCalled VALUES('B014','S015','R114','Tr√¥ng 2 ??a tr? 3 tu?i');
 
-INSERT INTO ServiceCalled VALUES('B015','S011','R110','KhÙng c?n gÏ thÍm');
+INSERT INTO ServiceCalled VALUES('B015','S011','R110','Kh√¥ng c?n g√¨ th√™m');
 
-INSERT INTO ServiceCalled VALUES('B016','S013','R111','D?n d?p phÚng ');
+INSERT INTO ServiceCalled VALUES('B016','S013','R111','D?n d?p ph√≤ng ');
 
-INSERT INTO ServiceCalled VALUES('B017','S012','R112','2 chi?c xe m·y');
+INSERT INTO ServiceCalled VALUES('B017','S012','R112','2 chi?c xe m√°y');
 
-INSERT INTO ServiceCalled VALUES('B018','S014','R113','??t vÈ m·y bay t? Th‡nh ph? H? ChÌ Minh ra H‡ N?i');
+INSERT INTO ServiceCalled VALUES('B018','S014','R113','??t v√© m√°y bay t? Th√†nh ph? H? Ch√≠ Minh ra H√† N?i');
 
 
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Item				*/
 /*==============================================================*/
-INSERT INTO Item VALUES('I001','B‡n l‡', 1,'T?t');
+INSERT INTO Item VALUES('I001','B√†n l√†', 1,'T?t');
 INSERT INTO Item VALUES('I002','Kh?n t?m', 2,'Ch?a trang b?');
 INSERT INTO Item VALUES('I003','M?n', 2,'T?t');
-INSERT INTO Item VALUES('I004','MÛc qu?n ·o', 5,'H? h?ng');
-INSERT INTO Item VALUES('I005','BÏnh ?un siÍu t?c', 1,'T?t');
+INSERT INTO Item VALUES('I004','M√≥c qu?n √°o', 5,'H? h?ng');
+INSERT INTO Item VALUES('I005','B√¨nh ?un si√™u t?c', 1,'T?t');
 INSERT INTO Item VALUES('I006','Qu?t ??ng', 1,'Ch?a trang b?');
 INSERT INTO Item VALUES('I007','Tivi', 1,'T?t');
 INSERT INTO Item VALUES('I008','T? l?nh', 1,'H? h?ng');
-INSERT INTO Item VALUES('I009','MÛc qu?n ·o', 5,'T?t');
+INSERT INTO Item VALUES('I009','M√≥c qu?n √°o', 5,'T?t');
 INSERT INTO Item VALUES('I010','M?n', 2,'Ch?a trang b?');
-INSERT INTO Item VALUES('I011','?Ën', 5,'T?t');
-INSERT INTO Item VALUES('I012','M·y l?nh ?i?u hÚa', 2,'H? h?ng');
+INSERT INTO Item VALUES('I011','?√®n', 5,'T?t');
+INSERT INTO Item VALUES('I012','M√°y l?nh ?i?u h√≤a', 2,'H? h?ng');
 INSERT INTO Item VALUES('I013','G?i', 3,'T?t');
-INSERT INTO Item VALUES('I014','D˘ che m?a', 6,'T?t');
+INSERT INTO Item VALUES('I014','D√π che m?a', 6,'T?t');
 INSERT INTO Item VALUES('I015','V?t d?ng y t?', 4,'Ch?a trang b?');
 
 
@@ -503,43 +545,43 @@ INSERT INTO Item VALUES('I015','V?t d?ng y t?', 4,'Ch?a trang b?');
 /*      INSERT D? LI?U B?NG Reservation                         */
 /*==============================================================*/
 
-INSERT INTO Reservation VALUES ('RE001','C001','R100',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE002','C002','R101',TO_DATE('12/03/2021','dd/mm/yyyy'),TO_DATE('14/03/2021','dd/mm/yyyy'),TO_DATE('16/03/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE003','C003','R102',TO_DATE('29/06/2021','dd/mm/yyyy'),TO_DATE('30/06/2021','dd/mm/yyyy'),TO_DATE('02/07/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE004','C004','R103',TO_DATE('04/05/2021','dd/mm/yyyy'),TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('06/05/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE005','C005','R104',TO_DATE('03/05/2021','dd/mm/yyyy'),TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('08/05/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE006','C006','R105',TO_DATE('23/04/2021','dd/mm/yyyy'),TO_DATE('24/04/2021','dd/mm/yyyy'),TO_DATE('25/04/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE007','C007','R105',TO_DATE('25/06/2021','dd/mm/yyyy'),TO_DATE('26/06/2021','dd/mm/yyyy'),TO_DATE('28/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE008','C008','R107',TO_DATE('21/01/2021','dd/mm/yyyy'),TO_DATE('21/01/2021','dd/mm/yyyy'),TO_DATE('23/01/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE009','C009','R107',TO_DATE('22/07/2021','dd/mm/yyyy'),TO_DATE('22/07/2021','dd/mm/yyyy'),TO_DATE('23/07/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE010','C010','R109',TO_DATE('08/06/2021','dd/mm/yyyy'),TO_DATE('08/06/2021','dd/mm/yyyy'),TO_DATE('11/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE011','C002','R101',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE012','C003','R102',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE013','C004','R103',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE014','C011','R114',TO_DATE('13/05/2021','dd/mm/yyyy'),TO_DATE('16/05/2021','dd/mm/yyyy'),TO_DATE('22/05/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE015','C012','R110',TO_DATE('12/04/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('30/04/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE016','C013','R111',TO_DATE('15/03/2021','dd/mm/yyyy'),TO_DATE('15/04/2021','dd/mm/yyyy'),TO_DATE('17/04/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE017','C014','R112',TO_DATE('15/05/2021','dd/mm/yyyy'),TO_DATE('22/05/2021','dd/mm/yyyy'),TO_DATE('27/05/2021','dd/mm/yyyy'));
-INSERT INTO Reservation VALUES ('RE018','C015','R113',TO_DATE('28/06/2021','dd/mm/yyyy'),TO_DATE('12/07/2021','dd/mm/yyyy'),TO_DATE('16/07/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE001', 'B001','C001','R100',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE002', 'B001','C002','R101',TO_DATE('12/03/2021','dd/mm/yyyy'),TO_DATE('14/03/2021','dd/mm/yyyy'),TO_DATE('16/03/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE003', 'B001','C003','R102',TO_DATE('29/06/2021','dd/mm/yyyy'),TO_DATE('30/06/2021','dd/mm/yyyy'),TO_DATE('02/07/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE004', 'B001','C004','R103',TO_DATE('04/05/2021','dd/mm/yyyy'),TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('06/05/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE005', 'B001','C005','R104',TO_DATE('03/05/2021','dd/mm/yyyy'),TO_DATE('05/05/2021','dd/mm/yyyy'),TO_DATE('08/05/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE006', 'B001','C006','R105',TO_DATE('23/04/2021','dd/mm/yyyy'),TO_DATE('24/04/2021','dd/mm/yyyy'),TO_DATE('25/04/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE007', 'B001','C007','R105',TO_DATE('25/06/2021','dd/mm/yyyy'),TO_DATE('26/06/2021','dd/mm/yyyy'),TO_DATE('28/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE008', 'B001','C008','R107',TO_DATE('21/01/2021','dd/mm/yyyy'),TO_DATE('21/01/2021','dd/mm/yyyy'),TO_DATE('23/01/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE009', 'B001','C009','R107',TO_DATE('22/07/2021','dd/mm/yyyy'),TO_DATE('22/07/2021','dd/mm/yyyy'),TO_DATE('23/07/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE010', 'B001','C010','R109',TO_DATE('08/06/2021','dd/mm/yyyy'),TO_DATE('08/06/2021','dd/mm/yyyy'),TO_DATE('11/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE011', 'B001','C002','R101',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE012', 'B001','C003','R102',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE013', 'B001','C004','R103',TO_DATE('23/06/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('27/06/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE014', 'B001','C011','R114',TO_DATE('13/05/2021','dd/mm/yyyy'),TO_DATE('16/05/2021','dd/mm/yyyy'),TO_DATE('22/05/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE015', 'B001','C012','R110',TO_DATE('12/04/2021','dd/mm/yyyy'),TO_DATE('24/06/2021','dd/mm/yyyy'),TO_DATE('30/04/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE016', 'B001','C013','R111',TO_DATE('15/03/2021','dd/mm/yyyy'),TO_DATE('15/04/2021','dd/mm/yyyy'),TO_DATE('17/04/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE017', 'B001','C014','R112',TO_DATE('15/05/2021','dd/mm/yyyy'),TO_DATE('22/05/2021','dd/mm/yyyy'),TO_DATE('27/05/2021','dd/mm/yyyy'));
+INSERT INTO Reservation VALUES ('RE018', 'B001','C015','R113',TO_DATE('28/06/2021','dd/mm/yyyy'),TO_DATE('12/07/2021','dd/mm/yyyy'),TO_DATE('16/07/2021','dd/mm/yyyy'));
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Assessroom                          */
 /*==============================================================*/
 
 INSERT INTO Assessroom VALUES (8,'D?ch v? ph?c v? t?t','R100','C001');
-INSERT INTO Assessroom VALUES (7.5,'Ch?t l??ng phÚng ti?n nghi','R101','C002');
-INSERT INTO Assessroom VALUES (9,'Vi?c cung c?p d?ch v? ? m?c gi· ph˘ h?p v?i kh? n?ng ng??i tiÍu d˘ng','R102','C003');
-INSERT INTO Assessroom VALUES (7,'PhÚng c?ng bÏnh th??ng','R103','C004');
-INSERT INTO Assessroom VALUES (8,'Ch?t l??ng phÚng ph˘ h?p v?i m?c ti?n','R104','C005');
-INSERT INTO Assessroom VALUES (8.5,'Gi· ??t phÚng r?','R105','C006');
-INSERT INTO Assessroom VALUES (8,'Kh·ch s?n cÛ an ninh an to‡n','R105','C007');
-INSERT INTO Assessroom VALUES (9.5,'KhuÙn viÍn luÙn v? sinh s?ch s?','R107','C008');
-INSERT INTO Assessroom VALUES (10,'D?ch v? ph?c v? t?t, nh‚n viÍn nhi?t tÏnh','R107','C009');
-INSERT INTO Assessroom VALUES (8,'Kh·ch s?n ph?c v? thi?t b? ti?n nghi','R109','C010');
-INSERT INTO Assessroom VALUES (7,'Kh·ch s?n ph?c v? bÏnh th??ng','R114','C011');
+INSERT INTO Assessroom VALUES (7.5,'Ch?t l??ng ph√≤ng ti?n nghi','R101','C002');
+INSERT INTO Assessroom VALUES (9,'Vi?c cung c?p d?ch v? ? m?c gi√° ph√π h?p v?i kh? n?ng ng??i ti√™u d√πng','R102','C003');
+INSERT INTO Assessroom VALUES (7,'Ph√≤ng c?ng b√¨nh th??ng','R103','C004');
+INSERT INTO Assessroom VALUES (8,'Ch?t l??ng ph√≤ng ph√π h?p v?i m?c ti?n','R104','C005');
+INSERT INTO Assessroom VALUES (8.5,'Gi√° ??t ph√≤ng r?','R105','C006');
+INSERT INTO Assessroom VALUES (8,'Kh√°ch s?n c√≥ an ninh an to√†n','R105','C007');
+INSERT INTO Assessroom VALUES (9.5,'Khu√¥n vi√™n lu√¥n v? sinh s?ch s?','R107','C008');
+INSERT INTO Assessroom VALUES (10,'D?ch v? ph?c v? t?t, nh√¢n vi√™n nhi?t t√¨nh','R107','C009');
+INSERT INTO Assessroom VALUES (8,'Kh√°ch s?n ph?c v? thi?t b? ti?n nghi','R109','C010');
+INSERT INTO Assessroom VALUES (7,'Kh√°ch s?n ph?c v? b√¨nh th??ng','R114','C011');
 INSERT INTO Assessroom VALUES (6,'Ch?a ??y ?? ti?n nghe','R110','C012');
 INSERT INTO Assessroom VALUES (9,'VIew ??p, v? sinh s?ch s?','R111','C013');
-INSERT INTO Assessroom VALUES (7.5,'GÌa c? ?n','R112','C014');
+INSERT INTO Assessroom VALUES (7.5,'G√≠a c? ?n','R112','C014');
 INSERT INTO Assessroom VALUES (8,'Ph?c v? t?t','R113','C015');
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Belong                              */
@@ -564,21 +606,21 @@ INSERT INTO Belong VALUES ('I015','R114');
 /*      INSERT D? LI?U B?NG Position				            */
 /*==============================================================*/
 
-INSERT INTO Position VALUES('P001','L? T‚n','E001');
+INSERT INTO Position VALUES('P001','L? T√¢n','E001');
 INSERT INTO Position VALUES('P002','Ph?c v?','E002');
 INSERT INTO Position VALUES('P003','Ph?c v?','E003'); 
-INSERT INTO Position VALUES('P004','Ph? phÚng','E004');
+INSERT INTO Position VALUES('P004','Ph? ph√≤ng','E004');
 INSERT INTO Position VALUES('P005','V? sinh','E005');
-INSERT INTO Position VALUES('P006','Qu?n l˝','E016');
+INSERT INTO Position VALUES('P006','Qu?n l√Ω','E016');
 INSERT INTO Position VALUES('P007','B?o v?','E007');  
-INSERT INTO Position VALUES('P008','L? T‚n','E008');
-INSERT INTO Position VALUES('P009','L? T‚n','E009');
-INSERT INTO Position VALUES('P010','L? T‚n','E010');
-INSERT INTO Position VALUES('P011','L? t‚n','E011');
+INSERT INTO Position VALUES('P008','L? T√¢n','E008');
+INSERT INTO Position VALUES('P009','L? T√¢n','E009');
+INSERT INTO Position VALUES('P010','L? T√¢n','E010');
+INSERT INTO Position VALUES('P011','L? t√¢n','E011');
 INSERT INTO Position VALUES('P012','B?o v?','E012');
 INSERT INTO Position VALUES('P013','Ph?c v?','E013');
 INSERT INTO Position VALUES('P014','V? sinh','E014');
-INSERT INTO Position VALUES('P015','Ph? phÚng','E006');
+INSERT INTO Position VALUES('P015','Ph? ph√≤ng','E006');
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Pay		                            */
