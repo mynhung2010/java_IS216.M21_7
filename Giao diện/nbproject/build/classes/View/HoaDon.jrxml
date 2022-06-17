@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HoaDon" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="201"/>
+	<parameter name="MaHoaDon" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.BillNo, c.CusNo,c.CusName,se.SerNo, SerName, b.RoomNo, SumOfMoney
+from bill b join customer c on b.CusNo = c.CusNo
+            join Servicecalled Se on b.BillNo = Se.BillNo
+            join Service s on se.SerNo = s.SerNo
+where b.billNo = $P{MaHoaDon}
+group by  b.BillNo, c.CusNo,c.CusName,se.SerNo, SerName, b.RoomNo, SumOfMoney]]>
+	</queryString>
+	<field name="BILLNO" class="java.lang.String"/>
+	<field name="CUSNO" class="java.lang.String"/>
+	<field name="CUSNAME" class="java.lang.String"/>
+	<field name="SERNO" class="java.lang.String"/>
+	<field name="SERNAME" class="java.lang.String"/>
+	<field name="ROOMNO" class="java.lang.String"/>
+	<field name="SUMOFMONEY" class="java.math.BigDecimal"/>
+	<variable name="SERNO_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{SERNO}]]></variableExpression>
+	</variable>
+	<variable name="SERNO_2" class="java.lang.Integer" resetType="Page" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{SERNO}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="80">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="46" backcolor="#99FFFF"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[	                   HÓA ĐƠN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="123">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="100" height="20" backcolor="#99FFFF"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="299" y="0" width="100" height="20" forecolor="#000000" backcolor="#99FFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Mã khách hàng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="427" y="0" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{MaHoaDon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="43" width="128" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="299" y="43" width="100" height="20" forecolor="#000000" backcolor="#99FFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tên khách hàng:]]></text>
+			</staticText>
+			<textField evaluationTime="Page">
+				<reportElement x="327" y="103" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{SERNO_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="103" width="121" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[Số dịch vụ đã sử dụng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="43" width="100" height="20" forecolor="#000000" backcolor="#99FFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Phòng sử dụng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="43" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ROOMNO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="65">
+			<staticText>
+				<reportElement x="120" y="37" width="100" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Mã dịch vụ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="37" width="100" height="20"/>
+				<textElement lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Tên dịch vụ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="89">
+			<textField>
+				<reportElement x="120" y="42" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SERNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="42" width="228" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SERNAME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54">
+			<textField>
+				<reportElement x="241" y="13" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="33" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="46">
+			<rectangle>
+				<reportElement mode="Opaque" x="270" y="0" width="285" height="42" forecolor="#000000" backcolor="#99FFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="286" y="9" width="100" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="9" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUMOFMONEY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
