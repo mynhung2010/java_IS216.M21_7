@@ -1,29 +1,48 @@
+
 /*==============================================================*/
-/* Table: Bill							*/
+/* Table: Bill							                        */
 /*==============================================================*/
 Create table Bill(
 	BillNo		varchar2(5)		not null,
 	CusNo	varchar2(5)	not null,
-	SerNo	varchar2(5)		not null,
 	RoomNo		varchar2(5)	not null,
-	SumOfMoney	number		not null,
-	PolNo	varchar2(5)	not null
+	SumOfMoney	number		not null, 
+    status      int         not null,
+    -- Trang thai hoa don: 
+        -- 0: Chua thanh toan
+        -- 1: Da thanh toan
+    CONSTRAINT CHK_STATUS CHECK (status BETWEEN 0 AND 1)
 );
---- Khóa chính bảng Bill
+--- Kh�a ch�nh b?ng Bill
 ALTER TABLE Bill ADD CONSTRAINT PK_Bill PRIMARY KEY(BillNo);
 
 
-
+ALTER TABLE Bill
+   ADD CONSTRAINT FK_Bill_Customer FOREIGN KEY (CUSNO)
+      REFERENCES Customer (CUSNO);
+      
+ALTER TABLE Bill
+   ADD CONSTRAINT FK_Bill_Room FOREIGN KEY (ROOMNO)
+      REFERENCES ROOM (ROOMNO);
+ 
+ /*==============================================================*/
+/*      INSERT D? LI?U B?NG BILL				*/
 /*==============================================================*/
-/*      INSERT DỮ LIỆU BẢNG BILL				*/
-/*==============================================================*/
-INSERT INTO Bill VALUES ('B001','C001','S001','R100',1600000,'POL01');
-INSERT INTO Bill VALUES ('B002','C002','S002','R101',2000000,'POL02');
-INSERT INTO Bill VALUES ('B003','C003','S003','R102',1000000,'POL03');
-INSERT INTO Bill VALUES ('B004','C004','S004','R103',520000,'POL04');
-INSERT INTO Bill VALUES ('B005','C005','S005','R104',5900000,'POL05');
-INSERT INTO Bill VALUES ('B006','C006','S006','R105',5550000,'POL06');
-INSERT INTO Bill VALUES ('B007','C007','S007','R106',1400000,'POL07');
-INSERT INTO Bill VALUES ('B008','C008','S008','R107',1500000,'POL08');
-INSERT INTO Bill VALUES ('B009','C009','S009','R108',600000,'POL09');
-INSERT INTO Bill VALUES ('B010','C010','S010','R109',3550000,'POL10');
+INSERT INTO Bill VALUES ('B001','C001','R100',1400000,0);
+INSERT INTO Bill VALUES ('B002','C002','R101',2000000,0);
+INSERT INTO Bill VALUES ('B003','C003','R102',6020000,0);
+INSERT INTO Bill VALUES ('B004','C004','R103',520000,0);
+INSERT INTO Bill VALUES ('B005','C005','R104',5900000,0);
+INSERT INTO Bill VALUES ('B006','C006','R105',5550000,0);
+INSERT INTO Bill VALUES ('B007','C007','R105',2100000,0);
+INSERT INTO Bill VALUES ('B008','C008','R107',1500000,0);
+INSERT INTO Bill VALUES ('B009','C009','R107',300000,0);
+INSERT INTO Bill VALUES ('B010','C010','R109',3550000,0);
+INSERT INTO Bill VALUES ('B011','C002','R101',450000,0);
+INSERT INTO Bill VALUES ('B012','C003','R102',250000,0);
+INSERT INTO Bill VALUES ('B013','C004','R103',500000,0);
+INSERT INTO Bill VALUES ('B014','C011','R114',1700000,0);
+INSERT INTO Bill VALUES ('B015','C012','R110',1200000,0);
+INSERT INTO Bill VALUES ('B016','C013','R111',1550000,0);
+INSERT INTO Bill VALUES ('B017','C014','R112',750000,0);
+INSERT INTO Bill VALUES ('B018','C015','R113',1400000,0);
