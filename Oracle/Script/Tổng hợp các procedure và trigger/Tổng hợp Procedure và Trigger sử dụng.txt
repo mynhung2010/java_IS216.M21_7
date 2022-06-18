@@ -1,0 +1,636 @@
+/*==============================================================*/
+/*      PROCEDURE: DOI MAT KHAU                                 */
+/*      DIEU KIEN: + TAI KHOAN VA MAT KHAU CU PHAI TON TAI     
+                   + MAT KHAU MOI KHONG TRUNG MAT KHAU CU       */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_change_password (ACC_USERNAME ACCOUNT.USERNAME%TYPE, 
+                                             ACC_OLD_PASS ACCOUNT.PASSWORD%TYPE, 
+                                             ACC_NEW_PASS ACCOUNT.PASSWORD%TYPE )
+AS
+    V_USERNAME ACCOUNT.USERNAME%TYPE;
+    V_PASS ACCOUNT.PASSWORD%TYPE;
+BEGIN
+    -- Tim trong databse ten tai khoan trung voi ten tai khoan duoc nhap, sau do gan gia tri vao bien V_USERNAME 
+        SELECT USERNAME INTO V_USERNAME 
+        FROM ACCOUNT 
+        WHERE USERNAME = ACC_USERNAME;
+    -- Tim trong databse mat khau trung voi mat khau cua tai khoan duoc nhap, sau do gan gia tri vao bien V_PASS
+        SELECT PASSWORD INTO V_PASS 
+        FROM ACCOUNT 
+        WHERE PASSWORD = ACC_OLD_PASS  AND USERNAME = ACC_USERNAME;     
+            
+    -- Kiem tra mat khau vua nhap trung voi mat khau cu khong   
+    IF ( V_USERNAME = ACC_USERNAME AND V_PASS = ACC_NEW_PASS)
+       THEN RAISE_APPLICATION_ERROR(-20103, 'Mat khau moi da trung voi mat khau cu');
+    
+    -- Neu khong trung thi cap nhat mat khau moi cho nguoi dung 
+    ELSE    
+        UPDATE ACCOUNT 
+        SET PASSWORD = ACC_NEW_PASS
+        WHERE USERNAME = ACC_USERNAME;
+        DBMS_OUTPUT.PUT_LINE('Cap nhat mat khau thanh cong!');       
+    END IF;
+    --Truong hop ten tai khoan, mat khau duoc nhap chua ton tai trong he thong
+    EXCEPTION WHEN NO_DATA_FOUND
+        THEN DBMS_OUTPUT.PUT_LINE('Khong co nguoi dung vua nhap hoac mat khau da bi nhap sai!');
+END;
+
+
+
+
+/* =============================== THEM, XOA, SUA CHO CAC BANG =========================*/
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: CUSTOMER                                         */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_insert_cus (Cus_No Customer.CusNo%TYPE,
+                                             Cus_name Customer.CusName%TYPE,
+                                             Gen_der  Customer.Gender%TYPE,
+                                             Add_ress Customer.Address%TYPE,
+                                             PhoneNo  Customer.Phone%TYPE,
+                                             Email_Cus    Customer.Email%TYPE,
+                                             CID      Customer.ID%TYPE,
+                                             AID      Customer.AccountID%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    SELECT Count(CusNo) INTO NumberOfExists
+    FROM Customer
+    WHERE CusNo = Cus_No;
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO Customer(CusNo, CusName, Gender, Address, Phone,Email, ID, AccountID)
+        VALUES(Cus_No, Cus_name, Gen_der, Add_ress, PhoneNo, Email_Cus, CID, AID);
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma khach nay da co');
+    END IF;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_cus(Cus_No Customer.CusNo%TYPE)
+IS
+BEGIN
+    DELETE FROM Customer
+    WHERE CusNo = Cus_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_cus (CusNo_OLD Customer.CusNo%TYPE,
+                                             Cus_name Customer.CusName%TYPE,
+                                             address_In customer.address%TYPE,  
+                                             PhoneNo  Customer.Phone%TYPE,
+                                             Email_Cus    Customer.Email%TYPE,
+                                             CID      Customer.ID%TYPE)
+                                             
+IS
+BEGIN
+    UPDATE Customer
+    SET  CusName = Cus_name, address = address_In,Phone = PhoneNo, Email = Email_Cus, ID = CID
+    WHERE CusNo = CusNo_OLD;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+END;
+
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: ACCOUNT                                          */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_insert_account(account_ID Account.accountID%TYPE,
+                                                user_name  Account.username%TYPE,
+                                                pass       Account.Password%TYPE,
+                                                role_acc   Account.Role%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA TAI KHOAN CU
+    SELECT Count(accountID) INTO NumberOfExists
+    FROM Account
+    WHERE accountID = account_ID;
+    -- INSERT
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO Account(accountID, username, Password, Role)
+        VALUES(account_ID, user_name, pass, role_acc);
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma tai khoan nay da co');
+    END IF;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_account(account_ID Account.accountID%TYPE)
+IS
+BEGIN
+    DELETE FROM Account
+    WHERE accountID = account_ID;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_update_account(account_ID Account.accountID%TYPE,
+                                                role_acc   Account.Role%TYPE)
+IS
+BEGIN
+    UPDATE Account
+    SET role = role_acc
+    WHERE accountID = account_ID;
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: ROOM                                             */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_insert_room(Room_No ROOM.RoomNo%TYPE,
+                                             Type_Room ROOM.TypeOfRoom%TYPE,
+                                             Quality_Room ROOM.Quality%TYPE,
+                                             Cost_Room   ROOM.cost%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA PHONG CU
+    SELECT Count(RoomNo) INTO NumberOfExists
+    FROM Room
+    WHERE RoomNo = Room_No;
+    -- INSERT
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO Room(RoomNo, TypeOfRoom, Quality, Cost)
+        VALUES(Room_No, Type_Room, Quality_Room, Cost_Room);
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma phong nay da co');
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE proc_delete_room(Room_No ROOM.RoomNo%TYPE)
+IS
+BEGIN
+    DELETE FROM Room
+    WHERE RoomNo = Room_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_room(RoomNo_Old ROOM.RoomNo%TYPE,
+                                             TypeRoom_Update ROOM.TypeOfRoom%TYPE,
+                                             Cost_Room_Update   ROOM.cost%TYPE)
+IS
+BEGIN
+    UPDATE Room
+    SET TypeOfRoom = TypeRoom_Update, Cost = Cost_Room_Update
+    WHERE RoomNo = RoomNo_Old;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong');
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: SERVICE                                          */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_insert_service(Ser_No Service.SerNo%TYPE,
+                                                Ser_name Service.SerName%TYPE,
+                                                TypeService Service.TypeOfService%TYPE,
+                                                Cost_Ser Service.Cost%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA TAI KHOAN CU
+    SELECT Count(SerNo) INTO NumberOfExists
+    FROM Service
+    WHERE SerNo = Ser_No;
+    -- INSERT
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO Service(SerNo, SerName, TypeOfService, Cost)
+        VALUES(Ser_No, Ser_name, TypeService, Cost_Ser);
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma dich vu nay da co');
+    END IF;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_service(Ser_No Service.SerNo%TYPE)
+IS
+BEGIN
+    DELETE FROM Service
+    WHERE SerNo = Ser_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong!');
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_update_service(SerNo_Old Service.SerNo%TYPE,
+                                                SerName_Update Service.SerName%TYPE,
+                                                TypeService_Update Service.TypeOfService%TYPE,
+                                                Cost_Update Service.Cost%TYPE)
+IS
+BEGIN
+    UPDATE Service
+    SET SerName = SerName_Update, TypeOfService = TypeService_Update, Cost = Cost_Update
+    WHERE SerNo = SerNo_Old;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+END;
+
+
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: EMPLOYEE                                         */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_insert_employee(Emp_No employee.empno%TYPE,
+                                             Emp_Name employee.empname%TYPE,                                      
+                                             phone_new   employee.phone%TYPE,
+                                             Pos_No  employee.posno%TYPE,
+                                             dateofBirth_new employee.dateofbirth%TYPE,
+                                             genger_new employee.gender%TYPE,
+                                             StartDate_new employee.startdate%TYPE,
+                                             Email_new employee.email%TYPE,
+                                             AccountID_new employee.accountid%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA Employee CU
+    SELECT Count(EmpNo) INTO NumberOfExists
+    FROM EMPLOYEE
+    WHERE EmpNo = Emp_No;
+    -- INSERT
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO Employee(EmpNo, EmpName,phone,PosNo,DateOfBirth,Gender, StartDate,Email,AccountID)
+        VALUES(Emp_No, Emp_Name, phone_new, Pos_No,dateofBirth_new,genger_new,StartDate_new,Email_new,AccountID_new);
+        BEGIN
+            proc_insert_position(Pos_No,'L? Tân', Emp_No);
+        END;
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma nhan vien nay da co');
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_employee(Emp_OLD employee.empno%TYPE,
+                                             Emp_Name employee.empname%TYPE,                                      
+                                             phone_update   employee.phone%TYPE,
+                                             Pos_update  employee.posno%TYPE,
+                                             StartDate_update employee.startdate%TYPE,
+                                             Email_update employee.email%TYPE)
+                                             
+IS
+BEGIN
+    UPDATE Employee
+    SET EmpName = Emp_Name, phone = phone_update, PosNo = Pos_update,
+                            StartDate=StartDate_update, Email = Email_update
+    WHERE EmpNo = Emp_OLD;
+    COMMIT;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_update_managementEmployee(Account_ID Employee.AccountID%TYPE,
+                                                 Emp_Name Employee.Empname%TYPE,
+                                                 S?T      employee.phone%TYPE,
+                                                 birth_date employee.dateofbirth%TYPE,
+                                                 start_date employee.startdate%TYPE,
+                                                 email_In      employee.email%TYPE)
+IS
+BEGIN
+    
+    UPDATE EMPLOYEE
+    SET Empname = Emp_Name, phone = S?T, dateofbirth = birth_date, startdate = start_date, email = email_In
+    WHERE AccountID = Account_ID;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_employee(EmpNo_In Employee.EmpNo%TYPE)
+AS
+BEGIN
+    DELETE FROM EMPLOYEE
+    WHERE EmpNo = EmpNo_In;
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: POSITION                                         */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_insert_position(Pos_No position.posno%TYPE,
+                                             Pos_Name position.posname%TYPE,                                            
+                                             Emp_No position.EmpNo%TYPE)                                             
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA POSITION CU
+    SELECT Count(PosNo) INTO NumberOfExists
+    FROM POSITION
+    WHERE PosNo = Pos_No;
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO POSITION(PosNo, PosName,EmpNo)
+        VALUES(Pos_No,Pos_Name,Emp_No);
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma vi tri nay da co');
+    END IF;
+END;
+
+CREATE OR REPLACE PROCEDURE proc_delete_position(Pos_No position.PosNo%TYPE)
+IS
+BEGIN
+    DELETE FROM POSITION
+    WHERE PosNo = Pos_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_Position(Pos_No position.posno%TYPE,                                           
+                                             Pos_Name   position.posname%TYPE,
+                                             Emp_No      position.empno%TYPE)
+IS
+BEGIN
+    UPDATE POSITION
+    SET PosName = Pos_Name, EmpNo= Emp_No
+    WHERE PosNo = Pos_No;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong');
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: ITEM                                             */
+/*==============================================================*/
+
+
+CREATE OR REPLACE PROCEDURE proc_insert_item(Item_No item.itemno%TYPE,
+                                             ItemName_new item.itemname%TYPE,                                            
+                                             NoOfItem_new   item.noofitem%TYPE,
+                                             Status_new  item.status%TYPE,
+                                             Room_No      belong.RoomNo%TYPE)
+IS
+    NumberOfExists NUMBER := 0;
+BEGIN
+    -- TIM MA ITEM CU
+    SELECT Count(ItemNo) INTO NumberOfExists
+    FROM ITEM
+    WHERE ItemNo = Item_No;
+    -- INSERT
+    IF(NumberOfExists = 0) THEN
+        INSERT INTO ITEM(ItemNo, ItemName,NoOfItem,Status)
+        VALUES(Item_No, ItemName_new, NoOfItem_new, Status_new);
+        BEGIN
+            proc_insert_belong(Item_No, Room_No);
+        END;
+        DBMS_OUTPUT.PUT_LINE('Them thanh cong');
+    ELSE
+        Raise_Application_Error(-20011, 'Ma vat dung nay da co');
+    END IF;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_item(Item_No item.itemno%TYPE,
+                                             RoomNo  belong.RoomNo%TYPE)
+IS
+BEGIN
+    BEGIN
+        proc_delete_belong(Item_No, RoomNo);
+    END;
+    DELETE FROM ITEM
+    WHERE ItemNo = Item_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_Item(Item_OLD item.itemno%TYPE,                                           
+                                             Item_Name   item.itemname%TYPE,
+                                             No_ofItem   item.noofitem%TYPE,
+                                             Status_update  item.status%TYPE)
+IS
+BEGIN
+    UPDATE ITEM
+    SET ItemName = Item_Name, NoOfItem=No_OfItem, Status=Status_update
+    WHERE ItemNo = Item_OLD;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong');
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: BELONG                                           */
+/*==============================================================*/
+
+CREATE OR REPLACE PROCEDURE proc_insert_belong(Item_No  BELONG.ItemNo%TYPE,
+                                               Room_No  BELONG.RoomNo%TYPE)
+IS
+BEGIN
+    INSERT INTO BELONG VALUES(Item_No,Room_No);
+    COMMIT;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_delete_belong(Item_No  BELONG.ItemNo%TYPE,
+                                               Room_No  BELONG.RoomNo%TYPE)
+IS
+BEGIN
+    DELETE FROM BELONG
+    WHERE ItemNo = Item_No AND RoomNo = Room_No;
+    COMMIT;
+END;
+
+CREATE OR REPLACE PROCEDURE proc_update_belong(Item_No  BELONG.ItemNo%TYPE,
+                                               Room_No  BELONG.RoomNo%TYPE,
+                                               Item_new BELONG.ItemNo%TYPE,
+                                               Room_New BELONG.RoomNo%TYPE)
+IS
+BEGIN
+    UPDATE BELONG
+    SET ItemNo = Item_new, RoomNo = Room_New
+    WHERE ItemNo = Item_No AND RoomNo = Room_No;
+    COMMIT;
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: ServiceCalled                                    */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_insert_sercall(Bill_No servicecalled.billno%TYPE,
+                                                Ser_No servicecalled.serno%TYPE,
+                                                Room_No servicecalled.roomno%TYPE)
+                                                                                                  
+AS
+    NumberOfExists NUMBER := 0;
+    cost_add service.cost%TYPE;
+BEGIN
+    --lay ra tien cua dich vu
+    SELECT cost INTO cost_add
+    FROM SERVICE SER
+    WHERE ser.serno = Ser_No;
+    -- Them du lieu moi
+    INSERT INTO SERVICECALLED(billno,SerNo,RoomNo,Note)
+    VALUES(bill_no,Ser_No,Room_No,'Không c?n gì thêm');
+    -- Cap nhat tien hoa don   
+    UPDATE BILL
+    SET SumOfMoney = SumOfMoney + cost_add
+    WHERE bill.billno = Bill_No;   
+
+END;
+
+-- Thieu : TH 2 phong dat 2 lan khac nhau nhung chung 1 dich vu
+CREATE OR REPLACE PROCEDURE proc_delete_sercall(Bill_No servicecalled.billno%TYPE,
+                                            Ser_No servicecalled.serno%TYPE,
+                                             Room_No servicecalled.roomno%TYPE)                                                                                           
+AS
+    cost_add service.cost%TYPE;
+BEGIN
+    --lay ra tien cua dich vu
+    SELECT cost INTO cost_add
+    FROM SERVICE SER
+    WHERE ser.serno = Ser_No;
+    -- Xoa du lieu
+    DELETE FROM SERVICECALLED
+    WHERE billno = bill_no and SerNo = Ser_No and roomno=Room_No;
+    -- Cap nhat bill
+    UPDATE BILL
+    SET SumOfMoney = SumOfMoney - cost_add
+    WHERE bill.billno = Bill_No;      
+END;
+
+-- Thieu: TH 2 phong dat 2 lan khac nhau nhung chung 1 dich vu
+CREATE OR REPLACE PROCEDURE proc_update_Sercall(Room_No servicecalled.roomno%TYPE,
+                                                Bill_No Bill.BillNo%TYPE,
+                                                Ser_OLD servicecalled.serno%TYPE,
+                                                note_update servicecalled.note%TYPE) 
+IS
+BEGIN
+    
+    UPDATE ServiceCalled
+    SET note = note_update
+    WHERE  RoomNo = RoomNo  and billNo = bill_No AND SerNo = Ser_OLD;
+    DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong');
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: PAY + BILL                                       */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_update_payBill(billNo_In bill.BillNo%TYPE)
+IS
+BEGIN
+    UPDATE Bill
+    SET status = 1
+    WHERE billNo = billNo_In;
+END;
+
+
+CREATE OR REPLACE PROCEDURE proc_update_money(billno_update bill.billno%TYPE)
+AS  
+    PaymentDate_update PAY.paymentdate%TYPE;   
+    tCheckOut_update Reservation.tCheckOut%TYPE; 
+    cost_room room.cost%type;
+    songaytre number;
+    --SerNo bill.serno%type;
+    total_ser NUMBER ;
+    SumOfMoney_update bill.sumofmoney%type;
+BEGIN
+    -- lay ngay thanh toan
+    SELECT paymentdate into PaymentDate_update
+    FROM PAY P
+    WHERE p.billno= billno_update;
+    
+    --Lay ngay tra phong
+    SELECT tCheckOut into tCheckOut_update
+    FROM reservation RES join BILL on res.billNo = bill.BillNo
+    WHERE bill.billno = billno_update;
+    
+    -- tính so ngay tra
+    songaytre := PaymentDate_update - tCheckOut_update;
+    
+    -- tính so dich vu
+    SELECT COUNT(SE.SerNo) into total_ser
+    FROM ServiceCalled Se Join Bill B On Se.BillNo = b.BillNo
+    WHERE b.billno = billno_update;
+    
+    -- lay gia cua phong
+    SELECT R.COST into cost_room
+    FROM ROOM R JOIN BILL B
+    ON R.ROOMNO = B.ROOMNO
+    where  B.billno = billno_update;
+    
+    -- lay tien bill
+    SELECT SumOfMoney into SumOfMoney_update
+    FROM BILL 
+    WHERE BILLNO = billno_update;
+    
+    IF (SumOfMoney_update >3000000 or total_ser >= 3) then
+        UPDATE BILL
+        SET SumOfMoney = (SumOfMoney*0.9) --//giam 10%
+        WHERE billno=billno_update;
+        DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+    ELSIF ( TO_DATE(PaymentDate_update,'DD-MM-YYYY') > TO_DATE(tCheckOut_update,'DD-MM-YYYY')) THEN
+        UPDATE BILL
+        SET SumOfMoney = SumOfMoney +  (cost_room * 0.05 * songaytre)
+        WHERE billno=billno_update;
+        DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
+    END IF;
+END;
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: RESERVATION                                      */
+/*==============================================================*/
+select * from RESERVATION;
+CREATE OR REPLACE PROCEDURE proc_delete_res(Res_No RESERVATION.resno%TYPE)
+IS
+BEGIN
+    DELETE FROM RESERVATION
+    WHERE ResNo = Res_No;
+    
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: PAY                                           */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_delete_pay(Bill_No pay.billno%TYPE)
+IS
+BEGIN
+    DELETE FROM PAY
+    WHERE BillNo = Bill_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+/*==============================================================*/
+/*      PROCEDURE: THEM XOA SUA	                                */
+/*      TABLE: BILL                                             */
+/*==============================================================*/
+CREATE OR REPLACE PROCEDURE proc_delete_Bill(Bill_No bill.billno%TYPE)
+IS
+BEGIN
+    DELETE FROM Bill
+    WHERE BillNo = Bill_No;
+    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+END;
+
+
+
+===================================================================================== TRIGGER ==============================================================
+
+/*==============================================================*/
+/*      TRIGGER: TUOI NHAN VIEN >= 18	                        */
+/*==============================================================*/
+
+CREATE OR REPLACE TRIGGER trigger_AgeOfNhanVien_employee
+AFTER INSERT OR UPDATE
+ON Employee
+FOR EACH ROW
+BEGIN
+    IF( Round((:New.StartDate - :New.DateOfBirth)/365)  < 18) THEN
+        Raise_Application_Error(-20000, 'KHONG THE CHO NHAN VIEN LAM VIEC VI CHUA DU 18 TUOI');
+    END IF;
+END;
+
+
+/*==============================================================*/
+/*      TRIGGER: TONG TIEN >= 0 (SumOfMoney)	                */
+/*==============================================================*/
+
+
+CREATE OR REPLACE TRIGGER trigger_sumofmoney_diff0_bill
+AFTER INSERT OR UPDATE
+ON Bill
+FOR EACH ROW
+BEGIN
+    IF (:NEW.SumOfMoney <= 0) THEN
+        Raise_Application_Error(-20011, 'TONG TIEN HOA DON KHONG THE BE HON BANG 0');
+    END IF;
+END;
