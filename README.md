@@ -115,7 +115,7 @@ trong đặt và sử dụng phòng tại khách sạn. Hệ thống được x�
 4.  run file `DangNhapFrame` sẽ mở ra trang web của dự án
 ## VIII. Liên Hệ
 Trần Thị Mỹ Nhung   
-Email: [Nhung](mail.google.com)  
+Email: [Nhung](mynhungffms2010@gmai.com)  
 Link dự án [HỆ THỐNG QUẢN LÝ KHÁCH SẠN](https://github.com/mynhung2010/java_IS216.M21_7)
 ##  IX.Tài liệu tham khảo
 - [Java Tutorial](https://docs.oracle.com/javase/tutorial/)
