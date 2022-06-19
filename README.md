@@ -10,6 +10,9 @@
 - [Các yêu cầu](https://github.com/mynhung2010/java_IS216.M21_7/pulls)
 
 ## I. Mục Tiêu Để Tài
+- Mô hình thực thể mối kết hợp  
+![](ERD_KhachSan.png)
+
 Đây là project của môn lập trình java. Nội dung tạo một trang web quản lý khách sạn.  
 
 Trang web phải đảm bảo các mục tiêu :
