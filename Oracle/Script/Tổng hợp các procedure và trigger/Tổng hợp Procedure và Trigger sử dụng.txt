@@ -504,6 +504,23 @@ END;
 /*      PROCEDURE: THEM XOA SUA	                                */
 /*      TABLE: PAY + BILL                                       */
 /*==============================================================*/
+-- Khach hang
+CREATE OR REPLACE PROCEDURE thanhToan(Res_No Reservation.ResNo%TYPE)
+AS
+    bill_No  Bill.BillNo%TYPE;
+BEGIN
+    -- Tim ma bill can thanh toan
+    SELECT BillNo INTO bill_No
+    FROM Reservation
+    WHERE ResNO = Res_No;
+    
+    -- Thanh toan
+    UPDATE Bill
+    SET status = 1
+    WHERE billNo = bill_No;
+END;
+
+-- Nhan Vien
 CREATE OR REPLACE PROCEDURE proc_update_payBill(billNo_In bill.BillNo%TYPE)
 IS
 BEGIN
@@ -511,7 +528,6 @@ BEGIN
     SET status = 1
     WHERE billNo = billNo_In;
 END;
-
 
 CREATE OR REPLACE PROCEDURE proc_update_money(billno_update bill.billno%TYPE)
 AS  
@@ -564,43 +580,21 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Cap nhat thanh cong!');
     END IF;
 END;
-/*==============================================================*/
-/*      PROCEDURE: THEM XOA SUA	                                */
-/*      TABLE: RESERVATION                                      */
-/*==============================================================*/
-select * from RESERVATION;
-CREATE OR REPLACE PROCEDURE proc_delete_res(Res_No RESERVATION.resno%TYPE)
-IS
-BEGIN
-    DELETE FROM RESERVATION
-    WHERE ResNo = Res_No;
-    
-END;
 
 /*==============================================================*/
 /*      PROCEDURE: THEM XOA SUA	                                */
-/*      TABLE: PAY                                           */
+/*      TABLE: Assessroom                                       */
 /*==============================================================*/
-CREATE OR REPLACE PROCEDURE proc_delete_pay(Bill_No pay.billno%TYPE)
+CREATE OR REPLACE PROCEDURE proc_update_Assessroom(Point_Room ASSESSROOM.point%TYPE,
+                                                   Comment_Room ASSESSROOM."Comment"%TYPE,
+                                                   Room_No ASSESSROOM.RoomNo%TYPE,
+                                                   Cus_No ASSESSROOM.CusNo%TYPE)
 IS
 BEGIN
-    DELETE FROM PAY
-    WHERE BillNo = Bill_No;
-    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
+    UPDATE Assessroom
+    SET Point = Point_Room, "Comment" = Comment_Room
+    WHERE CusNo = Cus_No AND RoomNo = Room_No;
 END;
-
-/*==============================================================*/
-/*      PROCEDURE: THEM XOA SUA	                                */
-/*      TABLE: BILL                                             */
-/*==============================================================*/
-CREATE OR REPLACE PROCEDURE proc_delete_Bill(Bill_No bill.billno%TYPE)
-IS
-BEGIN
-    DELETE FROM Bill
-    WHERE BillNo = Bill_No;
-    DBMS_OUTPUT.PUT_LINE('Xoa thanh cong');
-END;
-
 
 
 ===================================================================================== TRIGGER ==============================================================
