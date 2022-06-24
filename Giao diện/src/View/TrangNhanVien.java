@@ -82,6 +82,8 @@ public class TrangNhanVien extends javax.swing.JFrame {
 
         tplMainBoard.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
+        pTaiKhoan.setBackground(new java.awt.Color(237, 222, 217));
+
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_Logout_16px.png"))); // NOI18N
         jButton1.setText("Đăng xuất");
@@ -96,22 +98,20 @@ public class TrangNhanVien extends javax.swing.JFrame {
         pTaiKhoanLayout.setHorizontalGroup(
             pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                .addGroup(pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 1021, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addGap(424, 424, 424)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pTaiKhoanLayout.createSequentialGroup()
+                .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 1374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pTaiKhoanLayout.setVerticalGroup(
             pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
                 .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         tplMainBoard.addTab("Thông tin tài khoản", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_info_16px.png")), pTaiKhoan, ""); // NOI18N
@@ -126,7 +126,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         );
         pThongTinCaNhanLayout.setVerticalGroup(
             pThongTinCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
 
         tplMainBoard.addTab("Thông tin cá nhân", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_more_info_16px_1.png")), pThongTinCaNhan); // NOI18N
@@ -248,6 +248,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
 
         tplMainBoard.addTab("Các dịch vụ đã đặt", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_list_16px.png")), pDichVuDat); // NOI18N
 
+        pQuanLyKhachHang.setBackground(new java.awt.Color(237, 222, 217));
         pQuanLyKhachHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -283,9 +284,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 579, Short.MAX_VALUE)
         );
 
         pack();

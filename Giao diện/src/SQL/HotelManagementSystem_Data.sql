@@ -1,3 +1,17 @@
+--drop table customer;
+--drop table account;
+--drop table assessroom;
+--drop table belong;
+--drop table bill;
+--drop table employee;
+--drop table item;
+--drop table pay;
+--drop table position;
+--drop table reservation;
+--drop table room;
+--drop table service;
+--drop table servicecalled;
+
 ------------------------------------------------------------ CAC BANG VA THUOC TINH ------------------------------------------------------------ 
 /*==============================================================*/
 /* Table: Customer                                              */
@@ -169,7 +183,7 @@ Create table Item(
 	NoOfItem	number	not null,
 	Status		varchar2(20)	not null,
         -- T?t, h? h?ng, ch?a trang b?
-	CONSTRAINT CHK_STATUSItem CHECK(Status IN ('T?t', 'H? h?ng', 'Ch?a trang b?'))
+	CONSTRAINT CHK_STATUSItem CHECK(Status IN ('Tốt', 'Hư hỏng', 'Chưa trang bị'))
 );
 --- Khóa chính b?ng Item
 ALTER TABLE Item ADD CONSTRAINT PK_ITEM PRIMARY KEY(ItemNo);
@@ -285,7 +299,7 @@ ALTER TABLE Employee
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Account                             */
 /*==============================================================*/
-INSERT INTO Account VALUES (101,'trangnhung','trangnhung123','Nhân viên qu?n lý');
+INSERT INTO Account VALUES (101,'trangnhung','trangnhung123','Nhân viên quản lý');
 
 INSERT INTO Account VALUES (1,'vandau','vandau123','Nhân viên');
 INSERT INTO Account VALUES (2,'thianh','thianh123','Nhân viên');
@@ -322,22 +336,22 @@ INSERT INTO Account VALUES(215,'ngochien','ngochien123','Khách hàng');
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG EMPLOYEE                            */
 /*==============================================================*/
-INSERT INTO Employee VALUES ('E016','Ph?m Trang Nhung','0889972871','P006',TO_DATE('26/08/1996','dd/mm/yyyy'),1,TO_DATE('10/12/2017','dd/mm/yyyy'),'nhung@gmail.com',101);
+INSERT INTO Employee VALUES ('E016','Phạm Trang Nhung','0889972871','P006',TO_DATE('26/08/1996','dd/mm/yyyy'),1,TO_DATE('10/12/2017','dd/mm/yyyy'),'nhung@gmail.com',101);
 
-INSERT INTO Employee VALUES ('E001','Nguy?n V?n ??u','0123456789','P001',TO_DATE('26/08/1990','dd/mm/yyyy'),0,TO_DATE('26/10/2012','dd/mm/yyyy'),'dau@gmail.com',1);
-INSERT INTO Employee VALUES ('E002','Lê Th? Anh','0345678912','P002',TO_DATE('26/07/1998','dd/mm/yyyy'),1,TO_DATE('26/11/2012','dd/mm/yyyy'),'anh@gmail.com',2);
-INSERT INTO Employee VALUES ('E003','Nguy?n Anh Thiên','0135792468','P003',TO_DATE('26/06/1990','dd/mm/yyyy'),0,TO_DATE('26/12/2012','dd/mm/yyyy'),'thien@gmail.com',3);
-INSERT INTO Employee VALUES ('E004','Lê Th? Huy?n Trang','0246813579','P004',TO_DATE('13/05/1992','dd/mm/yyyy'),1,TO_DATE('10/10/2017','dd/mm/yyyy'),'trang@gmail.com',4);
-INSERT INTO Employee VALUES ('E005','Tr?n V?n Thanh','0778899210','P005',TO_DATE('14/06/1995','dd/mm/yyyy'),0,TO_DATE('10/11/2017','dd/mm/yyyy'),'thanh@gmail.com',5);
+INSERT INTO Employee VALUES ('E001','Nguyễn Văn Dậu','0123456789','P001',TO_DATE('26/08/1990','dd/mm/yyyy'),0,TO_DATE('26/10/2012','dd/mm/yyyy'),'dau@gmail.com',1);
+INSERT INTO Employee VALUES ('E002','Lê Thị Anh','0345678912','P002',TO_DATE('26/07/1998','dd/mm/yyyy'),1,TO_DATE('26/11/2012','dd/mm/yyyy'),'anh@gmail.com',2);
+INSERT INTO Employee VALUES ('E003','Nguyễn Anh Thiên','0135792468','P003',TO_DATE('26/06/1990','dd/mm/yyyy'),0,TO_DATE('26/12/2012','dd/mm/yyyy'),'thien@gmail.com',3);
+INSERT INTO Employee VALUES ('E004','Lê Thị Huyền Trang','0246813579','P004',TO_DATE('13/05/1992','dd/mm/yyyy'),1,TO_DATE('10/10/2017','dd/mm/yyyy'),'trang@gmail.com',4);
+INSERT INTO Employee VALUES ('E005','Trần Văn Thanh','0778899210','P005',TO_DATE('14/06/1995','dd/mm/yyyy'),0,TO_DATE('10/11/2017','dd/mm/yyyy'),'thanh@gmail.com',5);
 INSERT INTO Employee VALUES ('E006','Bùi Hoàng Phong','0779898771','P007',TO_DATE('27/08/1997','dd/mm/yyyy'),0,TO_DATE('12/10/2018','dd/mm/yyyy'),'phong@gmail.com',6);
-INSERT INTO Employee VALUES ('E007','Lê Th? C?m Tú','0112233445','P008',TO_DATE('28/08/1998','dd/mm/yyyy'),1,TO_DATE('09/08/2019','dd/mm/yyyy'),'tu@gmail.com',7);
-INSERT INTO Employee VALUES ('E008','Nguy?n Thành Long','0123456789','P009',TO_DATE('20/08/1999','dd/mm/yyyy'),0,TO_DATE('11/11/2016','dd/mm/yyyy'),'long@gmail.com',8);
-INSERT INTO Employee VALUES ('E009','Hoàng Th? Tuy?t Hà','0123456789','P010',TO_DATE('30/08/1999','dd/mm/yyyy'),1,TO_DATE('12/12/2018','dd/mm/yyyy'),'ha@gmail.com',9);
-INSERT INTO Employee VALUES ('E010','Bùi ??c Duy','0354354353','P011',TO_DATE('21/02/1998','dd/mm/yyyy'),0,TO_DATE('14/04/2019','dd/mm/yyyy'),'duy@gmail.com',10);
-INSERT INTO Employee VALUES ('E011','Tr?n Ng?c Nh?','0254837235','P012',TO_DATE('30/08/1997','dd/mm/yyyy'),1,TO_DATE('12/3/2018','dd/mm/yyyy'),'nhu@gmail.com',11);
-INSERT INTO Employee VALUES ('E012','Nguy?n Duy Anh','0123456789','P013',TO_DATE('23/07/1989','dd/mm/yyyy'),0,TO_DATE('12/5/2018','dd/mm/yyyy'),'danh@gmail.com',12);
-INSERT INTO Employee VALUES ('E013','Nguy?n Th? Th?o Hà','0326483923','P014',TO_DATE('12/04/2000','dd/mm/yyyy'),1,TO_DATE('06/03/2018','dd/mm/yyyy'),'tha@gmail.com',13);
-INSERT INTO Employee VALUES ('E014','Lê Anh Th?','0384249312','P015',TO_DATE('04/08/1999','dd/mm/yyyy'),1,TO_DATE('23/01/2018','dd/mm/yyyy'),'thu@gmail.com',14);
+INSERT INTO Employee VALUES ('E007','Lê Thị Cẩm Tú','0112233445','P008',TO_DATE('28/08/1998','dd/mm/yyyy'),1,TO_DATE('09/08/2019','dd/mm/yyyy'),'tu@gmail.com',7);
+INSERT INTO Employee VALUES ('E008','Nguyễn Thành Long','0123456789','P009',TO_DATE('20/08/1999','dd/mm/yyyy'),0,TO_DATE('11/11/2016','dd/mm/yyyy'),'long@gmail.com',8);
+INSERT INTO Employee VALUES ('E009','Hoàng Thị Tuyết Hà','0123456789','P010',TO_DATE('30/08/1999','dd/mm/yyyy'),1,TO_DATE('12/12/2018','dd/mm/yyyy'),'ha@gmail.com',9);
+INSERT INTO Employee VALUES ('E010','Bùi Đức Duy','0354354353','P011',TO_DATE('21/02/1998','dd/mm/yyyy'),0,TO_DATE('14/04/2019','dd/mm/yyyy'),'duy@gmail.com',10);
+INSERT INTO Employee VALUES ('E011','Trần Ngọc Như','0254837235','P012',TO_DATE('30/08/1997','dd/mm/yyyy'),1,TO_DATE('12/3/2018','dd/mm/yyyy'),'nhu@gmail.com',11);
+INSERT INTO Employee VALUES ('E012','Nguyễn Duy Anh','0123456789','P013',TO_DATE('23/07/1989','dd/mm/yyyy'),0,TO_DATE('12/5/2018','dd/mm/yyyy'),'danh@gmail.com',12);
+INSERT INTO Employee VALUES ('E013','Nguyễn Thị Thảo Hà','0326483923','P014',TO_DATE('12/04/2000','dd/mm/yyyy'),1,TO_DATE('06/03/2018','dd/mm/yyyy'),'tha@gmail.com',13);
+INSERT INTO Employee VALUES ('E014','Lê Anh Thư','0384249312','P015',TO_DATE('04/08/1999','dd/mm/yyyy'),1,TO_DATE('23/01/2018','dd/mm/yyyy'),'thu@gmail.com',14);
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG ROOM				*/
@@ -362,21 +376,21 @@ INSERT INTO Room VALUES ('R114',2,'Superior',500000);
 /*      INSERT D? LI?U B?NG Customer                            */
 /*==============================================================*/
 
-INSERT INTO Customer VALUES ('C001','Tr?n Th? M? Nhung',1,'Gia Lai','0343927832','nhung@gmail.com','049573028324',201);
-INSERT INTO Customer VALUES ('C002','Nguy?n Thành Phát',0,'Thành ph? H? Chí Minh','0335482738','phat@gmail.com','054928475893',202);
-INSERT INTO Customer VALUES ('C003','Nguy?n Th? Th?o H?ng',1,'Qu?ng Nam','0334586738','hong@gmail.com','035559375847',203);
-INSERT INTO Customer VALUES ('C004','Nguy?n Th? Th?o H?ng',0,'Nam ??nh','0365827407','linh@gmail.com','048529475843',204);
-INSERT INTO Customer VALUES ('C005','Nguy?n Hoài Linh',0,'Thành ph? H? Chí Minh','0224584727','linhnguyen@gmail.com','025847393024',205);
-INSERT INTO Customer VALUES ('C006','Nguy?n Anh Ki?t',0,'??ng Tháp','0326843438','kiet@gmail.com','034465584292',206);
-INSERT INTO Customer VALUES ('C007','V? Th? Ph??ng Linh',1,'Gia Lai','0234573859','linhvu@gmail.com','042386549373',207);
-INSERT INTO Customer VALUES ('C008','Tr?n Ng?c M? Quyên',1,'Bình ??nh','0343927832','quyen@gmail.com','026837542965',208);
-INSERT INTO Customer VALUES ('C009','Bùi Duy Thi?n',0,'??k L?k','0857437233','thien@gmail.com','024937584372',209);
-INSERT INTO Customer VALUES ('C010','Tr?n Anh Huy',0,'Bình D??ng','0489274823','huy@gmail.com','044389754618',210);
-INSERT INTO Customer VALUES ('C011','Nguy?n Duy',0,'V?ng Tàu','0432985342','duy@gmail.com','042984732647',211);
-INSERT INTO Customer VALUES ('C012','H? B?o An',0,'Nha Trang','0396418423','an@gmail.com','038427412345',212);
-INSERT INTO Customer VALUES ('C013','D??ng Thanh Th?y',1,'Thành ph? H? Chí Minh','0329642732','thuyduong@gmail.com','0593741842',213);
-INSERT INTO Customer VALUES ('C014','Thái T?ng ??c',0,'Qu?ng Tr?','0732406954','duc@gmail.com','049173829432',214);
-INSERT INTO Customer VALUES ('C015','Nguy?n Ng?c Hi?n',1,'B?n Tre','0493762453','hien@gmail.com','069382741345',215);
+INSERT INTO Customer VALUES ('C001','Trần Thị Mỹ Nhung',1,'Gia Lai','0343927832','nhung@gmail.com','049573028324',201);
+INSERT INTO Customer VALUES ('C002','Nguyễn Thành Phát',0,'Thành phỗ Hồ Chí Minh','0335482738','phat@gmail.com','054928475893',202);
+INSERT INTO Customer VALUES ('C003','Nguyễn Thị Thảo Hồng',1,'Quảng Nam','0334586738','hong@gmail.com','035559375847',203);
+INSERT INTO Customer VALUES ('C004','Vũ Tiến Linh',0,'Nam Định','0365827407','linh@gmail.com','048529475843',204);
+INSERT INTO Customer VALUES ('C005','Nguyễn Hoài Linh',0,'Thành phố Hồ Chí Minh','0224584727','linhnguyen@gmail.com','025847393024',205);
+INSERT INTO Customer VALUES ('C006','Nguyễn Anh Kiệt',0,'Đồng Tháp','0326843438','kiet@gmail.com','034465584292',206);
+INSERT INTO Customer VALUES ('C007','Vũ Thị Phương Linh',1,'Gia Lai','0234573859','linhvu@gmail.com','042386549373',207);
+INSERT INTO Customer VALUES ('C008','Trần Ngọc Mỹ Quyên',1,'Bình Định','0343927832','quyen@gmail.com','026837542965',208);
+INSERT INTO Customer VALUES ('C009','Bùi Duy Thiện',0,'Đăk Lăk','0857437233','thien@gmail.com','024937584372',209);
+INSERT INTO Customer VALUES ('C010','Trần Anh Huy',0,'Bình Dương','0489274823','huy@gmail.com','044389754618',210);
+INSERT INTO Customer VALUES ('C011','Nguyễn Duy',0,'Vũng Tàu','0432985342','duy@gmail.com','042984732647',211);
+INSERT INTO Customer VALUES ('C012','Hồ Bảo An',0,'Nha Trang','0396418423','an@gmail.com','038427412345',212);
+INSERT INTO Customer VALUES ('C013','Dương Thanh Thủy',1,'Thành phố Hồ Chí Minh','0329642732','thuyduong@gmail.com','0593741842',213);
+INSERT INTO Customer VALUES ('C014','Thái Tăng Đức',0,'Quảng Trị','0732406954','duc@gmail.com','049173829432',214);
+INSERT INTO Customer VALUES ('C015','Nguyễn Ngọc Hiền',1,'Bến Tre','0493762453','hien@gmail.com','069382741345',215);
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG BILL				*/
@@ -403,89 +417,89 @@ INSERT INTO Bill VALUES ('B018','C015','R113',1400000,0);
 /*      INSERT D? LI?U B?NG Service                             */
 /*==============================================================*/
 
-INSERT INTO Service VALUES ('S001','Dich vu Spa',1,1000000);
-INSERT INTO Service VALUES ('S002','Dich vu ca phe',1,100000);
-INSERT INTO Service VALUES ('S003','Dich vu thue xe',0,500000);
-INSERT INTO Service VALUES ('S004','Dich vu giat do',1,20000);
-INSERT INTO Service VALUES ('S005','Dich vu thue phong hop',1,5000000);
-INSERT INTO Service VALUES ('S006','Dich vu thue phong karaoke',0,5000000);
-INSERT INTO Service VALUES ('S007','Dich vu tiec ngoai troi',0,1000000);
-INSERT INTO Service VALUES ('S008','Dich vu san tennis',0,800000);
-INSERT INTO Service VALUES ('S009','Dich vu phong gym',1,50000);
-INSERT INTO Service VALUES ('S010','Dich vu bar tren lau khach san',0,1900000);
-INSERT INTO Service VALUES ('S011','D?ch v? xe ??a ?ón sân bay',0,1500000);
-INSERT INTO Service VALUES ('S012','D?ch v? cho thuê xe máy t? lái',0,500000);
-INSERT INTO Service VALUES ('S013','D?ch v? phòng 24/24',0,1000000);
-INSERT INTO Service VALUES ('S014','D?ch v? ??t vé máy bay, tour du l?ch',0,800000);
-INSERT INTO Service VALUES ('S015','D?ch v? trông tr?',0,1200000);
+INSERT INTO Service VALUES ('S001','Dịch vụ Spa',1,1000000);
+INSERT INTO Service VALUES ('S002','Dịch vụ cà phê',1,100000);
+INSERT INTO Service VALUES ('S003','Dịch vụ thuê xe',0,500000);
+INSERT INTO Service VALUES ('S004','Dịch vụ giặt đồ',1,20000);
+INSERT INTO Service VALUES ('S005','Dịch vụ thuê phòng họp',1,5000000);
+INSERT INTO Service VALUES ('S006','Dịch vụ thuê phòng karaoke',0,5000000);
+INSERT INTO Service VALUES ('S007','Dịch vụ tiệc ngoài trời',0,1000000);
+INSERT INTO Service VALUES ('S008','Dịch vụ sân tennis',0,800000);
+INSERT INTO Service VALUES ('S009','Dịch vụ phòng gym',1,50000);
+INSERT INTO Service VALUES ('S010','Dịch vụ bar trên lầu khách sạn',0,1900000);
+INSERT INTO Service VALUES ('S011','Dịch vụ xe đưa đón sân bay',0,1500000);
+INSERT INTO Service VALUES ('S012','Dịch vụ cho thuê xe máy tự lái',0,500000);
+INSERT INTO Service VALUES ('S013','Dịch vụ phòng 24/24',0,1000000);
+INSERT INTO Service VALUES ('S014','Dịch vụ đặt vé máy bay, tour du lịch',0,800000);
+INSERT INTO Service VALUES ('S015','Dịch vụ trông trẻ',0,1200000);
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG ServiceCalled			            */
 /*==============================================================*/
-INSERT INTO ServiceCalled VALUES('B001','S001','R100','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B001','S001','R100','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B002','S002','R101','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B002','S002','R101','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B003','S003','R102','Ch? l?y 2 chi?c xe ??p');
-INSERT INTO ServiceCalled VALUES('B003','S004','R102','Gi?t và tr? t?i phòng');
-INSERT INTO ServiceCalled VALUES('B003','S005','R102','C?n phòng r?ng, có máy l?nh');
+INSERT INTO ServiceCalled VALUES('B003','S003','R102','Chỉ lấy 2 chiếc xe đạp');
+INSERT INTO ServiceCalled VALUES('B003','S004','R102','Giặt và trả tại phòng');
+INSERT INTO ServiceCalled VALUES('B003','S005','R102','Cần phòng rộng, có máy lạnh');
 
-INSERT INTO ServiceCalled VALUES('B004','S004','R103','Kèm là ?? và giao t?i phòng tr??c 14h');
+INSERT INTO ServiceCalled VALUES('B004','S004','R103','Kèm là ủi và giao tới phòng trước 14h');
 
-INSERT INTO ServiceCalled VALUES('B005','S005','R104','C?n phòng r?ng, có máy l?nh');
+INSERT INTO ServiceCalled VALUES('B005','S005','R104','Cần phòng rộng, có máy lạnh');
 
-INSERT INTO ServiceCalled VALUES('B006','S006','R105','Trang b? s?n 2 mic, trái cây');
-INSERT INTO ServiceCalled VALUES('B006','S007','R105','K? bên ti?c có h? b?i');
+INSERT INTO ServiceCalled VALUES('B006','S006','R105','Trang bị sẵn 2 mic, trái cây');
+INSERT INTO ServiceCalled VALUES('B006','S007','R105','Kế bên tiệc có hồ bơi');
 
-INSERT INTO ServiceCalled VALUES('B007','S006','R105','Trang b? s?n 2 mic, trái cây');
-INSERT INTO ServiceCalled VALUES('B007','S007','R105','K? bên ti?c có h? b?i');
+INSERT INTO ServiceCalled VALUES('B007','S006','R105','Trang bị sẵn 2 mic, trái cây');
+INSERT INTO ServiceCalled VALUES('B007','S007','R105','Kế bên tiệc có hồ bơi');
 
-INSERT INTO ServiceCalled VALUES('B008','S008','R107','C?n 2 cây v?t ?ánh tennis');
-INSERT INTO ServiceCalled VALUES('B008','S009','R107','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B008','S008','R107','Cần 2 cây vợt đánh tennis');
+INSERT INTO ServiceCalled VALUES('B008','S009','R107','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B009','S008','R107','C?n 2 cây v?t ?ánh tennis');
-INSERT INTO ServiceCalled VALUES('B009','S009','R107','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B009','S008','R107','Cần 2 cây vợt đánh tennis');
+INSERT INTO ServiceCalled VALUES('B009','S009','R107','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B010','S010','R109','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B010','S010','R109','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B011','S002','R101','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B011','S002','R101','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B012','S003','R102','Ch? l?y 2 chi?c xe ??p');
-INSERT INTO ServiceCalled VALUES('B012','S004','R102','Gi?t và tr? t?i phòng');
-INSERT INTO ServiceCalled VALUES('B012','S005','R102','C?n phòng r?ng, có máy l?nh');
+INSERT INTO ServiceCalled VALUES('B012','S003','R102','Chỉ lấy 2 chiếc xe đạp');
+INSERT INTO ServiceCalled VALUES('B012','S004','R102','Giặt và trả tại phòng');
+INSERT INTO ServiceCalled VALUES('B012','S005','R102','Cần phòng rộng, có máy lạnh');
 
-INSERT INTO ServiceCalled VALUES('B013','S004','R103','Kèm là ?? và giao t?i phòng tr??c 14h');
+INSERT INTO ServiceCalled VALUES('B013','S004','R103','Kèm là ủi và giao tại phòng trước 14h');
 
-INSERT INTO ServiceCalled VALUES('B014','S015','R114','Trông 2 ??a tr? 3 tu?i');
+INSERT INTO ServiceCalled VALUES('B014','S015','R114','Trông 2 đứa trẻ 3 tuổi');
 
-INSERT INTO ServiceCalled VALUES('B015','S011','R110','Không c?n gì thêm');
+INSERT INTO ServiceCalled VALUES('B015','S011','R110','Không cần gì thêm');
 
-INSERT INTO ServiceCalled VALUES('B016','S013','R111','D?n d?p phòng ');
+INSERT INTO ServiceCalled VALUES('B016','S013','R111','Dọn dẹp phòng ');
 
-INSERT INTO ServiceCalled VALUES('B017','S012','R112','2 chi?c xe máy');
+INSERT INTO ServiceCalled VALUES('B017','S012','R112','2 chiếc xe máy');
 
-INSERT INTO ServiceCalled VALUES('B018','S014','R113','??t vé máy bay t? Thành ph? H? Chí Minh ra Hà N?i');
+INSERT INTO ServiceCalled VALUES('B018','S014','R113','Đặt vé máy bay từ Thành phố Hồ Chí Minh ra Hà Nội');
 
 
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Item				*/
 /*==============================================================*/
-INSERT INTO Item VALUES('I001','Bàn là', 1,'T?t');
-INSERT INTO Item VALUES('I002','Kh?n t?m', 2,'Ch?a trang b?');
-INSERT INTO Item VALUES('I003','M?n', 2,'T?t');
-INSERT INTO Item VALUES('I004','Móc qu?n áo', 5,'H? h?ng');
-INSERT INTO Item VALUES('I005','Bình ?un siêu t?c', 1,'T?t');
-INSERT INTO Item VALUES('I006','Qu?t ??ng', 1,'Ch?a trang b?');
-INSERT INTO Item VALUES('I007','Tivi', 1,'T?t');
-INSERT INTO Item VALUES('I008','T? l?nh', 1,'H? h?ng');
-INSERT INTO Item VALUES('I009','Móc qu?n áo', 5,'T?t');
-INSERT INTO Item VALUES('I010','M?n', 2,'Ch?a trang b?');
-INSERT INTO Item VALUES('I011','?èn', 5,'T?t');
-INSERT INTO Item VALUES('I012','Máy l?nh ?i?u hòa', 2,'H? h?ng');
-INSERT INTO Item VALUES('I013','G?i', 3,'T?t');
-INSERT INTO Item VALUES('I014','Dù che m?a', 6,'T?t');
-INSERT INTO Item VALUES('I015','V?t d?ng y t?', 4,'Ch?a trang b?');
+INSERT INTO Item VALUES('I001','Bàn là', 1,'Tốt');
+INSERT INTO Item VALUES('I002','Khăn tắm', 2,'Chưa trang bị');
+INSERT INTO Item VALUES('I003','Mền', 2,'Tốt');
+INSERT INTO Item VALUES('I004','Móc quần áo', 5,'Hư hỏng');
+INSERT INTO Item VALUES('I005','Bình đun siêu tốc', 1,'Tốt');
+INSERT INTO Item VALUES('I006','Quạt đứng', 1,'Chưa trang bị');
+INSERT INTO Item VALUES('I007','Tivi', 1,'Tốt');
+INSERT INTO Item VALUES('I008','Tủ lạnh', 1,'Hư hỏng');
+INSERT INTO Item VALUES('I009','Móc quần áo', 5,'Tốt');
+INSERT INTO Item VALUES('I010','Mền', 2,'Chưa trang bị');
+INSERT INTO Item VALUES('I011','Đèn', 5,'Tốt');
+INSERT INTO Item VALUES('I012','Máy lạnh điều hòa', 2,'Hư hỏng');
+INSERT INTO Item VALUES('I013','Gối', 3,'Tốt');
+INSERT INTO Item VALUES('I014','Dù che mưa', 6,'Tốt');
+INSERT INTO Item VALUES('I015','Vật dùng y tế', 4,'Chưa trang bị');
 
 
 /*==============================================================*/
@@ -515,21 +529,21 @@ INSERT INTO Reservation VALUES ('RE018', 'B018','C015','R113',TO_DATE('28/06/202
 /*      INSERT D? LI?U B?NG Assessroom                          */
 /*==============================================================*/
 
-INSERT INTO Assessroom VALUES (8,'D?ch v? ph?c v? t?t','R100','C001');
-INSERT INTO Assessroom VALUES (7.5,'Ch?t l??ng phòng ti?n nghi','R101','C002');
-INSERT INTO Assessroom VALUES (9,'Vi?c cung c?p d?ch v? ? m?c giá phù h?p v?i kh? n?ng ng??i tiêu dùng','R102','C003');
-INSERT INTO Assessroom VALUES (7,'Phòng c?ng bình th??ng','R103','C004');
-INSERT INTO Assessroom VALUES (8,'Ch?t l??ng phòng phù h?p v?i m?c ti?n','R104','C005');
-INSERT INTO Assessroom VALUES (8.5,'Giá ??t phòng r?','R105','C006');
-INSERT INTO Assessroom VALUES (8,'Khách s?n có an ninh an toàn','R105','C007');
-INSERT INTO Assessroom VALUES (9.5,'Khuôn viên luôn v? sinh s?ch s?','R107','C008');
-INSERT INTO Assessroom VALUES (10,'D?ch v? ph?c v? t?t, nhân viên nhi?t tình','R107','C009');
-INSERT INTO Assessroom VALUES (8,'Khách s?n ph?c v? thi?t b? ti?n nghi','R109','C010');
-INSERT INTO Assessroom VALUES (7,'Khách s?n ph?c v? bình th??ng','R114','C011');
-INSERT INTO Assessroom VALUES (6,'Ch?a ??y ?? ti?n nghe','R110','C012');
-INSERT INTO Assessroom VALUES (9,'VIew ??p, v? sinh s?ch s?','R111','C013');
-INSERT INTO Assessroom VALUES (7.5,'Gía c? ?n','R112','C014');
-INSERT INTO Assessroom VALUES (8,'Ph?c v? t?t','R113','C015');
+INSERT INTO Assessroom VALUES (8,'Dịch vụ phục vụ tốt','R100','C001');
+INSERT INTO Assessroom VALUES (7.5,'Chất lượng phòng tiện nghi','R101','C002');
+INSERT INTO Assessroom VALUES (9,'Việc cung cấp dịch vụ ở mức giá phù hợp với khả năng người tiêu dùng','R102','C003');
+INSERT INTO Assessroom VALUES (7,'Phòng cũng bình thường','R103','C004');
+INSERT INTO Assessroom VALUES (8,'Chất lượng phòng phù hợp với mức tiền','R104','C005');
+INSERT INTO Assessroom VALUES (8.5,'Giá đặt phòng rẻ','R105','C006');
+INSERT INTO Assessroom VALUES (8,'Khách sạn có an ninh an toàn','R105','C007');
+INSERT INTO Assessroom VALUES (9.5,'Khuôn viên luôn vệ sinh sạch sẻ','R107','C008');
+INSERT INTO Assessroom VALUES (10,'Dịch vụ phục vụ tốt, nhân viên nhi?t tình','R107','C009');
+INSERT INTO Assessroom VALUES (8,'Khách sạn phục vụ thiết bị tiện nghi','R109','C010');
+INSERT INTO Assessroom VALUES (7,'Khách sạn phục vụ bình thường','R114','C011');
+INSERT INTO Assessroom VALUES (6,'Chưa đầy đủ tiện nghe','R110','C012');
+INSERT INTO Assessroom VALUES (9,'VIew đẹp, vệ sinh sạch sẻ','R111','C013');
+INSERT INTO Assessroom VALUES (7.5,'Gía cả ổn','R112','C014');
+INSERT INTO Assessroom VALUES (8,'Phục vụ tốt','R113','C015');
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Belong                              */
 /*==============================================================*/
@@ -553,21 +567,21 @@ INSERT INTO Belong VALUES ('I015','R114');
 /*      INSERT D? LI?U B?NG Position				            */
 /*==============================================================*/
 
-INSERT INTO Position VALUES('P001','L? Tân','E001');
-INSERT INTO Position VALUES('P002','Ph?c v?','E002');
-INSERT INTO Position VALUES('P003','Ph?c v?','E003'); 
-INSERT INTO Position VALUES('P004','Ph? phòng','E004');
-INSERT INTO Position VALUES('P005','V? sinh','E005');
-INSERT INTO Position VALUES('P006','Qu?n lý','E016');
-INSERT INTO Position VALUES('P007','B?o v?','E007');  
-INSERT INTO Position VALUES('P008','L? Tân','E008');
-INSERT INTO Position VALUES('P009','L? Tân','E009');
-INSERT INTO Position VALUES('P010','L? Tân','E010');
-INSERT INTO Position VALUES('P011','L? tân','E011');
-INSERT INTO Position VALUES('P012','B?o v?','E012');
-INSERT INTO Position VALUES('P013','Ph?c v?','E013');
-INSERT INTO Position VALUES('P014','V? sinh','E014');
-INSERT INTO Position VALUES('P015','Ph? phòng','E006');
+INSERT INTO Position VALUES('P001','Lễ Tân','E001');
+INSERT INTO Position VALUES('P002','Phục vụ','E002');
+INSERT INTO Position VALUES('P003','Phục vụ','E003'); 
+INSERT INTO Position VALUES('P004','Phụ phòng','E004');
+INSERT INTO Position VALUES('P005','Vệ sinh','E005');
+INSERT INTO Position VALUES('P006','Quản lý','E016');
+INSERT INTO Position VALUES('P007','Bảo vệ','E007');  
+INSERT INTO Position VALUES('P008','Lễ Tân','E008');
+INSERT INTO Position VALUES('P009','Lễ Tân','E009');
+INSERT INTO Position VALUES('P010','Lễ Tân','E010');
+INSERT INTO Position VALUES('P011','Lễ tân','E011');
+INSERT INTO Position VALUES('P012','Bảo vệ','E012');
+INSERT INTO Position VALUES('P013','Phục vụ','E013');
+INSERT INTO Position VALUES('P014','Vệ sinh','E014');
+INSERT INTO Position VALUES('P015','Phụ phòng','E006');
 
 /*==============================================================*/
 /*      INSERT D? LI?U B?NG Pay		                            */

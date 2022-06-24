@@ -80,13 +80,9 @@ public class DatPhong extends javax.swing.JFrame {
         cbbChatLuong = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnXemDanhGia = new javax.swing.JButton();
-        btnDatPhong = new javax.swing.JButton();
         btnTraCuu = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbDanhGia = new javax.swing.JTable();
-        btnThemDanhGia = new javax.swing.JButton();
-        btnXoaBaiDanhGia = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -103,11 +99,10 @@ public class DatPhong extends javax.swing.JFrame {
         txtMaKhachHang = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Đặt phòng");
+        setTitle("Tra cứu");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
@@ -145,16 +140,6 @@ public class DatPhong extends javax.swing.JFrame {
         });
         getContentPane().add(btnXemDanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 170, -1, -1));
 
-        btnDatPhong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnDatPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/reservation.png"))); // NOI18N
-        btnDatPhong.setText("Đặt phòng");
-        btnDatPhong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDatPhongActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnDatPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 575, 145, -1));
-
         btnTraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,38 +165,13 @@ public class DatPhong extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 75, 409, 250));
 
-        btnThemDanhGia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnThemDanhGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_add_database_16px.png"))); // NOI18N
-        btnThemDanhGia.setText("Thêm đánh giá");
-        btnThemDanhGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemDanhGiaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnThemDanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 344, -1, -1));
-
-        btnXoaBaiDanhGia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnXoaBaiDanhGia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
-        btnXoaBaiDanhGia.setText("Xóa đánh giá");
-        btnXoaBaiDanhGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaBaiDanhGiaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnXoaBaiDanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(913, 344, -1, -1));
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_service_16px_1.png"))); // NOI18N
-        jButton4.setText("Đặt dịch vụ");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(819, 575, 145, -1));
-
         btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(974, 575, -1, -1));
+        getContentPane().add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel4.setText("BẢNG ĐÁNH GIÁ");
@@ -220,7 +180,7 @@ public class DatPhong extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel5.setText("DANH SÁCH PHÒNG");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 25, -1, 32));
-        getContentPane().add(txtNgayDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 409, 288, -1));
+        getContentPane().add(txtNgayDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 409, 320, -1));
 
         btnQuayLij.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_back_16px.png"))); // NOI18N
         btnQuayLij.addActionListener(new java.awt.event.ActionListener() {
@@ -228,28 +188,28 @@ public class DatPhong extends javax.swing.JFrame {
                 btnQuayLijActionPerformed(evt);
             }
         });
-        getContentPane().add(btnQuayLij, new org.netbeans.lib.awtextra.AbsoluteConstraints(1029, 11, -1, -1));
+        getContentPane().add(btnQuayLij, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 40, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Mã phòng:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(756, 447, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 410, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Điểm:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Đánh giá:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(762, 509, -1, -1));
-        getContentPane().add(txtMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 444, 87, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, -1, -1));
+        getContentPane().add(txtMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 410, 87, -1));
 
         txtDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDiemActionPerformed(evt);
             }
         });
-        getContentPane().add(txtDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 475, 87, -1));
-        getContentPane().add(txtDanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 506, 188, -1));
+        getContentPane().add(txtDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 440, 87, -1));
+        getContentPane().add(txtDanhGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 470, 188, 30));
 
         btnSua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
@@ -259,12 +219,12 @@ public class DatPhong extends javax.swing.JFrame {
                 btnSuaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 344, -1, -1));
+        getContentPane().add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Mã khách hàng:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, -1, -1));
-        getContentPane().add(txtMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(835, 537, 87, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 510, -1, -1));
+        getContentPane().add(txtMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 510, 87, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Loại phòng:");
@@ -274,13 +234,8 @@ public class DatPhong extends javax.swing.JFrame {
         jLabel10.setText("Chất lượng phòng:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(397, 478, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("ĐẶT PHÒNG VÀ ĐẶT DỊCH VỤ");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 410, -1, -1));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
-        jLabel12.setFocusCycleRoot(true);
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -80, 1090, 1220));
+        jPanel1.setBackground(new java.awt.Color(237, 222, 217));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -323,10 +278,6 @@ public class DatPhong extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnXemDanhGiaActionPerformed
-
-    private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDatPhongActionPerformed
 
     /**
      * Tra cứu phòng
@@ -400,12 +351,6 @@ public class DatPhong extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnQuayLijActionPerformed
 
-    private void btnThemDanhGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDanhGiaActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_btnThemDanhGiaActionPerformed
-
     public void displayToTextField( int row){
         txtMaPhong.setEnabled(false);
         txtMaPhong.setText((String) tbDanhGia.getModel().getValueAt(row, 0));
@@ -463,10 +408,6 @@ public class DatPhong extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void btnXoaBaiDanhGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaBaiDanhGiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXoaBaiDanhGiaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -507,21 +448,15 @@ public class DatPhong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDatPhong;
     private javax.swing.JButton btnQuayLij;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThemDanhGia;
     private javax.swing.JButton btnTraCuu;
     private javax.swing.JButton btnXemDanhGia;
-    private javax.swing.JButton btnXoaBaiDanhGia;
     private javax.swing.JComboBox<String> cbbChatLuong;
     private javax.swing.JComboBox<String> cbbLoaiPhong;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -530,6 +465,7 @@ public class DatPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbDanhGia;

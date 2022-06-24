@@ -392,7 +392,7 @@ public class Room {
      */
     public List<Room> getDanhGiaList(String maPhong) throws SQLException, ClassNotFoundException {
         Connection conn = ConnectionUtils.getMyConnection();
-        String query = "select a.CusNo,r.RoomNo,Point, \"Comment\" " +
+        String query = "select a.CusNo,r.RoomNo,Point, Comment_Room " +
                        " from assessroom a join room r on a.roomNo = r.RoomNo " +
                        " where r.RoomNo = '" + maPhong + "'";
         Statement stat = conn.createStatement();
@@ -408,7 +408,7 @@ public class Room {
                 
                 room.setDiem(kq.getFloat("Point"));
                 
-                room.setBinhLuan(kq.getString("\"Comment\""));
+                room.setBinhLuan(kq.getString("Comment_Room"));
                 
                 RoomData.add(room);
             }

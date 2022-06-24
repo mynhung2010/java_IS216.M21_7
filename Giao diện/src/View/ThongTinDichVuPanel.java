@@ -118,7 +118,7 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Loại hình:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Giá:");

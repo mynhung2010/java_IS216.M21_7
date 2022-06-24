@@ -81,7 +81,6 @@ public class KhachHangPage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnDatPhong = new javax.swing.JButton();
-        btnTraPhong = new javax.swing.JButton();
         btnThongTinPhongDaDat = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
@@ -283,18 +282,13 @@ public class KhachHangPage extends javax.swing.JFrame {
 
         btnDatPhong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnDatPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/online-booking.png"))); // NOI18N
-        btnDatPhong.setText("Đặt phòng");
+        btnDatPhong.setText("Tra cứu phòng");
         btnDatPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDatPhongActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDatPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 140, -1));
-
-        btnTraPhong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnTraPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/trả phòng.png"))); // NOI18N
-        btnTraPhong.setText("Trả phòng");
-        getContentPane().add(btnTraPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 120, -1));
+        getContentPane().add(btnDatPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 140, -1));
 
         btnThongTinPhongDaDat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnThongTinPhongDaDat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_interior_16px.png"))); // NOI18N
@@ -304,7 +298,7 @@ public class KhachHangPage extends javax.swing.JFrame {
                 btnThongTinPhongDaDatActionPerformed(evt);
             }
         });
-        getContentPane().add(btnThongTinPhongDaDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, -1, -1));
+        getContentPane().add(btnThongTinPhongDaDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
         jLabel11.setPreferredSize(new java.awt.Dimension(650, 450));
@@ -393,7 +387,6 @@ public class KhachHangPage extends javax.swing.JFrame {
     private javax.swing.JButton btnDatPhong;
     private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JButton btnThongTinPhongDaDat;
-    private javax.swing.JButton btnTraPhong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

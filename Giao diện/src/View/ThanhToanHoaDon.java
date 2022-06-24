@@ -193,12 +193,12 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
             
             Connection con = ConnectionUtils.getMyConnection();
 
-            String file = "src/Source/ReportHoaDon.jrxml";
+            String file = "src/Source/Report_HoaDon.jrxml";
 
             JasperReport jReport = JasperCompileManager.compileReport(file);
             
             JasperPrint jPrint = JasperFillManager.fillReport(jReport, hs, con);
-            
+             
             JasperViewer.viewReport(jPrint, false);
             
             JasperExportManager.exportReportToPdfFile(jPrint, file);

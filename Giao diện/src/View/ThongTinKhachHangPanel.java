@@ -67,8 +67,8 @@ public class ThongTinKhachHangPanel extends javax.swing.JPanel {
         cbbGioiTinh = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtADiaChi = new javax.swing.JTextArea();
-        jLabel11 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(237, 222, 217));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -181,11 +181,7 @@ public class ThongTinKhachHangPanel extends javax.swing.JPanel {
         txtADiaChi.setRows(5);
         jScrollPane2.setViewportView(txtADiaChi);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, 260, 30));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, -160, 2160, 1260));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, 250, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -412,7 +408,6 @@ public class ThongTinKhachHangPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnXoaThongTin;
     private javax.swing.JComboBox<String> cbbGioiTinh;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

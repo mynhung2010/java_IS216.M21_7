@@ -58,7 +58,6 @@ public class ThongTinPhongDat extends javax.swing.JFrame {
         lbSĐT = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDatPhong = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -179,9 +178,6 @@ public class ThongTinPhongDat extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, 139));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/thông_tin_đặt_phòng.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 400, 290));
-
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
         jLabel12.setToolTipText("");
         jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -295,7 +291,6 @@ public class ThongTinPhongDat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
