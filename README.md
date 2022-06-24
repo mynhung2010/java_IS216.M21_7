@@ -21,7 +21,7 @@
 - Mô hình thực thể mối kết hợp  
 ![](ERD_KhachSan.png)
 - Mô hình class diagram
-![](CLASS%20DIAGRAM_KhachSan.png)
+![](CLASS%20DIAGRAM_KhachSan.png)\
 Đây là project của môn lập trình java. Nội dung tạo một phần mềm quản lý khách sạn.  
 
 Phần mềm phải đảm bảo các mục tiêu :
