@@ -47,7 +47,6 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -63,39 +62,43 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
         btnTaoMoi = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(204, 255, 255));
+        setBackground(new java.awt.Color(237, 222, 217));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÔNG TIN CÁ NHÂN");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 235, -1));
-
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Tên:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
         add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 176, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Ngày sinh:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
         add(txtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 176, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("SĐT:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
         add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 176, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Giới tính:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
-        add(txtGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 89, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, -1));
+        add(txtGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 150, -1));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Ngày vào làm:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
-        add(txtNgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 150, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
+        add(txtNgayVaoLam, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 150, -1));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Email:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
         add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 176, -1));
 
+        btnTaoMoi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnTaoMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
         btnTaoMoi.setText("Tạo mới");
         btnTaoMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -103,8 +106,9 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
                 btnTaoMoiActionPerformed(evt);
             }
         });
-        add(btnTaoMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        add(btnTaoMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
 
+        btnSua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
         btnSua.setText("Sửa thông tin");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -112,11 +116,35 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
                 btnSuaActionPerformed(evt);
             }
         });
-        add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+        add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/employees.png"))); // NOI18N
-        jLabel8.setText("jLabel8");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 490, 470));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/màn_hình_nhân_viên_2.png"))); // NOI18N
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 640, 360));
+
+        jPanel2.setBackground(new java.awt.Color(214, 172, 150));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("THÔNG TIN CÁ NHÂN");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(334, 334, 334)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(676, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoMoiActionPerformed
@@ -147,23 +175,23 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
         
         try {
             if(phone_In.equals("") || email_in.equals(""))
-                JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
+                JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);                 
             else if(phone_In.length() > 10 || matcherSĐT.find() == false)
-                JOptionPane.showMessageDialog(this, "SĐT chỉ có số và không quá 10 số"
+                JOptionPane.showMessageDialog(null, "SĐT chỉ có số và không quá 10 số"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
             else if(matcher.find() == false)
-                JOptionPane.showMessageDialog(this, "Email phải có dạng ***@gmail.com"
+                JOptionPane.showMessageDialog(null, "Email phải có dạng ***@gmail.com"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
             else
                 index = nv.SuaNhanVien(EmpName_In, phone_In, email_in);
             
             
             if(index > 0){
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
             }
             else
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thất bại");
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thất bại");
                 
         } catch (Exception e) {
         }
@@ -181,6 +209,7 @@ public class ThongTinNVPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGioiTinh;
     private javax.swing.JTextField txtNgaySinh;

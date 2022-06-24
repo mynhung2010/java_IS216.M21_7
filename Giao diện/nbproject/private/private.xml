@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/DatabaseProcess/NhanVien.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/DatabaseProcess/Room.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>179</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Java/GiaoDienNhanVien_Test/src/View/DangNhapFrame.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien_Test/src/View/KhachHangPage.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien_Test/src/View/NhanVienForm.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien_Test/src/View/ThanhToanHoaDon.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien_Test/src/ConnectDB/ConnectionUtils.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinHoaDonPanel.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/KhachHangPage.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinTaiKhoan.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DatPhong.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DangKyKHFrame.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinPhongDat.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinVatDungPhongPanel.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/TrangNhanVien.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/NhanVienForm.java</file>
         </group>
     </open-files>
 </project-private>

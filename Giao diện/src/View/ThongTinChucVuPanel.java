@@ -55,16 +55,25 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
         txtMaNhanVien = new javax.swing.JTextField();
         btnSuaChucVu = new javax.swing.JButton();
         btnXoaChucVu = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Tra cứu:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, 20));
+        add(txtTraCuuMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 138, -1));
 
+        btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
         });
+        add(btnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, -1, -1));
 
         tbThongTinChucVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,38 +90,50 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinChucVu);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, 266));
+
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã chức vụ:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 73, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Tên chức vụ:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Mã nhân viên:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, -1, -1));
 
         txtMaChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaChucVuActionPerformed(evt);
             }
         });
+        add(txtMaChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 104, -1));
 
         txtTenChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenChucVuActionPerformed(evt);
             }
         });
+        add(txtTenChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 104, -1));
 
         txtMaNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaNhanVienActionPerformed(evt);
             }
         });
+        add(txtMaNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 104, -1));
 
+        btnSuaChucVu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuaChucVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
         btnSuaChucVu.setText("Sửa chức vụ");
         btnSuaChucVu.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +141,9 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
                 btnSuaChucVuActionPerformed(evt);
             }
         });
+        add(btnSuaChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
 
+        btnXoaChucVu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnXoaChucVu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
         btnXoaChucVu.setText("Xóa chức vụ");
         btnXoaChucVu.addActionListener(new java.awt.event.ActionListener() {
@@ -128,76 +151,38 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
                 btnXoaChucVuActionPerformed(evt);
             }
         });
+        add(btnXoaChucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(430, 430, 430)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(33, 33, 33))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(25, 25, 25)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(31, 31, 31)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaChucVu)
-                            .addComponent(txtTenChucVu)
-                            .addComponent(txtMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(351, 351, 351)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTraCuuMa, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnTimKiem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(336, 336, 336)
-                        .addComponent(btnSuaChucVu)
-                        .addGap(70, 70, 70)
-                        .addComponent(btnLamMoi)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnXoaChucVu)))
-                .addContainerGap(394, Short.MAX_VALUE))
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 80, 1410, 730));
+
+        jPanel2.setBackground(new java.awt.Color(214, 172, 150));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setText("THÔNG TIN CHỨC VỤ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1290, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTraCuuMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTenChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoaChucVu)
-                    .addComponent(btnSuaChucVu)
-                    .addComponent(btnLamMoi))
-                .addContainerGap(54, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMaChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaChucVuActionPerformed
@@ -281,12 +266,14 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
             index = cv.SuaChucVu(maChucVu, tenChucVu, maNhanVien);
             
             if(index > 0){
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                JOptionPane.showMessageDialog(null, "Sửa thành công");
                 loadData();
             }
             else
-                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                JOptionPane.showMessageDialog(null, "Sửa thất bại");
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_btnSuaChucVuActionPerformed
@@ -304,20 +291,21 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
             try {
 
                 if(maChucVu.equals(""))
-                    JOptionPane.showMessageDialog(this, "Không thể để trống mã chức vụ"
+                    JOptionPane.showMessageDialog(null, "Không thể để trống mã chức vụ"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
                 else
                     index = cv.XoaChucVu(maChucVu);
 
                 if(index > 0){
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
                     loadData();
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
 
             } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-                JOptionPane.showMessageDialog(this, "Mã chức vụ không tồn tại");
+                JOptionPane.showMessageDialog(null, e.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }          
     }//GEN-LAST:event_btnXoaChucVuActionPerformed
@@ -384,6 +372,9 @@ public class ThongTinChucVuPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbThongTinChucVu;
     private javax.swing.JTextField txtMaChucVu;

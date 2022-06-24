@@ -29,20 +29,8 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
     public ThongTinDichVuPanel() throws SQLException {
         initComponents();
         loadData();
-        gioiHan();
     }
 
-    private void gioiHan(){
-        if(ShareData.useraccount.getVaiTro().equals("Nhân viên")){
-            txtMaDichVu.setEnabled(false);
-            txtGia.setEnabled(false);
-            txtTenDichVu.setEnabled(false);
-            cbbLoaiHinh.setEnabled(false);
-            btnThem.setEnabled(false);
-            btnXoa.setEnabled(false);
-            btnSua.setEnabled(false);
-        }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,21 +56,24 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
         txtTenDichVu = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
         cbbLoaiHinh = new javax.swing.JComboBox<>();
-        btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Tra cứu dịch vụ:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 55, -1, -1));
+        add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 120, -1));
 
         btnTraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTraCuu.setText("Tìm kiếm");
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraCuuActionPerformed(evt);
             }
         });
+        add(btnTraCuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, -1, -1));
 
         tbThongTinDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,127 +98,40 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinDichVu);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 680, 235));
+
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã dịch vụ:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Tên dịch vụ:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 180, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Loại hình:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Giá:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 58, -1));
+        add(txtMaDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 110, 30));
+        add(txtTenDichVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 172, 110, 30));
+        add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 113, 30));
 
         cbbLoaiHinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngoài trời", "Trong nhà" }));
+        add(cbbLoaiHinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 260, 90, 30));
 
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_add_database_16px.png"))); // NOI18N
-        btnThem.setText("Thêm dịch vụ");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
-        btnXoa.setText("Xóa dịch vụ");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
-        btnSua.setText("Sửa dịch vụ");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(btnThem)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(31, 31, 31)
-                                .addComponent(cbbLoaiHinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(99, 99, 99)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSua)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnLamMoi)
-                        .addGap(28, 28, 28)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnXoa)))
-                .addContainerGap(312, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnTraCuu)
-                .addGap(405, 405, 405))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTraCuu))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTenDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbbLoaiHinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnThem)
-                    .addComponent(btnSua)
-                    .addComponent(btnLamMoi))
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 1410, 590));
     }// </editor-fold>//GEN-END:initComponents
 
     
@@ -291,36 +195,6 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
         txtTimKiem.setText("");
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-        int ret = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa","Xóa dịch vụ",JOptionPane.YES_NO_OPTION);
-        if (ret == JOptionPane.YES_OPTION){
-            String maDichVu = txtMaDichVu.getText();
-        
-            int index = 0;
-            DichVu dv = new DichVu();
-
-            try {
-
-                if(maDichVu.equals(""))
-                    JOptionPane.showMessageDialog(this, "Không thể để trống mã dịch vụ"
-                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
-                else
-                    index = dv.XoaDichVu(maDichVu);
-
-                if(index > 0){
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
-                    loadData();
-                }
-                else
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
-
-            } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-            }
-        }  
-        
-    }//GEN-LAST:event_btnXoaActionPerformed
-
     
         /**
      * Hàm in thông tin lên các TextField
@@ -348,91 +222,6 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
         
         displayToTextField(row);
     }//GEN-LAST:event_tbThongTinDichVuMouseClicked
-
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        
-        
-        String maDichVu = txtMaDichVu.getText();
-        String tenDichVu = txtTenDichVu.getText();
-        String loaiHinh = (String) cbbLoaiHinh.getSelectedItem();
-        if(loaiHinh.equals("Ngoài trời"))
-            loaiHinh = "0";
-        else
-            loaiHinh = "1"; 
-        String giaDichVu = txtGia.getText();
-
-
-        DichVu dv = new DichVu();
-        int index = 0;
-        try {
-            try {             
-                if(maDichVu.equals("") || tenDichVu.equals("") || giaDichVu.equals(""))
-                    JOptionPane.showMessageDialog(this, "Thông tin chưa đẩy đủ"
-                        , "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE); 
-                else if(maDichVu.length() > 5)
-                    JOptionPane.showMessageDialog(this, "Mã dịch vụ có chiều dài là 5 bao gồm số và chữ"
-                        , "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE); 
-                else
-                    index = dv.ThemDichVuMoi(maDichVu, tenDichVu
-                            , Integer.parseInt(loaiHinh), Integer.parseInt(giaDichVu));
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            if (index > 0) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-                loadData();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
-            }
-        }catch (SQLException  ex) {
-            JOptionPane.showMessageDialog(this, "Mã dịch vụ đã tồn tại"
-                , "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE); 
-        }
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        
-        String maDichVu = txtMaDichVu.getText();
-        String tenDichVu = txtTenDichVu.getText();
-        String loaiHinh = (String) cbbLoaiHinh.getSelectedItem();
-        if(loaiHinh.equals("Ngoài trời"))
-            loaiHinh = "0";
-        else
-            loaiHinh = "1"; 
-        String giaDichVu = txtGia.getText();
-
-
-        DichVu dv = new DichVu();
-        int index = 0;
-        try {
-            try {               
-                if(maDichVu.equals("") || tenDichVu.equals("") || giaDichVu.equals(""))
-                    JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
-                        , "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE); 
-                else
-                    index = dv.SuaDichVu(maDichVu, tenDichVu
-                            , Integer.parseInt(loaiHinh), Integer.parseInt(giaDichVu));
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            if (index > 0) {
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
-                loadData();
-            } else {
-                JOptionPane.showMessageDialog(this, "Sửa thất bại");
-            }
-        }catch (SQLException  ex) {
-            Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
 
 
     /**
@@ -464,16 +253,14 @@ public class ThongTinDichVuPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTraCuu;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbbLoaiHinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbThongTinDichVu;

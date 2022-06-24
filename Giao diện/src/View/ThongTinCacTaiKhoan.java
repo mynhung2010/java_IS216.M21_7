@@ -54,6 +54,11 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
         btnSuaThongTin = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         btnXoaTaiKhoan = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbThongTinCacTaiKhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,22 +75,38 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinCacTaiKhoan);
 
-        jLabel1.setText("Tra cứu:");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 554, 393));
+        add(txtMaTimKiemTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 150, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Tra cứu:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, 20));
+
+        btnTraCuu.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnTraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTraCuu.setText("Tìm kiếm");
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraCuuActionPerformed(evt);
             }
         });
+        add(btnTraCuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã tài khoản:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Tên tài khoản:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Vai trò:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, -1, -1));
+        add(txtMaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 144, -1));
+        add(txtTenTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 144, -1));
+        add(txtVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, 144, -1));
 
+        btnSuaThongTin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuaThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
         btnSuaThongTin.setText("Sửa thông tin");
         btnSuaThongTin.addActionListener(new java.awt.event.ActionListener() {
@@ -93,15 +114,18 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
                 btnSuaThongTinActionPerformed(evt);
             }
         });
+        add(btnSuaThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, -1, -1));
 
+        btnLamMoi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, -1, -1));
 
+        btnXoaTaiKhoan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnXoaTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
         btnXoaTaiKhoan.setText("Xóa tài khoản");
         btnXoaTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
@@ -109,78 +133,38 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
                 btnXoaTaiKhoanActionPerformed(evt);
             }
         });
+        add(btnXoaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 340, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMaTimKiemTen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(btnTraCuu))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSuaThongTin)
-                                .addGap(101, 101, 101)
-                                .addComponent(btnLamMoi)
-                                .addGap(96, 96, 96)
-                                .addComponent(btnXoaTaiKhoan))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(txtMaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(txtTenTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(98, 98, 98)
-                                .addComponent(jLabel5)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(365, Short.MAX_VALUE))
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1500, 770));
+
+        jPanel2.setBackground(new java.awt.Color(214, 172, 150));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setText("THÔNG TIN TÀI KHOẢN");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1290, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaTimKiemTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnTraCuu))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtMaTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTenTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSuaThongTin)
-                    .addComponent(btnLamMoi)
-                    .addComponent(btnXoaTaiKhoan))
-                .addContainerGap(92, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTaiKhoanActionPerformed
@@ -195,19 +179,20 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
 
             try {
                 if(maTaiKhoan.equals(""))
-                    JOptionPane.showMessageDialog(this, "Không thể để trống mã tài khoản"
+                    JOptionPane.showMessageDialog(null, "Không thể để trống mã tài khoản"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
                 else
                     index = tk.XoaTaiKhoan(Integer.parseInt(maTaiKhoan));
 
                 if(index > 0){
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
                     loadData();
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
             } catch (HeadlessException | ClassNotFoundException | NumberFormatException | SQLException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, e.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }  
     }//GEN-LAST:event_btnXoaTaiKhoanActionPerformed
@@ -241,19 +226,21 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
         
         try {
             if(vaiTro.equals(""))
-                JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
+                JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
                     , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
             else
                 index = tk.SuaTaiKhoan(Integer.parseInt(maTaiKhoan), vaiTro);
             
             
             if(index > 0){
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
                 loadData();
             }
             else
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thất bại");
-        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thất bại");
+        } catch (HeadlessException | ClassNotFoundException | NumberFormatException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSuaThongTinActionPerformed
 
@@ -354,6 +341,9 @@ public class ThongTinCacTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbThongTinCacTaiKhoan;
     private javax.swing.JTextField txtMaTaiKhoan;

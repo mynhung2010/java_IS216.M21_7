@@ -44,7 +44,6 @@ public class NhanVienForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btnDangXuat = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnThongTinCaNhan = new javax.swing.JButton();
         btnQuanLyKhachHang = new javax.swing.JButton();
         btnThongTinHoaDon = new javax.swing.JButton();
@@ -54,6 +53,7 @@ public class NhanVienForm extends javax.swing.JFrame {
         btnCacDichVuDaDat = new javax.swing.JButton();
         btnThongTinDatPhong = new javax.swing.JButton();
         btnDangXuat1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -64,9 +64,6 @@ public class NhanVienForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang nhân viên");
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LOGO");
 
         btnThongTinCaNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_more_info_16px_1.png"))); // NOI18N
         btnThongTinCaNhan.setText("Thông tin cá nhân");
@@ -132,13 +129,16 @@ public class NhanVienForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/hotel.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnThongTinTaiKhoan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThongTinCaNhan)
@@ -154,24 +154,28 @@ public class NhanVienForm extends javax.swing.JFrame {
                 .addComponent(btnCacDichVuDaDat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDangXuat1)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
             .addComponent(tplThongTin)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThongTinCaNhan)
-                    .addComponent(btnQuanLyKhachHang)
-                    .addComponent(btnThongTinHoaDon)
-                    .addComponent(btnThongTinTaiKhoan)
-                    .addComponent(btnDichVu)
-                    .addComponent(btnCacDichVuDaDat)
-                    .addComponent(btnThongTinDatPhong)
-                    .addComponent(btnDangXuat1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnThongTinCaNhan)
+                            .addComponent(btnQuanLyKhachHang)
+                            .addComponent(btnThongTinHoaDon)
+                            .addComponent(btnThongTinTaiKhoan)
+                            .addComponent(btnDichVu)
+                            .addComponent(btnCacDichVuDaDat)
+                            .addComponent(btnThongTinDatPhong)
+                            .addComponent(btnDangXuat1)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tplThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
+                .addComponent(tplThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -332,7 +336,7 @@ public class NhanVienForm extends javax.swing.JFrame {
     private javax.swing.JButton btnThongTinDatPhong;
     private javax.swing.JButton btnThongTinHoaDon;
     private javax.swing.JButton btnThongTinTaiKhoan;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTabbedPane tplThongTin;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,7 +22,10 @@ import java.util.List;
 public class Room {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String MaPhong, LoaiPhong, ChatLuongPhong, Gia;
+    private String maHoaDon;
     private String maKhachHang, maDatPhong, ngayDatPhong, ngayNhanPhong, ngayTraPhong;
+    private float Diem;
+    private String binhLuan;
 
     public Room(String MaPhong, String LoaiPhong, String ChatLuongPhong, String Gia, String maKhachHang, String maDatPhong, String ngayDatPhong, String ngayNhanPhong, String ngayTraPhong) {
         this.MaPhong = MaPhong;
@@ -41,6 +44,31 @@ public class Room {
         
     }
 
+    public float getDiem() {
+        return Diem;
+    }
+
+    public void setDiem(float Diem) {
+        this.Diem = Diem;
+    }
+
+    public String getBinhLuan() {
+        return binhLuan;
+    }
+
+    public void setBinhLuan(String binhLuan) {
+        this.binhLuan = binhLuan;
+    }
+
+    public String getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+
+    
     public String getMaKhachHang() {
         return maKhachHang;
     }
@@ -195,7 +223,6 @@ public class Room {
         }
     }
     
-    
     /**
      * Hàm xóa phòng
      * @param Room_No
@@ -287,6 +314,8 @@ public class Room {
                 
                 room.setMaDatPhong(kq.getString("ResNo"));
                 
+                room.setMaHoaDon(kq.getString("BillNo"));
+                
                 room.setMaKhachHang(kq.getString("CusNo"));
                 
                 room.setMaPhong(kq.getString("RoomNo"));
@@ -329,6 +358,8 @@ public class Room {
                 
                 room.setMaDatPhong(kq.getString("ResNo"));
                 
+                room.setMaHoaDon(kq.getString("BillNo"));
+                
                 room.setMaKhachHang(kq.getString("CusNo"));
                 
                 room.setMaPhong(kq.getString("RoomNo"));
@@ -349,6 +380,111 @@ public class Room {
             }
             return RoomData;
         }
+    }
+    
+    
+    /**
+     * Tìm đánh giá phòng
+     * @param maPhong
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<Room> getDanhGiaList(String maPhong) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "select a.CusNo,r.RoomNo,Point, \"Comment\" " +
+                       " from assessroom a join room r on a.roomNo = r.RoomNo " +
+                       " where r.RoomNo = '" + maPhong + "'";
+        Statement stat = conn.createStatement();
+        try(ResultSet kq = stat.executeQuery(query)){
+            List<Room> RoomData = new ArrayList<>();
+            
+            while(kq.next()){
+                Room room = new Room();
+                
+                room.setMaKhachHang(kq.getString("CusNo"));
+             
+                room.setMaPhong(kq.getString("RoomNo"));
+                
+                room.setDiem(kq.getFloat("Point"));
+                
+                room.setBinhLuan(kq.getString("\"Comment\""));
+                
+                RoomData.add(room);
+            }
+            return RoomData;
+        }
+    }
+    
+    /**
+     * Tra cứu phòng
+     * @param loaiPhong
+     * @param chatLuong
+     * @param ngayMuonDat
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<Room> traCuuPhong(int loaiPhong, String chatLuong, String ngayMuonDat) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "SELECT DISTINCT R.RoomNo, TypeOfRoom, Quality, Cost " 
+                        + " FROM ROOM R JOIN RESERVATION RE ON R.RoomNo = RE.RoomNo " 
+                        + " WHERE typeOfRoom = " + loaiPhong + " AND Quality = '" + chatLuong + "'"
+                        + " AND R.RoomNo  NOT IN (SELECT RoomNo "
+                                              + " FROM RESERVATION "
+                                              + " WHERE ResDate = "
+                                                    + "TO_DATE('" + ngayMuonDat + "'," + "'dd/mm/yyyy'))"
+                  + " UNION "
+                        + " SELECT RoomNo, TypeOfRoom, Quality, Cost "
+                        + " FROM Room R  "
+                        + " WHERE typeOfRoom = " + loaiPhong + " AND Quality = '" + chatLuong + "'"
+                                                 + " AND R.RoomNo NOT IN (SELECT RoomNo "
+                                                                      + " FROM RESERVATION)";
+        Statement stat = conn.createStatement();
+        try(ResultSet kq = stat.executeQuery(query)){
+            List<Room> RoomData = new ArrayList<>();
+            
+            while(kq.next()){
+                Room room = new Room();
+             
+                room.setMaPhong(kq.getString("RoomNo"));
+                
+                room.setLoaiPhong(kq.getString("TypeOfRoom"));
+                
+                room.setChatLuongPhong(kq.getString("Quality"));
+                
+                room.setGia(kq.getString("Cost"));
+                
+                RoomData.add(room);
+            }
+            return RoomData;
+        }
+    }
+    
+    /**
+     * Sửa bài đánh giá
+     * @param Point_Room
+     * @param Comment_Room
+     * @param Room_No
+     * @param Cus_No
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int SuaDanhGia(Float Point_Room, String Comment_Room, String Room_No,
+            String Cus_No) throws SQLException, ClassNotFoundException{
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "BEGIN "
+                     + "proc_update_Assessroom(" + Point_Room + ",'" + Comment_Room 
+                     + "','" + Room_No + "','" + Cus_No + "');"
+                     + " END;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+
+        return i;
     }
     
 }

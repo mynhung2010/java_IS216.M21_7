@@ -9,6 +9,7 @@ package DatabaseProcess;
  * @author Thanh Phat
  */
 public class ShareData {
+
     public static User useraccount;
     public static NhanVienQuanLy nvql;
     public static NhanVien nv;
@@ -22,4 +23,7 @@ public class ShareData {
     public static String ngayTraPhong;
     public static String maDatPhong;
     public static int maTk;
+    public static int maKH;
+    public static String trangThai;
+    public static KhachHang kh;
 }

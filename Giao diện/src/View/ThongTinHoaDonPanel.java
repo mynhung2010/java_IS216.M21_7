@@ -6,6 +6,7 @@ package View;
 
 import ConnectDB.ConnectionUtils;
 import DatabaseProcess.*;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,6 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
     public ThongTinHoaDonPanel() throws SQLException {
         initComponents();
         loadData();
-        txtMaHoaDon.setEnabled(false);
     }
 
     /**
@@ -48,9 +48,10 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
         txtTimKiemHoaDon = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtMaHoaDon = new javax.swing.JTextField();
+        btnCapNhatTien = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbThongTinHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,8 +68,13 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinHoaDon);
 
-        jLabel1.setText("Tra cứu hóa đơn:");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 780, 287));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Tra cứu hóa đơn:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+
+        btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Thanh toán.png"))); // NOI18N
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -76,77 +82,38 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
                 btnThanhToanActionPerformed(evt);
             }
         });
+        add(btnThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, -1, -1));
+        add(txtTimKiemHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 130, -1));
 
+        btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
         });
+        add(btnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, -1, -1));
 
         btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnRefresh.setText("Làm mới");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
             }
         });
+        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Cập nhật tiền.png"))); // NOI18N
-        jButton1.setText("Cập nhật tiền hóa đơn");
+        btnCapNhatTien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnCapNhatTien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Cập nhật tiền.png"))); // NOI18N
+        btnCapNhatTien.setText("Cập nhật tiền hóa đơn");
+        btnCapNhatTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatTienActionPerformed(evt);
+            }
+        });
+        add(btnCapNhatTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
 
-        jLabel2.setText("Mã hóa đơn:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(437, 437, 437)
-                        .addComponent(jLabel2)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(btnRefresh)
-                        .addGap(96, 96, 96)
-                        .addComponent(jButton1)
-                        .addGap(92, 92, 92)
-                        .addComponent(btnThanhToan))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTimKiemHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnTimKiem)))
-                .addContainerGap(396, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTimKiemHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRefresh)
-                    .addComponent(btnThanhToan)
-                    .addComponent(jButton1))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 1410, 590));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -166,13 +133,14 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             btnThanhToan.setEnabled(true);
+            ShareData.maHoaDon = "";
+            ShareData.trangThai = "";
             loadData();
         } catch (SQLException ex) {
             Logger.getLogger(ThongTinHoaDonPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         txtTimKiemHoaDon.setText("");
-        txtMaHoaDon.setText("");
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private String trangThai;
@@ -181,13 +149,14 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
      * @param row 
      */
     private void displayToTextField(int row){
-        txtMaHoaDon.setText((String) tbThongTinHoaDon.getModel().getValueAt(row, 0));
         
-        ShareData.maHoaDon = txtMaHoaDon.getText();
+        ShareData.maHoaDon = (String) tbThongTinHoaDon.getModel().getValueAt(row, 0);
         
         ShareData.tongTien = (Integer) tbThongTinHoaDon.getModel().getValueAt(row, 3);
         
         trangThai = ((String) tbThongTinHoaDon.getModel().getValueAt(row, 6));
+        
+        ShareData.trangThai = trangThai;
     }
 
     private void tbThongTinHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbThongTinHoaDonMouseClicked
@@ -205,7 +174,7 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Hóa đơn đã thanh toán");
         }
         else{
-            String maHoaDon = txtMaHoaDon.getText();
+            String maHoaDon = ShareData.maHoaDon;
             if(maHoaDon.equals(""))
                 JOptionPane.showMessageDialog(this, "Không thể tìm hóa đơn vì mã hóa đơn trống"
                     , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
@@ -221,6 +190,46 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
         }
             
     }//GEN-LAST:event_btnThanhToanActionPerformed
+    private static int soLanCapNhat = 0;
+    private void btnCapNhatTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatTienActionPerformed
+        // TODO add your handling code here:
+        String trangThai = ((String) tbThongTinHoaDon.getModel().getValueAt(tbThongTinHoaDon.getSelectedRow(), 6));
+
+        if(trangThai.equals("Đã thanh toán"))
+            JOptionPane.showMessageDialog(null, "Hóa đơn đã thanh toán"
+                , "Lỗi", JOptionPane.ERROR_MESSAGE); 
+        else if(soLanCapNhat == 1)
+            JOptionPane.showMessageDialog(null, "Hóa đơn đã cập nhật tiền"
+                , "Lỗi", JOptionPane.ERROR_MESSAGE); 
+        else{
+            soLanCapNhat = 1;
+            String maHoaDon = (String) tbThongTinHoaDon.getModel().getValueAt(tbThongTinHoaDon.getSelectedRow(), 0);   
+
+            int index = 0;
+            HoaDon hd = new HoaDon();
+
+            try {
+
+                if(maHoaDon.equals(""))
+                    JOptionPane.showMessageDialog(null, "Không thể để trống mã hóa đơn"
+                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
+                else
+                    index = hd.capNhatTienHoaDon(maHoaDon);
+
+                if(index > 0){
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công");
+                    loadData();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Cập nhật thất bại");
+                }
+
+            } catch (HeadlessException | ClassNotFoundException | SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE); 
+            }
+        }
+    }//GEN-LAST:event_btnCapNhatTienActionPerformed
 
 
     
@@ -292,15 +301,14 @@ public class ThongTinHoaDonPanel extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCapNhatTien;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbThongTinHoaDon;
-    private javax.swing.JTextField txtMaHoaDon;
     private javax.swing.JTextField txtTimKiemHoaDon;
     // End of variables declaration//GEN-END:variables
 }

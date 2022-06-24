@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_HoaDon" language="groovy" pageWidth="900" pageHeight="1200" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fef59f46-a4dd-40f1-9b96-71f577e6cc24">
+	<property name="ireport.zoom" value="1.4641000000000117"/>
+	<property name="ireport.x" value="18"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="MaHoaDon" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select b.billno, sumofmoney, se.serno, se.sername, c.cusno, c.cusname, c.address, c.phone, r.roomno, r.typeofroom, r.quality, r.cost as "room_cost", re.tcheckin, re.tcheckout, se.sername, se.cost as "ser_cost", b.sumofmoney
+from customer c, room r, reservation re, bill b, service se, servicecalled sc
+where re.roomno = r.roomno and r.roomno = b.roomno and  re.cusno = c.cusno and b.billno = re.billno and sc.roomno = r.roomno
+and b.billno = $P{MaHoaDon}
+group by b.billno, sumofmoney, se.serno, se.sername, c.cusno, c.cusname, c.address, c.phone, r.roomno, r.typeofroom, r.quality, r.cost, re.tcheckin, re.tcheckout, se.sername, se.cost, b.sumofmoney]]>
+	</queryString>
+	<field name="BILLNO" class="java.lang.String"/>
+	<field name="SUMOFMONEY" class="java.math.BigDecimal"/>
+	<field name="SERNO" class="java.lang.String"/>
+	<field name="SERNAME" class="java.lang.String"/>
+	<field name="CUSNO" class="java.lang.String"/>
+	<field name="CUSNAME" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="PHONE" class="java.lang.String"/>
+	<field name="ROOMNO" class="java.lang.String"/>
+	<field name="TYPEOFROOM" class="java.math.BigDecimal"/>
+	<field name="QUALITY" class="java.lang.String"/>
+	<field name="room_cost" class="java.math.BigDecimal"/>
+	<field name="TCHECKIN" class="java.sql.Timestamp"/>
+	<field name="TCHECKOUT" class="java.sql.Timestamp"/>
+	<field name="ser_cost" class="java.math.BigDecimal"/>
+	<variable name="SERNO_1" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{SERNO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="209" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="860" height="106" backcolor="#D9A389" uuid="fbff5d3c-51f3-4a49-9e6e-1e5490ff5582"/>
+				<staticText>
+					<reportElement style="Title" x="189" y="21" width="671" height="78" forecolor="#403939" uuid="d8a121bb-2bd4-428b-8fcd-f6bfb4bc3be4"/>
+					<textElement>
+						<font fontName="Segoe UI" size="40" isBold="true"/>
+					</textElement>
+					<text><![CDATA[HÓA ĐƠN THANH TOÁN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="317" y="70" width="240" height="29" forecolor="#403939" uuid="ce8af192-d3dd-4351-ad47-c80fb8ca110c"/>
+					<textElement>
+						<font fontName="Segoe UI" size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Hotel Management System]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="104" width="860" height="32" forecolor="#000000" backcolor="#EDDED9" uuid="24c78536-af40-4e99-9561-f698b22b8a5b"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="331" y="0" width="153" height="32" forecolor="#666666" backcolor="#666666" uuid="f3acf274-0929-438c-8d48-b9decf84299e"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="287" y="162" width="166" height="32" uuid="c44f3048-fe63-449b-acbe-356305d889ca"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HÓA ĐƠN]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="683" y="148" width="261" height="50" uuid="00c88d9a-1997-4e62-b1b0-112da4b9add2"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="448" y="163" width="121" height="32" uuid="e047bc88-ea4a-478b-b54a-65a21892a180"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BILLNO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="356" splitType="Stretch">
+			<staticText>
+				<reportElement x="72" y="1" width="274" height="30" forecolor="#4C4747" uuid="256d144c-4920-41a6-887d-6abdd10af89a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THÔNG TIN KHÁCH HÀNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="57" width="105" height="27" uuid="4eca7657-9d69-484f-9e42-c3c10d305214"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Họ và tên:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="95" width="105" height="27" uuid="4f96b4bc-04b3-4634-bea4-6f03e1c0d2b6"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="57" width="121" height="27" uuid="f9d7a5aa-20ec-4a54-9d15-5484d0ef82c8"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Số điện thoại:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="139" width="231" height="30" forecolor="#4C4747" uuid="aa607ac0-6f8d-44d9-814e-46d3382777f1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THÔNG TIN PHÒNG ĐẶT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="183" width="117" height="27" uuid="8f1e271c-31ba-4995-8424-68a0b846961e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Mã phòng đặt:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="224" width="105" height="27" uuid="b57e3019-f013-4d4f-9ba4-181dc7f7490d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Loại phòng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="226" width="105" height="27" uuid="255dedf6-4f28-4c1c-80be-7497f6c00a1d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Giá phòng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="267" width="105" height="27" uuid="e7580215-6801-4573-a3ff-7ecf3cb7797a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ngày nhận:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="267" width="105" height="27" uuid="01b020a2-f10e-4118-bf28-5ddac8f2818a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ngày trả:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="314" width="226" height="30" forecolor="#4C4747" uuid="7087f235-b83c-4b0f-9494-ffdf04cb6c85"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LỊCH SỬ ĐẶT DỊCH VỤ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="199" y="55" width="169" height="27" uuid="7f3b249a-8de4-4dfa-a29c-080c27f37136"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSNAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="199" y="95" width="122" height="27" uuid="b67e47a3-a78c-49f2-bb39-f15cf5e9ce8c"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="545" y="57" width="122" height="27" uuid="e0236e4b-f643-4ba3-bf9f-ecb0bce30fa1"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PHONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="216" y="183" width="122" height="27" uuid="eda922a0-ca73-4537-acb5-a46cf09e8f4a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROOMNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="199" y="223" width="148" height="27" uuid="aed3bff3-4830-419b-afe1-e7a912be2d78"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TYPEOFROOM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="407" y="183" width="105" height="27" uuid="4f292a20-cfb8-45ea-b269-6b6bd19b4940"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Chất lượng:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" positionType="Float" x="199" y="267" width="148" height="27" uuid="39021d37-92b2-437d-8b12-ba07f08c323e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TCHECKIN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+				<reportElement style="Detail" positionType="Float" x="507" y="267" width="148" height="27" uuid="a00d3812-7c51-4f06-8953-5a6ba01f9fb7"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TCHECKOUT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="507" y="183" width="148" height="27" uuid="ca7618fa-f225-47ce-b376-cf148f5d8add"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QUALITY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="507" y="226" width="148" height="27" uuid="d93f4f36-69be-47de-ba2b-789ea89ae53d"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{room_cost}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="273" y="15" width="100" height="1" forecolor="#999999" uuid="f83a3d4b-d087-4202-b477-0d5edb6cd812"/>
+			</line>
+			<line>
+				<reportElement x="19" y="14" width="47" height="1" forecolor="#999999" uuid="3d04d9a2-c718-4856-91b0-dd2acd14b2a1"/>
+			</line>
+			<line>
+				<reportElement x="270" y="154" width="108" height="1" forecolor="#999999" uuid="bf4a6e88-85f5-4a81-b283-a89ff1b43a48"/>
+			</line>
+			<line>
+				<reportElement x="19" y="155" width="53" height="1" forecolor="#999999" uuid="45eef032-9ca7-4c7b-b40d-d0f8746fe18a"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="186" y="5" width="105" height="27" forecolor="#4C4747" uuid="df22b9cd-916d-4132-9653-0a1109219808"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã dịch vụ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="5" width="105" height="27" forecolor="#4C4747" uuid="0985d914-97de-4d64-8b21-994451c73f78"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên dịch vụ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="599" y="5" width="105" height="27" forecolor="#4C4747" uuid="a2483b94-dc3a-4a8e-951d-cf1eaa4a53eb"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giá dịch vụ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<line>
+				<reportElement x="182" y="31" width="519" height="1" uuid="1d5c8336-5a89-4393-8354-04ca830acf8e"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="200" y="0" width="101" height="31" uuid="771a1ca6-719b-4194-a182-0a5084002a52"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="317" y="0" width="240" height="30" uuid="dec28d28-5aa5-457c-8f89-4b194285aa61"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SERNAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="579" y="0" width="101" height="31" uuid="4d173722-e597-40e6-b2a6-50812e3dce6e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ser_cost}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="472" y="-5" width="207" height="30" uuid="c5d15326-89d6-4df2-81bd-e6279a35fbb4"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<text><![CDATA[Số dịch vụ đã sử dụng: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="658" y="-5" width="121" height="30" uuid="6b540439-7e25-46d4-ad86-415804c39b00"/>
+				<textElement>
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SERNO_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="215" splitType="Stretch">
+			<rectangle>
+				<reportElement x="199" y="7" width="471" height="36" backcolor="#EDDED9" uuid="2e60d4ea-091f-4ad3-beba-bed0ad20c8eb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="250" y="8" width="151" height="38" uuid="2a02e227-1eda-44c3-a341-b2126258ab74"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="21" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thành tiền:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="357" y="8" width="190" height="36" uuid="392fd9f9-4fe5-42f5-b549-31233814be22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="21" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUMOFMONEY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="89" y="77" width="141" height="43" uuid="664360ca-1700-41b7-9736-c8205f55d9d3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<text><![CDATA[Nhân viên ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="629" y="77" width="141" height="43" uuid="626422ec-f91e-4edc-9308-6c7d1598ae64"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="17"/>
+				</textElement>
+				<text><![CDATA[Khách hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="103" width="156" height="29" uuid="ab9ff2b6-74b3-4b27-89c5-46ae3f272351"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="15"/>
+				</textElement>
+				<text><![CDATA[(Ký và ghi rõ họ tên)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="615" y="103" width="163" height="29" uuid="260ca799-5f62-44fa-9d84-c6236b56019f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="15"/>
+				</textElement>
+				<text><![CDATA[(Ký và ghi rõ họ tên)]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="-2" y="194" width="860" height="21" forecolor="#ECA79F" backcolor="#D9A389" uuid="611710f3-011a-48b2-a32e-d9deba4db94a"/>
+				<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="769" y="0" width="91" height="21" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="98ff0e4e-961d-43cd-99db-103bbcc6878d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Segoe UI" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement style="Column header" x="2" y="0" width="205" height="21" forecolor="#FFFFFF" uuid="e84d3df3-7f92-4da8-87b1-c8dd91996f03"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="14" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="485" y="9" width="151" height="38" uuid="eb82580f-ff59-43c3-880b-d149e93591ea"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="21" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VNĐ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

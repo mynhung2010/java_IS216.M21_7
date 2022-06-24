@@ -116,6 +116,7 @@ public class HoaDon {
     }
     
     
+    
     /**
      * Lấy thông tin các hóa đơn
      * @return
@@ -286,6 +287,56 @@ public class HoaDon {
         i = stat.executeUpdate(query);
         
         return i;
+    }
+    
+    /**
+     * Cập nhật lại tiền cho hóa đơn
+     * @param billNo_In
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int capNhatTienHoaDon(String billNo_In) throws SQLException, ClassNotFoundException{
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "BEGIN "
+                + "proc_update_money('" + billNo_In + "');"
+                + " END;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+        
+        return i;
+    }
+    
+     /**
+     * Tìm trạng thái bill của mã khách hàng
+     * @param maKhachHang
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public String getTrangThai(String maKhachHang) throws SQLException, ClassNotFoundException{
+        
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Select AccountID FROM ACCOUNT WHERE AccountID = '" + maKhachHang + "'";
+        Statement stat = conn.createStatement();
+        
+        String trangThai = "";
+        
+        try(ResultSet kq = stat.executeQuery(query)){
+            while(kq.next()){
+                
+                
+                
+                String tt = "";
+                
+                trangThai = tt;
+                
+            }
+            return trangThai;
+        }
     }
     
 }

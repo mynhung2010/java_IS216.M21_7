@@ -59,16 +59,24 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
         btnLamMoi = new javax.swing.JButton();
         btnSuaThongTin = new javax.swing.JButton();
         btnXoaVatDung = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Tra cứu:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        add(txtTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 161, -1));
 
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
         });
+        add(btnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, -1, -1));
 
         tbThongTinVatDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,18 +93,36 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinVatDung);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 534, 244));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã phòng:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Mã vật dụng:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Tên vật dụng:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Số lượng:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Tình trạng:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+        add(txtMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 330, 154, -1));
+        add(txtMaVatDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 151, -1));
+        add(txtTenVatDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 210, 151, -1));
+        add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 250, 151, -1));
 
         cbbTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tốt", "Hư hỏng", "Chưa trang bị" }));
+        add(cbbTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 117, -1));
 
+        btnThem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_add_database_16px.png"))); // NOI18N
         btnThem.setText("Thêm vật dụng");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -104,15 +130,17 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
                 btnThemActionPerformed(evt);
             }
         });
+        add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, -1, -1));
 
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, -1));
 
+        btnSuaThongTin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuaThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
         btnSuaThongTin.setText("Sửa thông tin");
         btnSuaThongTin.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +148,7 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
                 btnSuaThongTinActionPerformed(evt);
             }
         });
+        add(btnSuaThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, -1));
 
         btnXoaVatDung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
         btnXoaVatDung.setText("Xóa vật dụng");
@@ -128,88 +157,38 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
                 btnXoaVatDungActionPerformed(evt);
             }
         });
+        add(btnXoaVatDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTimKiem)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(btnThem)
-                .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLamMoi)
-                        .addGap(100, 100, 100)
-                        .addComponent(btnSuaThongTin)
-                        .addGap(100, 100, 100)
-                        .addComponent(btnXoaVatDung))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(42, 42, 42)
-                        .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTenVatDung, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(txtSoLuong)
-                            .addComponent(cbbTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaVatDung))))
-                .addContainerGap(134, Short.MAX_VALUE))
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1450, 720));
+
+        jPanel2.setBackground(new java.awt.Color(214, 172, 150));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setText("THÔNG TIN VẬT DỤNG");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1320, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtMaVatDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTenVatDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbbTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSuaThongTin)
-                        .addComponent(btnXoaVatDung)
-                        .addComponent(btnLamMoi)))
-                .addContainerGap(81, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -321,16 +300,21 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
         int index = 0;
         
         try {
-            index = vd.SuaThongTinVatDung(maVatDung, tenVatDung,Integer.parseInt(soLuong), tinhTrang);
+            
+            if(maVatDung.equals("") || tenVatDung.equals("") || soLuong.equals(""))
+                JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
+                    , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);                 
+            else
+                index = vd.SuaThongTinVatDung(maVatDung, tenVatDung,Integer.parseInt(soLuong), tinhTrang);
             
             if(index > 0){
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
                 loadData();
             }
             else
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thất bại");
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thất bại");
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(this, e.toString());
+            JOptionPane.showMessageDialog(null, e.toString());
         }
         
     }//GEN-LAST:event_btnSuaThongTinActionPerformed
@@ -357,21 +341,21 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
             
             if(maVatDung.equals("") || tenVatDung.equals("") 
                     || soLuong.equals("") || maPhong.equals(""))
-                    JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
+                    JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
             else
                 index = vd.ThemVatDung(maVatDung, tenVatDung, Integer.parseInt(soLuong), trangThai, maPhong);
             
             if(index > 0){
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
                 loadData();
             }
             else
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                JOptionPane.showMessageDialog(null, "Thêm thất bại");
             
             
         } catch (HeadlessException | SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "Mã vật dụng đã tồn tại");
+            JOptionPane.showMessageDialog(null, "Mã vật dụng đã tồn tại");
         }
         
     }//GEN-LAST:event_btnThemActionPerformed
@@ -389,17 +373,17 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
 
             try {
                 if(maXoa.equals("") || maPhong.equals(""))
-                    JOptionPane.showMessageDialog(this, "Không để trống các mã"
+                    JOptionPane.showMessageDialog(null, "Không để trống các mã"
                         , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
                 else
                     index = vd.XoaVatDung(maXoa, maPhong);
 
                 if(index > 0){
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
                     loadData();
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
 
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(ThongTinVatDungPhongPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -448,6 +432,9 @@ public class ThongTinVatDungPhongPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbThongTinVatDung;
     private javax.swing.JTextField txtMaPhong;

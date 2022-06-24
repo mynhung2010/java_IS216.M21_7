@@ -18,6 +18,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
     public TrangNhanVien() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -35,22 +36,14 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         pThongTinCaNhan = new javax.swing.JPanel();
         thongTinNVPanel1 = new View.ThongTinNVPanel();
-        pQuanLyKhachHang = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        try {
-            thongTinKhachHangPanel1 = new View.ThongTinKhachHangPanel();
-        } catch (java.sql.SQLException e1) {
-            e1.printStackTrace();
-        }
         pDatPhong = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         try {
             thongTinDatPhong1 = new View.ThongTinDatPhong();
         } catch (java.sql.SQLException e1) {
             e1.printStackTrace();
         }
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         pThongTinHoaDon = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -75,6 +68,14 @@ public class TrangNhanVien extends javax.swing.JFrame {
         } catch (java.sql.SQLException e1) {
             e1.printStackTrace();
         }
+        pQuanLyKhachHang = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        try {
+            thongTinKhachHangPanel2 = new View.ThongTinKhachHangPanel();
+        } catch (java.sql.SQLException e1) {
+            e1.printStackTrace();
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang nhân viên");
@@ -95,7 +96,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
             pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
                 .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 819, Short.MAX_VALUE))
+                .addGap(0, 1479, Short.MAX_VALUE))
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,7 +108,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
                 .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(0, 583, Short.MAX_VALUE))
+                .addGap(0, 360, Short.MAX_VALUE))
         );
 
         tplMainBoard.addTab("Thông tin tài khoản", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_info_16px.png")), pTaiKhoan, ""); // NOI18N
@@ -120,46 +121,22 @@ public class TrangNhanVien extends javax.swing.JFrame {
             pThongTinCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pThongTinCaNhanLayout.createSequentialGroup()
                 .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 150, Short.MAX_VALUE))
+                .addGap(0, 810, Short.MAX_VALUE))
         );
         pThongTinCaNhanLayout.setVerticalGroup(
             pThongTinCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pThongTinCaNhanLayout.createSequentialGroup()
-                .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 342, Short.MAX_VALUE))
+            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
         );
 
         tplMainBoard.addTab("Thông tin cá nhân", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_more_info_16px_1.png")), pThongTinCaNhan); // NOI18N
 
-        pQuanLyKhachHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("QUẢN LÝ DANH SÁCH KHÁCH HÀNG");
-        pQuanLyKhachHang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 34, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 153, 102));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1250, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
-        );
-
-        pQuanLyKhachHang.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
-        pQuanLyKhachHang.add(thongTinKhachHangPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
-
-        tplMainBoard.addTab("Quản lý khách hàng", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_customer_16px.png")), pQuanLyKhachHang); // NOI18N
-
         pDatPhong.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pDatPhong.add(thongTinDatPhong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 100, 1290, 500));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel2.setBackground(new java.awt.Color(217, 163, 137));
+        jPanel2.setForeground(new java.awt.Color(0, 51, 153));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("QUẢN LÝ THÔNG TIN ĐẶT PHÒNG");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -167,28 +144,27 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(421, 421, 421)
+                .addGap(360, 360, 360)
                 .addComponent(jLabel2)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap(517, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        pDatPhong.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
-        pDatPhong.add(thongTinDatPhong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1140, -1));
+        pDatPhong.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 110));
 
         tplMainBoard.addTab("Thông tin đặt phòng", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_check_16px_1.png")), pDatPhong); // NOI18N
 
         pThongTinHoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel3.setBackground(new java.awt.Color(217, 163, 137));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("QUẢN LÝ HÓA ĐƠN");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -196,28 +172,28 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(490, 490, 490)
+                .addGap(481, 481, 481)
                 .addComponent(jLabel3)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(563, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel3)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        pThongTinHoaDon.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 110));
-        pThongTinHoaDon.add(thongTinHoaDonPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1130, -1));
+        pThongTinHoaDon.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 110));
+        pThongTinHoaDon.add(thongTinHoaDonPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 1280, 490));
 
         tplMainBoard.addTab("Thông tin hóa đơn", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_bill_16px.png")), pThongTinHoaDon); // NOI18N
 
         pBangDichVu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel4.setBackground(new java.awt.Color(217, 163, 137));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("BẢNG DỊCH VỤ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -225,7 +201,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(506, Short.MAX_VALUE)
+                .addContainerGap(497, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(480, 480, 480))
         );
@@ -238,15 +214,15 @@ public class TrangNhanVien extends javax.swing.JFrame {
         );
 
         pBangDichVu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 110));
-        pBangDichVu.add(thongTinDichVuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1130, -1));
+        pBangDichVu.add(thongTinDichVuPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1150, -1));
 
         tplMainBoard.addTab("Bảng dịch vụ", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_service_16px_1.png")), pBangDichVu); // NOI18N
 
         pDichVuDat.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(255, 153, 102));
+        jPanel5.setBackground(new java.awt.Color(217, 163, 137));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("DỊCH VỤ ĐÃ ĐẶT");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -254,7 +230,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(487, Short.MAX_VALUE)
+                .addContainerGap(475, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(480, 480, 480))
         );
@@ -271,15 +247,41 @@ public class TrangNhanVien extends javax.swing.JFrame {
 
         tplMainBoard.addTab("Các dịch vụ đã đặt", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_list_16px.png")), pDichVuDat); // NOI18N
 
+        pQuanLyKhachHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("QUẢN LÝ DANH SÁCH KHÁCH HÀNG");
+        pQuanLyKhachHang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 34, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(217, 163, 137));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1250, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        pQuanLyKhachHang.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
+        pQuanLyKhachHang.add(thongTinKhachHangPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1240, -1));
+
+        tplMainBoard.addTab("Quản lý khách hàng", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_customer_16px.png")), pQuanLyKhachHang); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tplMainBoard)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 1453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tplMainBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+            .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 594, Short.MAX_VALUE)
         );
 
         pack();
@@ -356,7 +358,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
     private View.ThongTinDichVuDaDat thongTinDichVuDaDat1;
     private View.ThongTinDichVuPanel thongTinDichVuPanel1;
     private View.ThongTinHoaDonPanel thongTinHoaDonPanel1;
-    private View.ThongTinKhachHangPanel thongTinKhachHangPanel1;
+    private View.ThongTinKhachHangPanel thongTinKhachHangPanel2;
     private View.ThongTinNVPanel thongTinNVPanel1;
     private View.ThongTinTaiKhoan thongTinTaiKhoan1;
     private javax.swing.JTabbedPane tplMainBoard;

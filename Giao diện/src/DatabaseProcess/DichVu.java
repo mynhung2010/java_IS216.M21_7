@@ -99,18 +99,51 @@ public class DichVu {
     }
     
     /**
-     * Thông tin dịch vụ
-     * @param maDatPhong
+     * Tìm mã dịch vụ có tồn tại
+     * @param maDichVu
      * @return
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
-    public List<DichVu> thongTinDichVu(String maDatPhong) throws SQLException, ClassNotFoundException {
+    public String getMaDVTonTai(String maDichVu) throws SQLException, ClassNotFoundException{
+        
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Select SerNo FROM Service WHERE SerNo = '" + maDichVu + "'";
+        Statement stat = conn.createStatement();
+        
+        String maHienTai = "";
+        
+        try(ResultSet kq = stat.executeQuery(query)){
+            //List<User> UserData = new ArrayList<>();
+            while(kq.next()){
+                DichVu dv = new DichVu();
+                
+                dv.setMaDichVuString(kq.getString("SerNo"));
+                
+                String maDv = dv.getMaDichVuString();
+                
+                maHienTai = maDv;
+                
+            }
+            return maHienTai;
+        }
+    }   
+    
+    
+    /**
+     * Thông tin dịch vụ
+     * @param maDatPhong
+     * @param maHoaDon
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<DichVu> thongTinDichVu(String maDatPhong, String maHoaDon) throws SQLException, ClassNotFoundException {
         Connection conn = ConnectionUtils.getMyConnection();
         String query =   "SELECT distinct S.SerNo, S.SerName "
                        + "FROM SERVICE S JOIN SERVICECALLED SER ON S.SerNo = SER.SerNo "
                        + "               JOIN RESERVATION RE ON SER.RoomNo = RE.RoomNo "
-                       + " WHERE ResNo = '" + maDatPhong + "'";
+                       + " WHERE ResNo = '" + maDatPhong + "' and SER.billNo = '" + maHoaDon + "'";
         Statement stat = conn.createStatement();
         try(ResultSet kq = stat.executeQuery(query)){
             List<DichVu> dichVuData = new ArrayList<>();
@@ -222,6 +255,54 @@ public class DichVu {
         return i;
     }
     
+    /**
+     * Thêm dịch vụ mới cho khách hàng
+     * @param Bill_No
+     * @param Ser_No
+     * @param Room_No
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int themDichVuDat(String Bill_No, String Ser_No, String Room_No)
+            throws SQLException, ClassNotFoundException {
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Begin "
+                + "proc_insert_sercall('" + Bill_No + "','" + Ser_No + "','" 
+                +  Room_No  +  "');"
+                + "End;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+        return i;
+    }
+    
+    
+    /**
+     * Xóa dịch vụ đã đặt
+     * @param Bill_No
+     * @param Ser_No
+     * @param Room_No
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int xoaDichVuDat(String Bill_No, String Ser_No, String Room_No)
+            throws SQLException, ClassNotFoundException {
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Begin "
+                + "proc_delete_sercall('" + Bill_No + "','" + Ser_No + "','" 
+                +  Room_No  +  "');"
+                + "End;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+        return i;
+    }
     
     /**
      * Hàm lấy thông tin các dịch vụ

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Thanh Phat
+ * @author Thanh Phat, My Nhung
  */
 public class KhachHang {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -106,6 +106,69 @@ public class KhachHang {
     public void setCCCD(String CCCD) {
         this.CCCD = CCCD;
     }
+    
+    /**
+     * Tìm các mã khách hàng
+     * @param role
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<Integer> listMaKhachHang(String role) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "SELECT CUSNO "
+                     + " FROM CUSTOMER "
+                     + " WHERE Role = '" + role + "'"
+                     + " ORDER BY CUSNO ";
+        Statement stat = conn.createStatement();
+        try(ResultSet kq = stat.executeQuery(query)){
+            List<Integer> KHData = new ArrayList<>();
+            
+            while(kq.next()){
+                KhachHang kh = new KhachHang();
+
+                kh.setMaKhachHangString(kq.getString("CUSNO"));
+                
+                String maKH = kh.getMaKhachHangString();
+                
+                KHData.add(Integer.parseInt(maKH));
+            }
+            return KHData;
+        }
+    }
+    
+        /**
+     * Tìm mã khách hàng hiện tại
+     *
+     * @param maKhachHang
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public int getMaKHHienTai(int maKhachHang) throws SQLException, ClassNotFoundException {
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Select CUSNO FROM CUSTOMER WHERE CUSNO = '" + maKhachHang + "'";
+        Statement stat = conn.createStatement();
+
+        int maHienTai = 0;
+
+        try ( ResultSet kq = stat.executeQuery(query)) {
+            //List<User> UserData = new ArrayList<>();
+            while (kq.next()) {
+                KhachHang kh = new KhachHang();
+
+                kh.setMaKhachHangString(kq.getString("CUSNO"));
+
+                String maKH = kh.getMaKhachHangString();
+
+                maHienTai = Integer.parseInt(maKH);
+
+            }
+            return maHienTai;
+        }
+    }
+
     
     /**
      * Tìm xem email đã tồn tại hay chưa
@@ -253,6 +316,35 @@ public class KhachHang {
         return null;
     }
     
+     /**
+     * Hàm thêm khách hàng
+     * @param maKhachHang
+     * @param gioiTinh
+     * @param diaChi
+     * @param SDT
+     * @param Email
+     * @param ID
+     * @param maTaiKhoan
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int ThemKhachHang(String maKhachHang, String gioiTinh, String diaChi, String SDT, String Email, String ID, String maTaiKhoan) throws SQLException, ClassNotFoundException{
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Begin "
+                        + "proc_insert_account(" + maKhachHang 
+                        + ",'" + gioiTinh + "','" + diaChi 
+                        + "','" + SDT + "'," + SDT 
+                        + "','" + Email + "','" + ID 
+                        + "','" + maTaiKhoan + "');"
+                        + "End;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+        return i;
+    }
     
     /**
      * Sửa thông tin khách hàng
@@ -298,6 +390,57 @@ public class KhachHang {
         Connection conn = ConnectionUtils.getMyConnection();
         String query = "Begin "
                 + "proc_delete_cus('" + Cus_No + "');"
+                + "End;";
+        Statement stat = conn.createStatement();
+        
+        i = stat.executeUpdate(query);
+        return i;
+    }
+    
+    /**
+     * Thông tin đặt phòng của khách hàng
+     * @param maKhachHang
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public List<Room> thongTinDatPhong(String maKhachHang) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "select re.resno, r.RoomNo, r.TypeOfRoom, r.QualiTy, r.Cost "
+                     + "from Reservation RE join Room R on RE.RoomNo = R.RoomNo "
+                     + "                    join Bill B on RE.BillNO = b.BillNo "
+                     + "where RE.CusNo = '" + maKhachHang + "' AND B.STATUS = 0";
+        Statement stat = conn.createStatement();
+        try(ResultSet kq = stat.executeQuery(query)){
+            List<Room> RoomData = new ArrayList<>();
+            
+            while(kq.next()){
+                Room room = new Room();
+                room.setMaDatPhong(kq.getString("ResNo"));
+                room.setMaPhong(kq.getString("RoomNo"));
+                room.setLoaiPhong(kq.getString("TYPEOFROOM"));
+                room.setChatLuongPhong(kq.getString("QUALITY"));
+                room.setGia(kq.getString("COST"));
+                RoomData.add(room);
+            }
+            return RoomData;
+        }
+    }
+    
+    /**
+     * Thanh toán hóa đơn
+     * @param Res_No
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
+    public int thanhToan(String Res_No)
+            throws SQLException, ClassNotFoundException {
+        int i = 0;
+
+        Connection conn = ConnectionUtils.getMyConnection();
+        String query = "Begin "
+                + "thanhToan('" + Res_No + "');"
                 + "End;";
         Statement stat = conn.createStatement();
         

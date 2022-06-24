@@ -29,7 +29,6 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
     public ThongTinDatPhong() throws SQLException {
         initComponents();
         loadData();
-        txtMaKhachHang.setEnabled(false);
     }
 
     /**
@@ -49,17 +48,18 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
         btnTimKiem = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         btnThongTin = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtMaKhachHang = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbThongTinDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã đặt phòng", "Mã khách hàng", "Mã phòng", "Ngày đặt", "Ngày nhận", "Ngày trả"
+                "Mã đặt phòng", "Mã hóa đơn", "Mã khách hàng", "Mã phòng", "Ngày đặt", "Ngày nhận", "Ngày trả"
             }
         ));
         tbThongTinDatPhong.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,24 +69,32 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinDatPhong);
 
-        jLabel1.setText("Tra cứu mã đặt phòng:");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 760, 360));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Tra cứu mã đặt phòng:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 25, -1, 30));
+        add(txtTraCuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 25, 158, -1));
+
+        btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
             }
         });
+        add(btnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 25, -1, -1));
 
+        btnLamMoi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
             }
         });
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 25, -1, -1));
 
+        btnThongTin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_info_16px.png"))); // NOI18N
         btnThongTin.setText("Thông tin khách đặt phòng");
         btnThongTin.addActionListener(new java.awt.event.ActionListener() {
@@ -94,56 +102,10 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
                 btnThongTinActionPerformed(evt);
             }
         });
+        add(btnThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 25, -1, -1));
 
-        jLabel2.setText("Mã khách hàng");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(359, 359, 359)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnThongTin)
-                                .addGap(85, 85, 85)
-                                .addComponent(btnLamMoi))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTimKiem)))
-                .addContainerGap(330, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLamMoi)
-                    .addComponent(btnThongTin))
-                .addContainerGap(79, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 1410, 590));
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -154,7 +116,7 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
         String maDatPhong = txtTraCuu.getText();
         try {
             Room roomData = new Room();
-            String arr[] = {"Mã đặt phòng", "Mã khách hàng", "Mã phòng"
+            String arr[] = {"Mã đặt phòng", "Mã hóa đơn","Mã khách hàng", "Mã phòng"
                     ,"Ngày đặt phòng", "Ngày nhận phòng", "Ngày trả phòng"};
             List <Room> listRoom = roomData.traCuuThongTinDatPhong(maDatPhong);
             DefaultTableModel dtm = new DefaultTableModel(arr,0);
@@ -163,7 +125,8 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
             
             for (Room room : listRoom) {
                 dtm.addRow(new Object[]{
-                    room.getMaDatPhong(), room.getMaKhachHang()
+                    room.getMaDatPhong(), room.getMaHoaDon()
+                   ,room.getMaKhachHang()
                    ,room.getMaPhong(), room.getNgayDatPhong()
                    ,room.getNgayNhanPhong(), room.getNgayTraPhong()
                 });
@@ -191,7 +154,7 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             txtTraCuu.setText("");
-            txtMaKhachHang.setText("");
+            ShareData.maKhachHang = "";
             loadData();
         } catch (SQLException ex) {
             Logger.getLogger(ThongTinDatPhong.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,7 +162,7 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
-        String maKhachHang = txtMaKhachHang.getText();
+        String maKhachHang = ShareData.maKhachHang;
         
         if(maKhachHang.equals(""))
             JOptionPane.showMessageDialog(this, "Không tìm được thông tin vì chưa có mã khách hàng"
@@ -222,16 +185,17 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
      * @param row 
      */
     private void displayToTextField(int row){
-        txtMaKhachHang.setText((String) tbThongTinDatPhong.getModel().getValueAt(row, 1));
-        
-        ShareData.maKhachHang = txtMaKhachHang.getText();
+    
+        ShareData.maKhachHang = (String) tbThongTinDatPhong.getModel().getValueAt(row, 2);
         
         ShareData.maDatPhong = (String)tbThongTinDatPhong.getModel().getValueAt(row, 0);
+        
+        ShareData.maHoaDon = (String) tbThongTinDatPhong.getModel().getValueAt(row, 1);
         
         ShareData.maPhong = (String) tbThongTinDatPhong.getModel().getValueAt(row, 2);
         
         
-        ShareData.ngayDatPhong = (String) tbThongTinDatPhong.getModel().getValueAt(row, 3);
+        ShareData.ngayDatPhong = (String) tbThongTinDatPhong.getModel().getValueAt(row, 4);
         
         ShareData.ngayTraPhong = (String) tbThongTinDatPhong.getModel().getValueAt(row, 5);
     }
@@ -250,7 +214,7 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
     public void loadData() throws SQLException{
         try {
             Room roomData = new Room();
-            String arr[] = {"Mã đặt phòng", "Mã khách hàng", "Mã phòng"
+            String arr[] = {"Mã đặt phòng", "Mã hóa đơn","Mã khách hàng", "Mã phòng"
                     ,"Ngày đặt phòng", "Ngày nhận phòng", "Ngày trả phòng"};
             List <Room> listRoom = roomData.thongTinDatPhong();
             DefaultTableModel dtm = new DefaultTableModel(arr,0);
@@ -259,7 +223,8 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
             
             for (Room room : listRoom) {
                 dtm.addRow(new Object[]{
-                    room.getMaDatPhong(), room.getMaKhachHang()
+                    room.getMaDatPhong(), room.getMaHoaDon()
+                   ,room.getMaKhachHang()
                    ,room.getMaPhong(), room.getNgayDatPhong()
                    ,room.getNgayNhanPhong(), room.getNgayTraPhong()
                 });
@@ -278,11 +243,10 @@ public class ThongTinDatPhong extends javax.swing.JPanel {
     private javax.swing.JButton btnThongTin;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tbThongTinDatPhong;
-    private javax.swing.JTextField txtMaKhachHang;
     private javax.swing.JTextField txtTraCuu;
     // End of variables declaration//GEN-END:variables
 }

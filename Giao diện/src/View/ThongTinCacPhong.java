@@ -56,38 +56,73 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        btnXoaPhong = new javax.swing.JButton();
-        btnSuaPhong = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbThongTinPhong = new javax.swing.JTable();
-        btnThemPhong1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        txtMaPhongTimKiem = new javax.swing.JTextField();
-        btnTraCuu = new javax.swing.JButton();
-        btnLoadLoaiDuLieu = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtMaPhong = new javax.swing.JTextField();
         cbbLoaiPhong = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         cbbChatLuong = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnThemPhong1 = new javax.swing.JButton();
+        btnSuaPhong = new javax.swing.JButton();
         txtGiaPhong = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        btnXoaPhong = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbThongTinPhong = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        txtMaPhongTimKiem = new javax.swing.JTextField();
+        btnTraCuu = new javax.swing.JButton();
+        btnLoadLoaiDuLieu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnXoaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
-        btnXoaPhong.setText("Xóa phòng");
-        btnXoaPhong.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(0,0,0,10));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Mã phòng: ");
+
+        txtMaPhong.setToolTipText("");
+
+        cbbLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        cbbLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaPhongActionPerformed(evt);
+                cbbLoaiPhongActionPerformed(evt);
             }
         });
-        add(btnXoaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(758, 563, -1, -1));
 
+        jLabel3.setText("giường");
+
+        cbbChatLuong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Standard", "Superior", "Deluxe" }));
+        cbbChatLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbChatLuongActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Loại phòng: ");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("Chất lượng phòng:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("Giá phòng:");
+
+        btnThemPhong1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnThemPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_add_database_16px.png"))); // NOI18N
+        btnThemPhong1.setText("Thêm phòng");
+        btnThemPhong1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemPhong1ActionPerformed(evt);
+            }
+        });
+
+        btnSuaPhong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSuaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_renew_16px.png"))); // NOI18N
         btnSuaPhong.setText("Sửa thông tin phòng");
         btnSuaPhong.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +130,79 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
                 btnSuaPhongActionPerformed(evt);
             }
         });
-        add(btnSuaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 563, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(85, 85, 85)
+                        .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(79, 79, 79)
+                        .addComponent(cbbLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnThemPhong1)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnSuaPhong))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbbChatLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(87, 87, 87)
+                            .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbbLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(cbbChatLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtGiaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThemPhong1)
+                    .addComponent(btnSuaPhong))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 420, 230));
+
+        btnXoaPhong.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnXoaPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_delete_database_16px.png"))); // NOI18N
+        btnXoaPhong.setText("Xóa phòng");
+        btnXoaPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaPhongActionPerformed(evt);
+            }
+        });
+        add(btnXoaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
         tbThongTinPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,95 +219,50 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbThongTinPhong);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 107, 1380, 250));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 107, 510, 240));
 
-        btnThemPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_add_database_16px.png"))); // NOI18N
-        btnThemPhong1.setText("Thêm phòng");
-        btnThemPhong1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemPhong1ActionPerformed(evt);
-            }
-        });
-        add(btnThemPhong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 563, -1, -1));
-
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Tra cứu:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 75, -1, -1));
-        add(txtMaPhongTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 72, 148, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        add(txtMaPhongTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 148, -1));
 
         btnTraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_find_and_replace_16px.png"))); // NOI18N
-        btnTraCuu.setText("Tìm kiếm");
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraCuuActionPerformed(evt);
             }
         });
-        add(btnTraCuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 71, -1, -1));
+        add(btnTraCuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
 
         btnLoadLoaiDuLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_restart_16px.png"))); // NOI18N
-        btnLoadLoaiDuLieu.setText("Làm mới");
         btnLoadLoaiDuLieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadLoaiDuLieuActionPerformed(evt);
             }
         });
-        add(btnLoadLoaiDuLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 563, -1, -1));
+        add(btnLoadLoaiDuLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
 
-        jLabel2.setText("Mã phòng: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 378, -1, -1));
-
-        jLabel4.setText("Loại phòng; ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 413, -1, -1));
-
-        jLabel5.setText("Chất lượng phòng:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 456, -1, -1));
-
-        jLabel6.setText("Giá phòng:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 496, -1, -1));
-        add(txtMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 375, 63, -1));
-
-        cbbLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
-        cbbLoaiPhong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbLoaiPhongActionPerformed(evt);
-            }
-        });
-        add(cbbLoaiPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 413, -1, -1));
-
-        jLabel3.setText("giường");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 416, 62, -1));
-
-        cbbChatLuong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Standard", "Superior", "Deluxe" }));
-        cbbChatLuong.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbChatLuongActionPerformed(evt);
-            }
-        });
-        add(cbbChatLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 453, 115, -1));
-        add(txtGiaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 493, 115, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 153, 102));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("THÔNG TIN CÁC PHÒNG");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(544, 544, 544)
-                .addComponent(jLabel1)
-                .addContainerGap(568, Short.MAX_VALUE))
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1460, 770));
+
+        jPanel2.setBackground(new java.awt.Color(214, 172, 150));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1290, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap())
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1380, 60));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 60));
     }// </editor-fold>//GEN-END:initComponents
     
     /**
@@ -241,132 +303,23 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
 
             try {
                 if(MaPhongtext.equals(""))
-                    JOptionPane.showMessageDialog(this, "Không thể để trống mã phòng"
+                    JOptionPane.showMessageDialog(null, "Không thể để trống mã phòng"
                         , "Lỗi xóa thông tin", JOptionPane.ERROR_MESSAGE);  
                 else
                     index = r.XoaPhong(MaPhongtext);    
                 if (index > 0) {
-                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công");
                     loadData();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại");
                 }
             }catch (SQLException | ClassNotFoundException  ex) {
-                Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, ex.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE); 
             }
         }  
         
     }//GEN-LAST:event_btnXoaPhongActionPerformed
-
-    private void btnSuaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaPhongActionPerformed
-        // TODO add your handling code here:
-       
-        String maPhongText = txtMaPhong.getText();
-
-        String giaPhongText = txtGiaPhong.getText();
-        
-        String LoaiPhongtext = (String) cbbLoaiPhong.getSelectedItem();
-        
-        Room r = new Room();
-        
-        int index = 0;
-        
-        try {
-            if(maPhongText.equals("") || giaPhongText.equals(""))
-                JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
-                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);  
-            else
-                index = r.SuaPhong(maPhongText, LoaiPhongtext, giaPhongText);
-            
-            if(index > 0){
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thành công");
-                loadData();
-            }
-            else
-                JOptionPane.showMessageDialog(this, "Sửa thông tin thất bại");
-        } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-        }
-    }//GEN-LAST:event_btnSuaPhongActionPerformed
-
-    private void btnThemPhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhong1ActionPerformed
-        // TODO add your handling code here:
-
-        String MaPhongtext = txtMaPhong.getText();
-        String LoaiPhongtext = (String) cbbLoaiPhong.getSelectedItem();
-        String chatLuongtext = (String) cbbChatLuong.getSelectedItem();
-        String giaPhongtext = "";
-        
-        if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Standard"))
-        {
-            txtGiaPhong.setText("200000");
-            giaPhongtext = txtGiaPhong.getText();
-        }
-        else if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Superior"))
-        {
-            txtGiaPhong.setText("250000");
-            giaPhongtext = txtGiaPhong.getText();            
-        }
-        else if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Deluxe"))
-        {
-            txtGiaPhong.setText("300000");
-            giaPhongtext = txtGiaPhong.getText();            
-        }
-        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Standard"))
-        {
-            txtGiaPhong.setText("450000");
-            giaPhongtext = txtGiaPhong.getText();            
-        } 
-        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Superior"))
-        {
-            txtGiaPhong.setText("500000");
-            giaPhongtext = txtGiaPhong.getText();            
-        }   
-        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Deluxe "))
-        {
-            txtGiaPhong.setText("550000");
-            giaPhongtext = txtGiaPhong.getText();            
-        }   
-        
-        
-        Room r = new Room();
-        int index = 0;
-        try {
-            try {
-            if(MaPhongtext.equals("")|| giaPhongtext.equals(""))
-                JOptionPane.showMessageDialog(this, "Thông tin chưa đầy đủ"
-                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
-            else if(MaPhongtext.length() > 5)
-                JOptionPane.showMessageDialog(this, "Mã phòng có độ dài là 5 bao gồm cả số và chữ"
-                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
-            else if(MaPhongtext.equals(r.getMaPhongHienTai(MaPhongtext)))
-                JOptionPane.showMessageDialog(this, "Mã phòng đã tồn tại"
-                        , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE); 
-            else
-                index = r.ThemPhongMoi(MaPhongtext, LoaiPhongtext, chatLuongtext, giaPhongtext);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            if (index > 0) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-                loadData();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
-            }
-        }catch (SQLException  ex) {
-            //JOptionPane.showMessageDialog(this, "Một lỗi gì đó");
-        }
-    }//GEN-LAST:event_btnThemPhong1ActionPerformed
-
-    private void cbbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiPhongActionPerformed
-        // TODO add your handling code here:
-        String selectItem = (String) cbbLoaiPhong.getSelectedItem();
-    }//GEN-LAST:event_cbbLoaiPhongActionPerformed
-
-    private void cbbChatLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChatLuongActionPerformed
-        // TODO add your handling code here:
-        String selectItem = (String) cbbChatLuong.getSelectedItem();
-    }//GEN-LAST:event_cbbChatLuongActionPerformed
 
     
     /**
@@ -458,6 +411,118 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
         displayToTextField(row);
     }//GEN-LAST:event_tbThongTinPhongMouseClicked
 
+    private void btnSuaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaPhongActionPerformed
+        // TODO add your handling code here:
+
+        String maPhongText = txtMaPhong.getText();
+
+        String giaPhongText = txtGiaPhong.getText();
+
+        String LoaiPhongtext = (String) cbbLoaiPhong.getSelectedItem();
+
+        Room r = new Room();
+
+        int index = 0;
+
+        try {
+            if(maPhongText.equals("") || giaPhongText.equals(""))
+            JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
+                , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            else
+                index = r.SuaPhong(maPhongText, LoaiPhongtext, giaPhongText);
+
+            if(index > 0){
+                JOptionPane.showMessageDialog(null, "Sửa thông tin thành công");
+                loadData();
+            }
+            else
+            JOptionPane.showMessageDialog(null, "Sửa thông tin thất bại");
+        } catch (HeadlessException | ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString()
+                , "Lỗi", JOptionPane.ERROR_MESSAGE); 
+        }
+    }//GEN-LAST:event_btnSuaPhongActionPerformed
+
+    private void btnThemPhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhong1ActionPerformed
+        // TODO add your handling code here:
+
+        String MaPhongtext = txtMaPhong.getText();
+        String LoaiPhongtext = (String) cbbLoaiPhong.getSelectedItem();
+        String chatLuongtext = (String) cbbChatLuong.getSelectedItem();
+        String giaPhongtext = "";
+
+        if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Standard"))
+        {
+            txtGiaPhong.setText("200000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+        else if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Superior"))
+        {
+            txtGiaPhong.setText("250000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+        else if(LoaiPhongtext.equals("1") && chatLuongtext.equals("Deluxe"))
+        {
+            txtGiaPhong.setText("300000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Standard"))
+        {
+            txtGiaPhong.setText("450000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Superior"))
+        {
+            txtGiaPhong.setText("500000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+        else if(LoaiPhongtext.equals("2") && chatLuongtext.equals("Deluxe "))
+        {
+            txtGiaPhong.setText("550000");
+            giaPhongtext = txtGiaPhong.getText();
+        }
+
+        Room r = new Room();
+        int index = 0;
+        try {
+            try {
+                if(MaPhongtext.equals("")|| giaPhongtext.equals(""))
+                JOptionPane.showMessageDialog(null, "Thông tin chưa đầy đủ"
+                    , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                else if(MaPhongtext.length() > 5)
+                JOptionPane.showMessageDialog(this, "Mã phòng có độ dài là 5 bao gồm cả số và chữ"
+                    , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                else if(MaPhongtext.equals(r.getMaPhongHienTai(MaPhongtext)))
+                JOptionPane.showMessageDialog(null, "Mã phòng đã tồn tại"
+                    , "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                else
+                index = r.ThemPhongMoi(MaPhongtext, LoaiPhongtext, chatLuongtext, giaPhongtext);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThongTinCacPhong.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (index > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                loadData();
+            } else {
+                JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            }
+        }catch (SQLException  ex) {
+            JOptionPane.showMessageDialog(null, ex.toString()
+                , "Lỗi", JOptionPane.ERROR_MESSAGE); 
+        }
+    }//GEN-LAST:event_btnThemPhong1ActionPerformed
+
+    private void cbbChatLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChatLuongActionPerformed
+        // TODO add your handling code here:
+        String selectItem = (String) cbbChatLuong.getSelectedItem();
+    }//GEN-LAST:event_cbbChatLuongActionPerformed
+
+    private void cbbLoaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiPhongActionPerformed
+        // TODO add your handling code here:
+        String selectItem = (String) cbbLoaiPhong.getSelectedItem();
+    }//GEN-LAST:event_cbbLoaiPhongActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoadLoaiDuLieu;
@@ -474,7 +539,9 @@ public class ThongTinCacPhong extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbThongTinPhong;

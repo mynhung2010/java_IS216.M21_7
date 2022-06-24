@@ -41,7 +41,7 @@ public class NhanVienQuanLyForm extends javax.swing.JFrame {
     private ThongTinNVQLPanel  nVQLPanelManagement;
     private ThongTinTaiKhoan taiKhoanPanelManagement;
     private ThongTinNhanVien nhanvienPanelManagement;
-    private ThongTinDichVuPanel dichVuPanel;
+    private ThongTinDichVuQL dichVuPanel;
     private ThongTinChucVuPanel chucVuPanel;
     private ThongTinCacTaiKhoan taiKhoanPanel;
     private ThongTinVatDungPhongPanel vatDungPhongPanel;
@@ -221,7 +221,7 @@ public class NhanVienQuanLyForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
         );
 
         pack();
@@ -303,7 +303,7 @@ public class NhanVienQuanLyForm extends javax.swing.JFrame {
                 
         if(dichVuPanel == null){
             try {
-                dichVuPanel = new ThongTinDichVuPanel();
+                dichVuPanel = new ThongTinDichVuQL();
             } catch (SQLException ex) {
                 Logger.getLogger(NhanVienQuanLyForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -359,7 +359,7 @@ public class NhanVienQuanLyForm extends javax.swing.JFrame {
         try {
             Connection con = ConnectionUtils.getMyConnection();
 
-            String file = "src/View/DoanhThu.jrxml";
+            String file = "src/Source/Report_DoanhThu.jrxml";
 
             JasperReport jReport = JasperCompileManager.compileReport(file);
             
@@ -370,7 +370,8 @@ public class NhanVienQuanLyForm extends javax.swing.JFrame {
             JasperExportManager.exportReportToPdfFile(jPrint, file);
             
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.toString());
+            JOptionPane.showMessageDialog(null, ex.toString()
+                        , "Lỗi", JOptionPane.ERROR_MESSAGE); 
         }
     }//GEN-LAST:event_menuXuatHoaDonActionPerformed
 

@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -22,6 +21,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import net.sourceforge.barbecue.BarcodeException;
 
 /**
  *
@@ -78,24 +78,29 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
         lbPhuongThuc = new javax.swing.JLabel();
         btnXuatHoaDon = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Trang thanh toán");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Mã hóa đơn:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 69, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 69, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã khách hàng");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 103, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 103, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Tên khách hàng:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 137, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 137, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Tổng tiền:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 205, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 205, -1, -1));
 
+        btnXacNhan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnXacNhan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_tick_box_16px.png"))); // NOI18N
         btnXacNhan.setText("Xác nhận thanh toán");
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
@@ -103,31 +108,35 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
                 btnXacNhanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 277, -1, -1));
+        getContentPane().add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
+        btnThoat.setBackground(new java.awt.Color(204, 204, 204));
+        btnThoat.setForeground(new java.awt.Color(204, 204, 204));
         btnThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_cancel_16px.png"))); // NOI18N
-        btnThoat.setText("Hủy");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
             }
         });
-        getContentPane().add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
+        getContentPane().add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Phương thức thanh toán:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 241, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 241, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Mã phòng:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 171, -1, -1));
-        getContentPane().add(lbMaHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 69, 151, 16));
-        getContentPane().add(lbMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 103, 151, 16));
-        getContentPane().add(lbTenKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 137, 151, 16));
-        getContentPane().add(lbMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 171, 151, 11));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 171, -1, -1));
+        getContentPane().add(lbMaHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 69, 151, 16));
+        getContentPane().add(lbMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 103, 151, 16));
+        getContentPane().add(lbTenKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 137, 151, 16));
+        getContentPane().add(lbMaPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 171, 151, 20));
 
         lbTongTien.setDisplayedMnemonic('l');
-        getContentPane().add(lbTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 205, 151, 16));
-        getContentPane().add(lbPhuongThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 241, 151, 18));
+        getContentPane().add(lbTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 205, 151, 16));
+        getContentPane().add(lbPhuongThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 241, 151, 18));
 
+        btnXuatHoaDon.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnXuatHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_paid_bill_16px.png"))); // NOI18N
         btnXuatHoaDon.setText("Xuất hóa đơn");
         btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -135,26 +144,18 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
                 btnXuatHoaDonActionPerformed(evt);
             }
         });
-        getContentPane().add(btnXuatHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 277, -1, -1));
+        getContentPane().add(btnXuatHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setText("THANH TOÁN HÓA ĐƠN");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 13, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 102));
+        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, -70, 520, 450));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
+        getAccessibleContext().setAccessibleName("Thanh toán hóa đơn");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,7 +193,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
             
             Connection con = ConnectionUtils.getMyConnection();
 
-            String file = "src/View/HoaDon.jrxml";
+            String file = "src/Source/Report_HoaDon.jrxml";
 
             JasperReport jReport = JasperCompileManager.compileReport(file);
             
@@ -259,7 +260,7 @@ public class ThanhToanHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbMaHoaDon;
     private javax.swing.JLabel lbMaKhachHang;
     private javax.swing.JLabel lbMaPhong;
