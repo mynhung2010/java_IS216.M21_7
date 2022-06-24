@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class KhachHangPage extends javax.swing.JFrame {
     private DoiMatKhau doiMatKhauFrame;
     private DatPhong datPhongFrame;
-    private DangNhapKHFrame loginInfo;
+    private DangNhapFrame loginInfo;
     private ThongTinPhongDat thongTinPhongFrame;
     /**
      * Creates new form KhachHangPage
@@ -337,7 +337,7 @@ public class KhachHangPage extends javax.swing.JFrame {
         if (ret == JOptionPane.YES_OPTION){
             this.dispose();
             
-            loginInfo = new DangNhapKHFrame();
+            loginInfo = new DangNhapFrame();
             loginInfo.setVisible(true);
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed

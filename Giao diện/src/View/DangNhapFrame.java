@@ -26,6 +26,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
     private DangKyNVienFrame dangKyFrame;
     private NhanVienForm nhanvienFrame;
     private TrangNhanVien nhanVienForm;
+    private DangKyKHFrame signup;
     /**
      * Creates new form LoginForm
      */
@@ -56,6 +57,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
         jpMatKhau = new javax.swing.JPasswordField();
         txtTenTaiKhoan = new javax.swing.JTextField();
         btnThoat = new javax.swing.JButton();
+        btnDangKy1 = new javax.swing.JButton();
         ManHinhNen = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -127,6 +129,17 @@ public class DangNhapFrame extends javax.swing.JFrame {
             }
         });
 
+        btnDangKy1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnDangKy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/sign-up.png"))); // NOI18N
+        btnDangKy1.setText("Đăng ký");
+        btnDangKy1.setBorder(null);
+        btnDangKy1.setBorderPainted(false);
+        btnDangKy1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKy1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,7 +168,10 @@ public class DangNhapFrame extends javax.swing.JFrame {
                         .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(90, 90, 90))))
+                        .addGap(90, 90, 90))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnDangKy1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +190,9 @@ public class DangNhapFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDangNhap)
                     .addComponent(btnThoat))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDangKy1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 330, 240));
@@ -249,6 +267,12 @@ public class DangNhapFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDangNhapKeyPressed
 
+    private void btnDangKy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKy1ActionPerformed
+        // TODO add your handling code here:
+        signup = new DangKyKHFrame();
+        signup.setVisible(true);
+    }//GEN-LAST:event_btnDangKy1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -286,6 +310,8 @@ public class DangNhapFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ManHinhNen;
+    private javax.swing.JButton btnDangKy;
+    private javax.swing.JButton btnDangKy1;
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;

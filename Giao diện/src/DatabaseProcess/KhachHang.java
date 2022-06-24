@@ -329,13 +329,16 @@ public class KhachHang {
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
-    public int ThemKhachHang(String maKhachHang, String gioiTinh, String diaChi, String SDT, String Email, String ID, String maTaiKhoan) throws SQLException, ClassNotFoundException{
+    public int ThemKhachHang(String maKhachHang, String gioiTinh, 
+            String diaChi, String SDT, 
+            String Email, String ID, 
+            String maTaiKhoan) throws SQLException, ClassNotFoundException{
         int i = 0;
 
         Connection conn = ConnectionUtils.getMyConnection();
         String query = "Begin "
-                        + "proc_insert_account(" + maKhachHang 
-                        + ",'" + gioiTinh + "','" + diaChi 
+                        + "proc_insert_customer(" + maKhachHang 
+                        + "," + gioiTinh + ",'" + diaChi 
                         + "','" + SDT + "'," + SDT 
                         + "','" + Email + "','" + ID 
                         + "','" + maTaiKhoan + "');"

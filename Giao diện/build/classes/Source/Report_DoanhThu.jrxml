@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_DoanhThu" language="groovy" pageWidth="1100" pageHeight="1180" orientation="Landscape" columnWidth="1060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8aa94e46-6e96-4492-a735-6ff85d159348">
-	<property name="ireport.zoom" value="0.9090909090909121"/>
+	<property name="ireport.zoom" value="0.683013455365073"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -84,7 +84,7 @@ order by date_payment desc]]>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="1060" height="103" forecolor="#ECA79F" backcolor="#D9A389" uuid="26e794c6-d146-4e96-9338-233ff5d1b33d"/>
 				<staticText>
-					<reportElement x="135" y="22" width="782" height="70" forecolor="#403939" backcolor="#403939" uuid="ef712c2e-8567-4a60-8257-12bff95b0054"/>
+					<reportElement x="167" y="22" width="782" height="70" forecolor="#403939" backcolor="#403939" uuid="ef712c2e-8567-4a60-8257-12bff95b0054"/>
 					<textElement textAlignment="Center">
 						<font fontName="Segoe UI" size="36" isBold="true"/>
 					</textElement>

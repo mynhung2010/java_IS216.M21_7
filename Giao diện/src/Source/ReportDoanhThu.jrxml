@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b72f5252-ab37-4fb0-9669-7844f39aae2d">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select B.BillNo, C.CusName, B.RoomNo, P.PaymentDate,B.SumOfMoney
+from Bill B join Customer C on B.CusNo = C.CusNo
+            join Room     R on B.RoomNo = R.RoomNo
+            join Pay      P on B.BillNo = P.BillNo
+Group by B.BillNo, C.CusName, B.RoomNo, P.PaymentDate,B.SumOfMoney
+order by B.BillNo]]>
+	</queryString>
+	<field name="BILLNO" class="java.lang.String"/>
+	<field name="CUSNAME" class="java.lang.String"/>
+	<field name="ROOMNO" class="java.lang.String"/>
+	<field name="PAYMENTDATE" class="java.sql.Timestamp"/>
+	<field name="SUMOFMONEY" class="java.math.BigDecimal"/>
+	<variable name="SUMOFMONEY_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{SUMOFMONEY}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="58">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="47" backcolor="#FF6666" uuid="7f1bb501-7ecb-4ce2-874d-469bb2d44304"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="20" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[DOANH THU KHÁCH SẠN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="49">
+			<staticText>
+				<reportElement x="-4" y="14" width="93" height="20" forecolor="#FF3333" backcolor="#00FFCC" uuid="fcfffe41-ce99-40b9-bd94-123a828d19b5"/>
+				<textElement rotation="None">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="15" width="88" height="20" forecolor="#FF3333" backcolor="#00FFCC" uuid="5b4f9f9f-e7bb-4ae5-9633-1f3c7033ad88"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Phòng đặt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="15" width="132" height="20" forecolor="#FF3333" backcolor="#00FFCC" uuid="9ce80478-ecc1-4ab9-babc-d9ad91f83359"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ngày thanh toán]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="15" width="74" height="20" forecolor="#FF3333" backcolor="#00FFCC" uuid="9373b583-1950-41c0-969d-a0be075b6f70"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="15" width="132" height="20" forecolor="#FF3333" backcolor="#00FFCC" uuid="c3e607a4-815c-41de-a6da-86402613b3db"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tên khách hàng]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="d89a4503-769b-4e2d-b78f-d20f5cbcad25"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="55">
+			<textField>
+				<reportElement x="18" y="10" width="61" height="20" uuid="0f19e0c5-5b4c-44c5-8ade-13f484eb89a5"/>
+				<textElement>
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BILLNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="10" width="174" height="20" uuid="ddec11f6-95f2-4604-8cea-f4dadceaad46"/>
+				<textElement>
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="10" width="87" height="20" uuid="1a6cf191-0f4b-4f17-aa74-f5f81ee67fb2"/>
+				<textElement>
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ROOMNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="358" y="10" width="100" height="20" uuid="8503c62b-ba2e-418e-b4c6-2c61eee4639e"/>
+				<textElement>
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAYMENTDATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="10" width="100" height="20" uuid="698e3fe8-7c85-405a-b1fc-4d4f64de2480"/>
+				<textElement>
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUMOFMONEY}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="79" y="38" width="390" height="1" forecolor="#FF0000" uuid="288f949f-468e-4e06-89cd-b88b49419825"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45">
+			<rectangle>
+				<reportElement x="80" y="11" width="389" height="24" backcolor="#FF6666" uuid="725d2eac-5121-4a5e-9d20-4b528bf45bfb"/>
+			</rectangle>
+			<textField>
+				<reportElement x="337" y="15" width="100" height="20" uuid="4ca43750-36ee-465b-af68-bff50f454ff8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUMOFMONEY_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="117" y="15" width="125" height="20" uuid="fac60bb4-5d5f-4a06-9a9b-2ce25c8c200c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tổng doanh thu:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="34" width="100" height="20" uuid="3e200999-87fa-4ae1-9214-84bbf3705a81"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="229" y="34" width="100" height="20" uuid="bbd11bfe-d4d2-4eb3-9be8-ca1dd0b354fd"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42"/>
+	</summary>
+</jasperReport>

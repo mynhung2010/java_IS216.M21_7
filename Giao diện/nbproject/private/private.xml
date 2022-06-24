@@ -20,12 +20,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinHoaDonPanel.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien/src/View/KhachHangPage.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinTaiKhoan.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/DatabaseProcess/KhachHang.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DangKyNVienFrame.java</file>
             <file>file:/E:/Java/GiaoDienNhanVien/src/View/DatPhong.java</file>
-            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DangKyKHFrame.java</file>
             <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinPhongDat.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DangNhapFrame.java</file>
+            <file>file:/E:/Java/GiaoDienNhanVien/src/View/DangKyKHFrame.java</file>
             <file>file:/E:/Java/GiaoDienNhanVien/src/View/ThongTinVatDungPhongPanel.java</file>
             <file>file:/E:/Java/GiaoDienNhanVien/src/View/TrangNhanVien.java</file>
             <file>file:/E:/Java/GiaoDienNhanVien/src/View/NhanVienForm.java</file>

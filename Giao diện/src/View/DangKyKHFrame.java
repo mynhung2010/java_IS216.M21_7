@@ -23,13 +23,14 @@ import javax.swing.JOptionPane;
  */
 public class DangKyKHFrame extends javax.swing.JFrame {
 
-    private DangNhapKHFrame login;
+    private DangNhapFrame login;
 
     /**
      * Creates new form DangKyKHFrame
      */
     public DangKyKHFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -76,6 +77,7 @@ public class DangKyKHFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Đăng ký khách hàng");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0,0,0,10
@@ -228,7 +230,7 @@ public class DangKyKHFrame extends javax.swing.JFrame {
                 .addGap(3, 3, 3))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 340, 350));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 340, 350));
 
         jPanel1.setBackground(new java.awt.Color(0,0,0,10));
 
@@ -407,7 +409,7 @@ public class DangKyKHFrame extends javax.swing.JFrame {
         // Xử lý thông tin khách hàng
         String hoTen = txtHoTen.getText();
         String diaChi = txtDiaChi.getText();
-        String gioiTinh="";
+        int gioiTinh = 0;
         
         String Email = txtEmail.getText();
         String regex_Email = "^[a-zA-Z][\\\\w-]+@([\\\\w]+\\\\.[\\\\w]+|[\\\\w]+\\\\.[\\\\w]{2,}\\\\.[\\\\w]{2,})$";
@@ -441,15 +443,18 @@ public class DangKyKHFrame extends javax.swing.JFrame {
 
             maKH = listKhachHang.get(listKhachHang.size() - 1) + 1;
             ShareData.maKH = maKH;
-
             txtMaTaiKhoan.setText(String.valueOf(maKH));
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DangKyNVienFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String maKhachHang = "C" + String.valueOf(maKH);
+        String maKhachHang = "C00" + String.valueOf(maKH);
         int indexKH = 0;
         KhachHang kh = new KhachHang();
+        if(RadioNam.isSelected())
+            gioiTinh = 0;
+        else
+            gioiTinh = 1; 
 
         try {
 
@@ -469,8 +474,10 @@ public class DangKyKHFrame extends javax.swing.JFrame {
                         "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             } else if (matcher_CCCD.find() == false) {
                 JOptionPane.showMessageDialog(this, "CCCD không hợp lệ",
-                        "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                        "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);            
             } 
+            //else
+                //indexKH = kh.ThemKhachHang(maKhachHang, hoTen, gioiTinh, diaChi, SDT, Email, CCCD);
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại");
         }
@@ -504,12 +511,6 @@ public class DangKyKHFrame extends javax.swing.JFrame {
                         "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             } else if (xacNhanMatKhau.equals(matKhau)) {
                 index = tk.ThemTaiKhoan(maTK, tenTaiKhoan, matKhau, vaiTro);
-                
-                if(RadioNam.isSelected())
-                    gioiTinh = "Nam";
-                else
-                    gioiTinh = "Nữ";
-                indexKH = kh.ThemKhachHang(maKhachHang, hoTen, gioiTinh, diaChi, SDT, Email, CCCD);
             } else {
                 JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận không đúng",
                         "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
@@ -520,14 +521,14 @@ public class DangKyKHFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Tạo tài khoản thất bại");
             }
         } catch (HeadlessException | ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại");
+            JOptionPane.showMessageDialog(this, e.toString());
         }
 
     }//GEN-LAST:event_btnDangKyActionPerformed
 
     private void btnTrangDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrangDangNhapActionPerformed
         // TODO add your handling code here:
-        login = new DangNhapKHFrame();
+        login = new DangNhapFrame();
         login.setVisible(true);
 
         this.dispose();

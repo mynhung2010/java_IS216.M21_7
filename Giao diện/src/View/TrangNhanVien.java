@@ -48,7 +48,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         try {
-            thongTinHoaDonPanel1 = new View.ThongTinHoaDonPanel();
+            thongTinHoaDonPanel2 = new View.ThongTinHoaDonPanel();
         } catch (java.sql.SQLException e1) {
             e1.printStackTrace();
         }
@@ -82,6 +82,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
 
         tplMainBoard.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_Logout_16px.png"))); // NOI18N
         jButton1.setText("Đăng xuất");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,20 +96,22 @@ public class TrangNhanVien extends javax.swing.JFrame {
         pTaiKhoanLayout.setHorizontalGroup(
             pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1479, Short.MAX_VALUE))
-            .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pTaiKhoanLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 1021, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pTaiKhoanLayout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         pTaiKhoanLayout.setVerticalGroup(
             pTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTaiKhoanLayout.createSequentialGroup()
-                .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(thongTinTaiKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(0, 360, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         tplMainBoard.addTab("Thông tin tài khoản", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_info_16px.png")), pTaiKhoan, ""); // NOI18N
@@ -119,13 +122,11 @@ public class TrangNhanVien extends javax.swing.JFrame {
         pThongTinCaNhan.setLayout(pThongTinCaNhanLayout);
         pThongTinCaNhanLayout.setHorizontalGroup(
             pThongTinCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pThongTinCaNhanLayout.createSequentialGroup()
-                .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 810, Short.MAX_VALUE))
+            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
         );
         pThongTinCaNhanLayout.setVerticalGroup(
             pThongTinCaNhanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+            .addComponent(thongTinNVPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
         );
 
         tplMainBoard.addTab("Thông tin cá nhân", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_more_info_16px_1.png")), pThongTinCaNhan); // NOI18N
@@ -185,7 +186,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
         );
 
         pThongTinHoaDon.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 110));
-        pThongTinHoaDon.add(thongTinHoaDonPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 100, 1280, 490));
+        pThongTinHoaDon.add(thongTinHoaDonPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
         tplMainBoard.addTab("Thông tin hóa đơn", new javax.swing.ImageIcon(getClass().getResource("/Source/icons8_bill_16px.png")), pThongTinHoaDon); // NOI18N
 
@@ -275,13 +276,16 @@ public class TrangNhanVien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 1453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 594, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tplMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,10 +293,10 @@ public class TrangNhanVien extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                int ret = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất","Đăng xuất",JOptionPane.YES_NO_OPTION);
+        int ret = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất","Đăng xuất",JOptionPane.YES_NO_OPTION);
         if (ret == JOptionPane.YES_OPTION){
             this.dispose();
-            
+
             loginInfo = new DangNhapFrame();
             loginInfo.setVisible(true);
         }
@@ -357,7 +361,7 @@ public class TrangNhanVien extends javax.swing.JFrame {
     private View.ThongTinDatPhong thongTinDatPhong1;
     private View.ThongTinDichVuDaDat thongTinDichVuDaDat1;
     private View.ThongTinDichVuPanel thongTinDichVuPanel1;
-    private View.ThongTinHoaDonPanel thongTinHoaDonPanel1;
+    private View.ThongTinHoaDonPanel thongTinHoaDonPanel2;
     private View.ThongTinKhachHangPanel thongTinKhachHangPanel2;
     private View.ThongTinNVPanel thongTinNVPanel1;
     private View.ThongTinTaiKhoan thongTinTaiKhoan1;

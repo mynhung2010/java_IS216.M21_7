@@ -138,54 +138,54 @@ public class ThongTinKhachHangPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Mã khách hàng: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Tên khách hàng:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Giới tính:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 390, -1, 20));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Địa chỉ:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 280, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("SĐT:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 220, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Email:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 260, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("CCCD:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, -1, 20));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, -1, 20));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Mã tài khoản:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 350, -1, -1));
-        add(txtMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 100, -1));
-        add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 180, -1));
-        add(txtSĐT, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 210, 110, -1));
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 250, 110, -1));
-        add(txtCCCD, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 170, 110, -1));
-        add(txtMaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 332, 60, 30));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, -1, -1));
+        add(txtMaKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, 100, -1));
+        add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 180, -1));
+        add(txtSĐT, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 190, 110, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 230, 110, -1));
+        add(txtCCCD, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 110, -1));
+        add(txtMaTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 310, 110, 30));
 
         cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        add(cbbGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 380, 60, 30));
+        add(cbbGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 360, 60, 30));
 
         txtADiaChi.setColumns(20);
         txtADiaChi.setRows(5);
         jScrollPane2.setViewportView(txtADiaChi);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 260, 30));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, 260, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Source/Màn hình đăng nhập.png"))); // NOI18N
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -330, -1, 1260));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, -160, 2160, 1260));
     }// </editor-fold>//GEN-END:initComponents
 
     
