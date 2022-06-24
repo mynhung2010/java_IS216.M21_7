@@ -1,0 +1,23 @@
+/*==============================================================*/
+/*      TRIGGER: PHONG DA CO NGUOI DAT	                        */
+/*==============================================================*/
+
+CREATE OR REPLACE TRIGGER trigger_room_not_available
+BEFORE INSERT OR UPDATE
+ON RESERVATION
+FOR EACH ROW
+DECLARE
+    RES RESERVATION%ROWTYPE;
+BEGIN
+        SELECT * INTO RES
+        FROM RESERVATION
+        WHERE RoomNo = :NEW.RoomNo;
+        IF (:NEW.RoomNo = RES.RoomNo 
+                AND   :NEW.CusNo <> RES.CusNo
+                AND   (:NEW.ResDate = RES.ResDate OR (:NEW.RESDATE > RES.RESDATE AND :NEW.RESDATE < RES.tCheckIn))
+                AND ( :NEW.tCheckIn >= RES.tCheckIn AND :NEW.tCheckIn <= RES.tCheckOut) 
+                OR  ( :NEW.tCheckIn < RES.tCheckIn AND :NEW.tCheckOut >= RES.tCheckIn))
+        THEN
+            Raise_Application_Error(-20011, 'PHONG DA CO NGUOI DAT');
+        END IF;
+END;
